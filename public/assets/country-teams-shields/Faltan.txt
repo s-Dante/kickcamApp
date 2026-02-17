@@ -1,0 +1,49 @@
+Ver bien la lista de paises y ver bien cuales faltan
+
+Andorra
+Armenia
+Austria
+Azerbayan
+Bangladesh
+Bielorusia
+Camerun
+Chile
+China
+Chipre
+CostaRica
+Cuba
+El Salvador
+Emiratos Arabes Unidos
+Eslovenia
+Estonia
+Finlandia
+Gabon
+Georgia
+Gibraltar
+Granada
+Grecia
+Guatemala
+Honduras
+Hungria
+Islandia
+Islas Feroe
+Israel
+Irlanda del Norte
+Kasajistan
+Letonia
+Lietchtenstein
+Lituania
+Luxemburgo
+Mali
+Malta
+Martinica
+Moldavia
+Montenego
+Nicaragua
+Peru
+Republica Dominicana
+Rusia
+San Marino
+Serbia
+Tahiti
+Venezuela
