@@ -54,7 +54,7 @@ class AssetPathProvider
         return asset($basePath . $fileName);
     }
 
-    public static function getWorldCupBall(WorldCupEnum $worldCup, string $type, string $year): string
+    public static function getWorldCupBall(WorldCupEnum $worldCup, string $type): string
     {
         $basePath = config("assets.paths.{$type}");
         $extension = config("assets.extensions.{$type}");

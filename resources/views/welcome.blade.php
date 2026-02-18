@@ -13,18 +13,28 @@
 
     <!-- Styles / Scripts -->
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
     @else
-    <style>
-    </style>
+        <style>
+        </style>
     @endif
 </head>
 
 <body>
     <main>
+
+        <div class="layer-balls">
+
+            @foreach (range(1, 5) as $i)
+                {{-- <img src="{{ asset(getWorldCupBall(WorldCupEnum::WC_2022_QATAR, 'ball')) }}"
+                    alt="World Cup 2022 Qatar Ball"> --}}
+                {{ dd(getWorldCupBall(WorldCupEnum::WC_2022_QATAR, 'ball')) }}
+            @endforeach
+
+        </div>
+
         <h1>Todo el Mundial en un mismo lugar</h1>
         <span>La experiencia definitiva de realidad aumentada para fanáticos del fútbol.</span>
-
         <a href="{{ route('auth.login') }}">
             Comenzar Ahora
         </a>
