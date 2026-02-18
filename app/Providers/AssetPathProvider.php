@@ -2,10 +2,12 @@
 
 namespace App\Providers;
 
-use App\Enums\CountryEnum;
 use Illuminate\Support\Str;
 
-class AssetPathService
+use App\Enums\CountryEnum;
+use App\Enums\WorldCupEnum;
+
+class AssetPathProvider
 {
     public static function get3DModel(CountryEnum $country, string $type): string
     {
@@ -15,11 +17,11 @@ class AssetPathService
         $fileName = Str::title($country->value) . $extension;
         return asset($basePath . $fileName);
     }
-    
+
     public static function getCountryFlag(CountryEnum $country, string $type): string
     {
         $basePath = config("assets.paths.{$type}");
-        $extension = config("assets.extensions.{$type}", '.png');
+        $extension = config("assets.extensions.{$type}");
 
         $fileName = Str::title($country->value) . $extension;
         return asset($basePath . $fileName);
@@ -30,7 +32,7 @@ class AssetPathService
         $basePath = config("assets.paths.{$type}");
         $extension = config("assets.extensions.{$type}");
 
-        $fileName = Str::title($country->value) . "-soccer-shield" . $extension;
+        $fileName = Str::title($country->value) . $extension;
         return asset($basePath . $fileName);
     }
 
@@ -52,30 +54,30 @@ class AssetPathService
         return asset($basePath . $fileName);
     }
 
-    public static function getWorldCupBall(CountryEnum $country, string $type, string $year): string
+    public static function getWorldCupBall(WorldCupEnum $worldCup, string $type, string $year): string
     {
         $basePath = config("assets.paths.{$type}");
-        $extension = config("assets.extensions.{$type}", '.png');
+        $extension = config("assets.extensions.{$type}");
 
-        $fileName = $year . "-" . Str::title($country->value) . $extension;
+        $fileName = Str::title($worldCup->value) . $extension;
         return asset($basePath . $fileName);
     }
 
-    public static function getWorldCupFifaLogo(string $type, string $year): string
+    public static function getWorldCupFifaLogo(WorldCupEnum $worldCup, string $type): string
     {
         $basePath = config("assets.paths.{$type}");
         $extension = config("assets.extensions.{$type}", '.png');
 
-        $fileName = "wordl-cup-" . $year . "-logo" . $extension;
+        $fileName = Str::title($worldCup->value) . $extension;
         return asset($basePath . $fileName);
     }
 
-    public static function getWorldCupPoster(CountryEnum $country, string $type, string $year): string
+    public static function getWorldCupPoster(WorldCupEnum $worldCup, string $type): string
     {
         $basePath = config("assets.paths.{$type}");
         $extension = config("assets.extensions.{$type}", '.png');
 
-        $fileName = $year . "-" . Str::title($country->value) . $extension;
+        $fileName = Str::title($worldCup->value) . $extension;
         return asset($basePath . $fileName);
     }
 }
