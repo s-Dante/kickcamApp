@@ -25,12 +25,6 @@
 
         <div class="layer-balls">
 
-            @foreach (range(1, 5) as $i)
-                {{-- <img src="{{ asset(getWorldCupBall(WorldCupEnum::WC_2022_QATAR, 'ball')) }}"
-                    alt="World Cup 2022 Qatar Ball"> --}}
-                {{ dd(getWorldCupBall(WorldCupEnum::WC_2022_QATAR, 'ball')) }}
-            @endforeach
-
         </div>
 
         <h1>Todo el Mundial en un mismo lugar</h1>
