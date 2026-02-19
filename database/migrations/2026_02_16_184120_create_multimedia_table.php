@@ -16,9 +16,9 @@ return new class extends Migration
             $table->id();
             $table->string('file_url');
             $table->enum('category', [
-                MultimediaCategoryEnum::IMAGE,
-                MultimediaCategoryEnum::VIDEO,
-                MultimediaCategoryEnum::AR,
+                MultimediaCategoryEnum::IMAGE->value,
+                MultimediaCategoryEnum::VIDEO->value,
+                MultimediaCategoryEnum::AR->value,
             ]);
             $table->foreignId('country_id')->constrained('countries', 'id')->onDelete('cascade');
             $table->timestamps();

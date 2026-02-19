@@ -16,9 +16,9 @@ return new class extends Migration
             $table->id();
             $table->text('question_text');
             $table->enum('difficulty', [
-                QuestionDifficultyEnum::EASY,
-                QuestionDifficultyEnum::MEDIUM,
-                QuestionDifficultyEnum::HARD,
+                QuestionDifficultyEnum::EASY->value,
+                QuestionDifficultyEnum::MEDIUM->value,
+                QuestionDifficultyEnum::HARD->value,
             ]);
             $table->foreignId('country_id')->constrained('countries', 'id')->onDelete('cascade');
             $table->timestamps();
