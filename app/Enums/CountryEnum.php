@@ -255,7 +255,7 @@ enum CountryEnum: string
     case KOSOVO = 'xk';
     case YEMEN = 'ye';
     case MAYOTTE = 'yt';
-    case SOUTH_AFRICA = 'yt';
+    case SOUTH_AFRICA = 'za';
     case ZAMBIA = 'zm';
     case ZIMBABWE = 'zw';
 }

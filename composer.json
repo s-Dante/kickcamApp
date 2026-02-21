@@ -50,15 +50,15 @@
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
             "@php artisan key:generate",
             "@php artisan db:create",
-            "@php artisan migrate:fresh",
+            "@php artisan migrate:fresh --seed",
             "npm install",
             "npm run build"
         ],
         "sync": [
             "composer install",
-            "@php artisan migrate:fresh",
+            "@php artisan migrate:fresh --seed",
             "@php artisan optimize:clear",
-            "npm intall",
+            "npm install",
             "npm run build"
         ],
         "dev": [

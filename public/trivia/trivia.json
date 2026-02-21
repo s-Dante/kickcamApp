@@ -1,0 +1,1782 @@
+[
+    {
+        "id": 1,
+        "country": "mx",
+        "difficulty": "easy",
+        "question": "¿Cuántas veces ha sido sede México de un Mundial masculino?",
+        "options": [
+            {
+                "id": 1001,
+                "text": "1"
+            },
+            {
+                "id": 1002,
+                "text": "2"
+            },
+            {
+                "id": 1003,
+                "text": "3"
+            },
+            {
+                "id": 1004,
+                "text": "4"
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "country": "mx",
+        "difficulty": "medium",
+        "question": "¿En qué años llegó México a cuartos de final?",
+        "options": [
+            {
+                "id": 1005,
+                "text": "1970 y 1986"
+            },
+            {
+                "id": 1006,
+                "text": "1994 y 1998"
+            },
+            {
+                "id": 1007,
+                "text": "2002 y 2010"
+            },
+            {
+                "id": 1008,
+                "text": "2014 y 2018"
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "country": "mx",
+        "difficulty": "hard",
+        "question": "¿Qué jugador mexicano disputó cinco Mundiales?",
+        "options": [
+            {
+                "id": 1009,
+                "text": "Rafael Márquez"
+            },
+            {
+                "id": 1010,
+                "text": "Hugo Sánchez"
+            },
+            {
+                "id": 1011,
+                "text": "Cuauhtémoc Blanco"
+            },
+            {
+                "id": 1012,
+                "text": "Jorge Campos"
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "country": "mx",
+        "difficulty": "easy",
+        "question": "¿En qué año será nuevamente sede México?",
+        "options": [
+            {
+                "id": 1013,
+                "text": "2026"
+            },
+            {
+                "id": 1014,
+                "text": "2030"
+            },
+            {
+                "id": 1015,
+                "text": "2034"
+            },
+            {
+                "id": 1016,
+                "text": "2022"
+            }
+        ]
+    },
+    {
+        "id": 5,
+        "country": "mx",
+        "difficulty": "medium",
+        "question": "¿Qué portero destacó en 2014 y 2018?",
+        "options": [
+            {
+                "id": 1017,
+                "text": "Guillermo Ochoa"
+            },
+            {
+                "id": 1018,
+                "text": "Jesús Corona"
+            },
+            {
+                "id": 1019,
+                "text": "Oswaldo Sánchez"
+            },
+            {
+                "id": 1020,
+                "text": "Talavera"
+            }
+        ]
+    },
+    {
+        "id": 6,
+        "country": "za",
+        "difficulty": "easy",
+        "question": "¿En qué año fue sede Sudáfrica?",
+        "options": [
+            {
+                "id": 1021,
+                "text": "2006"
+            },
+            {
+                "id": 1022,
+                "text": "2010"
+            },
+            {
+                "id": 1023,
+                "text": "2014"
+            },
+            {
+                "id": 1024,
+                "text": "2018"
+            }
+        ]
+    },
+    {
+        "id": 7,
+        "country": "za",
+        "difficulty": "medium",
+        "question": "¿Cómo se llamaba el famoso balón de 2010?",
+        "options": [
+            {
+                "id": 1025,
+                "text": "Jabulani"
+            },
+            {
+                "id": 1026,
+                "text": "Brazuca"
+            },
+            {
+                "id": 1027,
+                "text": "Telstar"
+            },
+            {
+                "id": 1028,
+                "text": "Teamgeist"
+            }
+        ]
+    },
+    {
+        "id": 8,
+        "country": "za",
+        "difficulty": "hard",
+        "question": "¿Contra qué selección marcó Siphiwe Tshabalala en la inauguración?",
+        "options": [
+            {
+                "id": 1029,
+                "text": "México"
+            },
+            {
+                "id": 1030,
+                "text": "Francia"
+            },
+            {
+                "id": 1031,
+                "text": "Uruguay"
+            },
+            {
+                "id": 1032,
+                "text": "España"
+            }
+        ]
+    },
+    {
+        "id": 9,
+        "country": "za",
+        "difficulty": "easy",
+        "question": "¿Fue el primer Mundial realizado en qué continente?",
+        "options": [
+            {
+                "id": 1033,
+                "text": "Asia"
+            },
+            {
+                "id": 1034,
+                "text": "África"
+            },
+            {
+                "id": 1035,
+                "text": "Oceanía"
+            },
+            {
+                "id": 1036,
+                "text": "América"
+            }
+        ]
+    },
+    {
+        "id": 10,
+        "country": "za",
+        "difficulty": "medium",
+        "question": "¿Sudáfrica superó la fase de grupos en 2010?",
+        "options": [
+            {
+                "id": 1037,
+                "text": "Sí"
+            },
+            {
+                "id": 1038,
+                "text": "No"
+            },
+            {
+                "id": 1039,
+                "text": "Llegó a semifinales"
+            },
+            {
+                "id": 1040,
+                "text": "Fue subcampeón"
+            }
+        ]
+    },
+    {
+        "id": 11,
+        "country": "uz",
+        "difficulty": "easy",
+        "question": "¿Uzbekistán logró clasificar por primera vez a un Mundial masculino en 2026?",
+        "options": [
+            {
+                "id": 1041,
+                "text": "Sí"
+            },
+            {
+                "id": 1042,
+                "text": "No"
+            },
+            {
+                "id": 1043,
+                "text": "En 2022"
+            },
+            {
+                "id": 1044,
+                "text": "En 2018"
+            }
+        ]
+    },
+    {
+        "id": 12,
+        "country": "uz",
+        "difficulty": "medium",
+        "question": "¿A qué confederación pertenece Uzbekistán?",
+        "options": [
+            {
+                "id": 1045,
+                "text": "UEFA"
+            },
+            {
+                "id": 1046,
+                "text": "AFC"
+            },
+            {
+                "id": 1047,
+                "text": "CAF"
+            },
+            {
+                "id": 1048,
+                "text": "CONMEBOL"
+            }
+        ]
+    },
+    {
+        "id": 13,
+        "country": "uz",
+        "difficulty": "hard",
+        "question": "¿En qué continente se ubica Uzbekistán?",
+        "options": [
+            {
+                "id": 1049,
+                "text": "Europa"
+            },
+            {
+                "id": 1050,
+                "text": "Asia"
+            },
+            {
+                "id": 1051,
+                "text": "África"
+            },
+            {
+                "id": 1052,
+                "text": "Oceanía"
+            }
+        ]
+    },
+    {
+        "id": 14,
+        "country": "uz",
+        "difficulty": "easy",
+        "question": "¿Será su primera participación mundialista?",
+        "options": [
+            {
+                "id": 1053,
+                "text": "Sí"
+            },
+            {
+                "id": 1054,
+                "text": "No"
+            },
+            {
+                "id": 1055,
+                "text": "Ya ganó uno"
+            },
+            {
+                "id": 1056,
+                "text": "Fue semifinalista"
+            }
+        ]
+    },
+    {
+        "id": 15,
+        "country": "uz",
+        "difficulty": "medium",
+        "question": "¿En qué año se independizó Uzbekistán?",
+        "options": [
+            {
+                "id": 1057,
+                "text": "1991"
+            },
+            {
+                "id": 1058,
+                "text": "1985"
+            },
+            {
+                "id": 1059,
+                "text": "1970"
+            },
+            {
+                "id": 1060,
+                "text": "2000"
+            }
+        ]
+    },
+    {
+        "id": 16,
+        "country": "co",
+        "difficulty": "easy",
+        "question": "¿Cuál es el mejor resultado histórico de Colombia en un Mundial?",
+        "options": [
+            {
+                "id": 1061,
+                "text": "Cuartos de final"
+            },
+            {
+                "id": 1062,
+                "text": "Final"
+            },
+            {
+                "id": 1063,
+                "text": "Semifinal"
+            },
+            {
+                "id": 1064,
+                "text": "Campeón"
+            }
+        ]
+    },
+    {
+        "id": 17,
+        "country": "co",
+        "difficulty": "medium",
+        "question": "¿En qué Mundial Colombia alcanzó los cuartos?",
+        "options": [
+            {
+                "id": 1065,
+                "text": "1994"
+            },
+            {
+                "id": 1066,
+                "text": "2014"
+            },
+            {
+                "id": 1067,
+                "text": "2018"
+            },
+            {
+                "id": 1068,
+                "text": "2006"
+            }
+        ]
+    },
+    {
+        "id": 18,
+        "country": "co",
+        "difficulty": "hard",
+        "question": "¿Qué jugador fue goleador del Mundial 2014?",
+        "options": [
+            {
+                "id": 1069,
+                "text": "Radamel Falcao"
+            },
+            {
+                "id": 1070,
+                "text": "James Rodríguez"
+            },
+            {
+                "id": 1071,
+                "text": "Juan Cuadrado"
+            },
+            {
+                "id": 1072,
+                "text": "Luis Díaz"
+            }
+        ]
+    },
+    {
+        "id": 19,
+        "country": "co",
+        "difficulty": "easy",
+        "question": "¿A qué confederación pertenece Colombia?",
+        "options": [
+            {
+                "id": 1073,
+                "text": "CONMEBOL"
+            },
+            {
+                "id": 1074,
+                "text": "CONCACAF"
+            },
+            {
+                "id": 1075,
+                "text": "UEFA"
+            },
+            {
+                "id": 1076,
+                "text": "CAF"
+            }
+        ]
+    },
+    {
+        "id": 20,
+        "country": "co",
+        "difficulty": "medium",
+        "question": "¿En qué continente está Colombia?",
+        "options": [
+            {
+                "id": 1077,
+                "text": "Europa"
+            },
+            {
+                "id": 1078,
+                "text": "Asia"
+            },
+            {
+                "id": 1079,
+                "text": "América"
+            },
+            {
+                "id": 1080,
+                "text": "África"
+            }
+        ]
+    },
+    {
+        "id": 21,
+        "country": "kr",
+        "difficulty": "easy",
+        "question": "¿En qué año Corea del Sur fue sede del Mundial junto a Japón?",
+        "options": [
+            {
+                "id": 1081,
+                "text": "1998"
+            },
+            {
+                "id": 1082,
+                "text": "2002"
+            },
+            {
+                "id": 1083,
+                "text": "2006"
+            },
+            {
+                "id": 1084,
+                "text": "2010"
+            }
+        ]
+    },
+    {
+        "id": 22,
+        "country": "kr",
+        "difficulty": "medium",
+        "question": "¿Cuál es el mejor resultado histórico de Corea del Sur en un Mundial?",
+        "options": [
+            {
+                "id": 1085,
+                "text": "Cuartos de final"
+            },
+            {
+                "id": 1086,
+                "text": "Semifinal"
+            },
+            {
+                "id": 1087,
+                "text": "Final"
+            },
+            {
+                "id": 1088,
+                "text": "Octavos de final"
+            }
+        ]
+    },
+    {
+        "id": 23,
+        "country": "kr",
+        "difficulty": "hard",
+        "question": "¿Qué jugador coreano ha sido figura en Europa con el Tottenham?",
+        "options": [
+            {
+                "id": 1089,
+                "text": "Park Ji-sung"
+            },
+            {
+                "id": 1090,
+                "text": "Son Heung-min"
+            },
+            {
+                "id": 1091,
+                "text": "Lee Kang-in"
+            },
+            {
+                "id": 1092,
+                "text": "Kim Min-jae"
+            }
+        ]
+    },
+    {
+        "id": 24,
+        "country": "kr",
+        "difficulty": "easy",
+        "question": "¿A qué confederación pertenece Corea del Sur?",
+        "options": [
+            {
+                "id": 1093,
+                "text": "AFC"
+            },
+            {
+                "id": 1094,
+                "text": "UEFA"
+            },
+            {
+                "id": 1095,
+                "text": "CAF"
+            },
+            {
+                "id": 1096,
+                "text": "CONMEBOL"
+            }
+        ]
+    },
+    {
+        "id": 25,
+        "country": "kr",
+        "difficulty": "medium",
+        "question": "¿En qué continente se ubica Corea del Sur?",
+        "options": [
+            {
+                "id": 1097,
+                "text": "Europa"
+            },
+            {
+                "id": 1098,
+                "text": "Asia"
+            },
+            {
+                "id": 1099,
+                "text": "África"
+            },
+            {
+                "id": 1100,
+                "text": "Oceanía"
+            }
+        ]
+    },
+    {
+        "id": 26,
+        "country": "es",
+        "difficulty": "easy",
+        "question": "¿En qué año ganó España su único Mundial masculino?",
+        "options": [
+            {
+                "id": 1101,
+                "text": "2006"
+            },
+            {
+                "id": 1102,
+                "text": "2010"
+            },
+            {
+                "id": 1103,
+                "text": "2014"
+            },
+            {
+                "id": 1104,
+                "text": "2018"
+            }
+        ]
+    },
+    {
+        "id": 27,
+        "country": "es",
+        "difficulty": "medium",
+        "question": "¿Contra qué selección ganó España la final de 2010?",
+        "options": [
+            {
+                "id": 1105,
+                "text": "Alemania"
+            },
+            {
+                "id": 1106,
+                "text": "Brasil"
+            },
+            {
+                "id": 1107,
+                "text": "Países Bajos"
+            },
+            {
+                "id": 1108,
+                "text": "Argentina"
+            }
+        ]
+    },
+    {
+        "id": 28,
+        "country": "es",
+        "difficulty": "hard",
+        "question": "¿Qué jugador anotó el gol en la final de 2010?",
+        "options": [
+            {
+                "id": 1109,
+                "text": "David Villa"
+            },
+            {
+                "id": 1110,
+                "text": "Andrés Iniesta"
+            },
+            {
+                "id": 1111,
+                "text": "Fernando Torres"
+            },
+            {
+                "id": 1112,
+                "text": "Xavi Hernández"
+            }
+        ]
+    },
+    {
+        "id": 29,
+        "country": "es",
+        "difficulty": "easy",
+        "question": "¿A qué confederación pertenece España?",
+        "options": [
+            {
+                "id": 1113,
+                "text": "UEFA"
+            },
+            {
+                "id": 1114,
+                "text": "CONMEBOL"
+            },
+            {
+                "id": 1115,
+                "text": "CAF"
+            },
+            {
+                "id": 1116,
+                "text": "AFC"
+            }
+        ]
+    },
+    {
+        "id": 30,
+        "country": "es",
+        "difficulty": "medium",
+        "question": "¿En qué continente se ubica España?",
+        "options": [
+            {
+                "id": 1117,
+                "text": "Europa"
+            },
+            {
+                "id": 1118,
+                "text": "Asia"
+            },
+            {
+                "id": 1119,
+                "text": "África"
+            },
+            {
+                "id": 1120,
+                "text": "América"
+            }
+        ]
+    },
+    {
+        "id": 31,
+        "country": "uy",
+        "difficulty": "easy",
+        "question": "¿Cuántos Mundiales ha ganado Uruguay?",
+        "options": [
+            {
+                "id": 1121,
+                "text": "1"
+            },
+            {
+                "id": 1122,
+                "text": "2"
+            },
+            {
+                "id": 1123,
+                "text": "3"
+            },
+            {
+                "id": 1124,
+                "text": "4"
+            }
+        ]
+    },
+    {
+        "id": 32,
+        "country": "uy",
+        "difficulty": "medium",
+        "question": "¿En qué años fue campeón Uruguay?",
+        "options": [
+            {
+                "id": 1125,
+                "text": "1930 y 1950"
+            },
+            {
+                "id": 1126,
+                "text": "1954 y 1970"
+            },
+            {
+                "id": 1127,
+                "text": "1962 y 1986"
+            },
+            {
+                "id": 1128,
+                "text": "1990 y 2002"
+            }
+        ]
+    },
+    {
+        "id": 33,
+        "country": "uy",
+        "difficulty": "hard",
+        "question": "¿En qué país se celebró el primer Mundial ganado por Uruguay?",
+        "options": [
+            {
+                "id": 1129,
+                "text": "Brasil"
+            },
+            {
+                "id": 1130,
+                "text": "Uruguay"
+            },
+            {
+                "id": 1131,
+                "text": "Italia"
+            },
+            {
+                "id": 1132,
+                "text": "Francia"
+            }
+        ]
+    },
+    {
+        "id": 34,
+        "country": "uy",
+        "difficulty": "easy",
+        "question": "¿A qué confederación pertenece Uruguay?",
+        "options": [
+            {
+                "id": 1133,
+                "text": "CONMEBOL"
+            },
+            {
+                "id": 1134,
+                "text": "UEFA"
+            },
+            {
+                "id": 1135,
+                "text": "CAF"
+            },
+            {
+                "id": 1136,
+                "text": "AFC"
+            }
+        ]
+    },
+    {
+        "id": 35,
+        "country": "uy",
+        "difficulty": "medium",
+        "question": "¿En qué continente se ubica Uruguay?",
+        "options": [
+            {
+                "id": 1137,
+                "text": "Europa"
+            },
+            {
+                "id": 1138,
+                "text": "Asia"
+            },
+            {
+                "id": 1139,
+                "text": "América"
+            },
+            {
+                "id": 1140,
+                "text": "África"
+            }
+        ]
+    },
+    {
+        "id": 36,
+        "country": "jp",
+        "difficulty": "easy",
+        "question": "¿Cuál es el mejor resultado de Japón en un Mundial?",
+        "options": [
+            {
+                "id": 1141,
+                "text": "Cuartos de final"
+            },
+            {
+                "id": 1142,
+                "text": "Octavos de final"
+            },
+            {
+                "id": 1143,
+                "text": "Semifinal"
+            },
+            {
+                "id": 1144,
+                "text": "Final"
+            }
+        ]
+    },
+    {
+        "id": 37,
+        "country": "jp",
+        "difficulty": "medium",
+        "question": "¿En qué año fue coanfitrión Japón del Mundial?",
+        "options": [
+            {
+                "id": 1145,
+                "text": "2002"
+            },
+            {
+                "id": 1146,
+                "text": "1998"
+            },
+            {
+                "id": 1147,
+                "text": "2006"
+            },
+            {
+                "id": 1148,
+                "text": "2010"
+            }
+        ]
+    },
+    {
+        "id": 38,
+        "country": "jp",
+        "difficulty": "hard",
+        "question": "¿A qué confederación pertenece Japón?",
+        "options": [
+            {
+                "id": 1149,
+                "text": "UEFA"
+            },
+            {
+                "id": 1150,
+                "text": "AFC"
+            },
+            {
+                "id": 1151,
+                "text": "CAF"
+            },
+            {
+                "id": 1152,
+                "text": "CONMEBOL"
+            }
+        ]
+    },
+    {
+        "id": 39,
+        "country": "jp",
+        "difficulty": "easy",
+        "question": "¿En qué continente se ubica Japón?",
+        "options": [
+            {
+                "id": 1153,
+                "text": "Asia"
+            },
+            {
+                "id": 1154,
+                "text": "Europa"
+            },
+            {
+                "id": 1155,
+                "text": "África"
+            },
+            {
+                "id": 1156,
+                "text": "América"
+            }
+        ]
+    },
+    {
+        "id": 40,
+        "country": "jp",
+        "difficulty": "medium",
+        "question": "¿En qué edición logró Japón vencer a Alemania en fase de grupos?",
+        "options": [
+            {
+                "id": 1157,
+                "text": "2014"
+            },
+            {
+                "id": 1158,
+                "text": "2018"
+            },
+            {
+                "id": 1159,
+                "text": "2022"
+            },
+            {
+                "id": 1160,
+                "text": "2006"
+            }
+        ]
+    },
+    {
+        "id": 41,
+        "country": "tn",
+        "difficulty": "easy",
+        "question": "¿Contra qué selección logró Túnez su primera victoria mundialista?",
+        "options": [
+            {
+                "id": 1161,
+                "text": "México"
+            },
+            {
+                "id": 1162,
+                "text": "Alemania"
+            },
+            {
+                "id": 1163,
+                "text": "Polonia"
+            },
+            {
+                "id": 1164,
+                "text": "Argentina"
+            }
+        ]
+    },
+    {
+        "id": 42,
+        "country": "tn",
+        "difficulty": "medium",
+        "question": "¿A qué confederación pertenece Túnez?",
+        "options": [
+            {
+                "id": 1165,
+                "text": "CAF"
+            },
+            {
+                "id": 1166,
+                "text": "UEFA"
+            },
+            {
+                "id": 1167,
+                "text": "AFC"
+            },
+            {
+                "id": 1168,
+                "text": "CONCACAF"
+            }
+        ]
+    },
+    {
+        "id": 43,
+        "country": "tn",
+        "difficulty": "hard",
+        "question": "¿En qué continente se ubica Túnez?",
+        "options": [
+            {
+                "id": 1169,
+                "text": "África"
+            },
+            {
+                "id": 1170,
+                "text": "Asia"
+            },
+            {
+                "id": 1171,
+                "text": "Europa"
+            },
+            {
+                "id": 1172,
+                "text": "América"
+            }
+        ]
+    },
+    {
+        "id": 44,
+        "country": "tn",
+        "difficulty": "easy",
+        "question": "¿En qué año debutó Túnez en un Mundial?",
+        "options": [
+            {
+                "id": 1173,
+                "text": "1978"
+            },
+            {
+                "id": 1174,
+                "text": "1990"
+            },
+            {
+                "id": 1175,
+                "text": "2002"
+            },
+            {
+                "id": 1176,
+                "text": "2010"
+            }
+        ]
+    },
+    {
+        "id": 45,
+        "country": "tn",
+        "difficulty": "medium",
+        "question": "¿En qué edición venció Túnez a Francia en fase de grupos?",
+        "options": [
+            {
+                "id": 1177,
+                "text": "2014"
+            },
+            {
+                "id": 1178,
+                "text": "2018"
+            },
+            {
+                "id": 1179,
+                "text": "2022"
+            },
+            {
+                "id": 1180,
+                "text": "2006"
+            }
+        ]
+    },
+    {
+        "id": 1041,
+        "questionId": 11,
+        "isCorrect": true
+    },
+    {
+        "id": 1042,
+        "questionId": 11,
+        "isCorrect": false
+    },
+    {
+        "id": 1043,
+        "questionId": 11,
+        "isCorrect": false
+    },
+    {
+        "id": 1044,
+        "questionId": 11,
+        "isCorrect": false
+    },
+    {
+        "id": 1045,
+        "questionId": 12,
+        "isCorrect": false
+    },
+    {
+        "id": 1046,
+        "questionId": 12,
+        "isCorrect": true
+    },
+    {
+        "id": 1047,
+        "questionId": 12,
+        "isCorrect": false
+    },
+    {
+        "id": 1048,
+        "questionId": 12,
+        "isCorrect": false
+    },
+    {
+        "id": 1049,
+        "questionId": 13,
+        "isCorrect": false
+    },
+    {
+        "id": 1050,
+        "questionId": 13,
+        "isCorrect": true
+    },
+    {
+        "id": 1051,
+        "questionId": 13,
+        "isCorrect": false
+    },
+    {
+        "id": 1052,
+        "questionId": 13,
+        "isCorrect": false
+    },
+    {
+        "id": 1053,
+        "questionId": 14,
+        "isCorrect": true
+    },
+    {
+        "id": 1054,
+        "questionId": 14,
+        "isCorrect": false
+    },
+    {
+        "id": 1055,
+        "questionId": 14,
+        "isCorrect": false
+    },
+    {
+        "id": 1056,
+        "questionId": 14,
+        "isCorrect": false
+    },
+    {
+        "id": 1057,
+        "questionId": 15,
+        "isCorrect": true
+    },
+    {
+        "id": 1058,
+        "questionId": 15,
+        "isCorrect": false
+    },
+    {
+        "id": 1059,
+        "questionId": 15,
+        "isCorrect": false
+    },
+    {
+        "id": 1060,
+        "questionId": 15,
+        "isCorrect": false
+    },
+    {
+        "id": 1061,
+        "questionId": 16,
+        "isCorrect": true
+    },
+    {
+        "id": 1062,
+        "questionId": 16,
+        "isCorrect": false
+    },
+    {
+        "id": 1063,
+        "questionId": 16,
+        "isCorrect": false
+    },
+    {
+        "id": 1064,
+        "questionId": 16,
+        "isCorrect": false
+    },
+    {
+        "id": 1065,
+        "questionId": 17,
+        "isCorrect": false
+    },
+    {
+        "id": 1066,
+        "questionId": 17,
+        "isCorrect": true
+    },
+    {
+        "id": 1067,
+        "questionId": 17,
+        "isCorrect": false
+    },
+    {
+        "id": 1068,
+        "questionId": 17,
+        "isCorrect": false
+    },
+    {
+        "id": 1069,
+        "questionId": 18,
+        "isCorrect": false
+    },
+    {
+        "id": 1070,
+        "questionId": 18,
+        "isCorrect": true
+    },
+    {
+        "id": 1071,
+        "questionId": 18,
+        "isCorrect": false
+    },
+    {
+        "id": 1072,
+        "questionId": 18,
+        "isCorrect": false
+    },
+    {
+        "id": 1073,
+        "questionId": 19,
+        "isCorrect": true
+    },
+    {
+        "id": 1074,
+        "questionId": 19,
+        "isCorrect": false
+    },
+    {
+        "id": 1075,
+        "questionId": 19,
+        "isCorrect": false
+    },
+    {
+        "id": 1076,
+        "questionId": 19,
+        "isCorrect": false
+    },
+    {
+        "id": 1077,
+        "questionId": 20,
+        "isCorrect": false
+    },
+    {
+        "id": 1078,
+        "questionId": 20,
+        "isCorrect": false
+    },
+    {
+        "id": 1079,
+        "questionId": 20,
+        "isCorrect": true
+    },
+    {
+        "id": 1080,
+        "questionId": 20,
+        "isCorrect": false
+    },
+    {
+        "id": 1081,
+        "questionId": 21,
+        "isCorrect": false
+    },
+    {
+        "id": 1082,
+        "questionId": 21,
+        "isCorrect": true
+    },
+    {
+        "id": 1083,
+        "questionId": 21,
+        "isCorrect": false
+    },
+    {
+        "id": 1084,
+        "questionId": 21,
+        "isCorrect": false
+    },
+    {
+        "id": 1085,
+        "questionId": 22,
+        "isCorrect": false
+    },
+    {
+        "id": 1086,
+        "questionId": 22,
+        "isCorrect": true
+    },
+    {
+        "id": 1087,
+        "questionId": 22,
+        "isCorrect": false
+    },
+    {
+        "id": 1088,
+        "questionId": 22,
+        "isCorrect": false
+    },
+    {
+        "id": 1089,
+        "questionId": 23,
+        "isCorrect": false
+    },
+    {
+        "id": 1090,
+        "questionId": 23,
+        "isCorrect": true
+    },
+    {
+        "id": 1091,
+        "questionId": 23,
+        "isCorrect": false
+    },
+    {
+        "id": 1092,
+        "questionId": 23,
+        "isCorrect": false
+    },
+    {
+        "id": 1093,
+        "questionId": 24,
+        "isCorrect": true
+    },
+    {
+        "id": 1094,
+        "questionId": 24,
+        "isCorrect": false
+    },
+    {
+        "id": 1095,
+        "questionId": 24,
+        "isCorrect": false
+    },
+    {
+        "id": 1096,
+        "questionId": 24,
+        "isCorrect": false
+    },
+    {
+        "id": 1097,
+        "questionId": 25,
+        "isCorrect": false
+    },
+    {
+        "id": 1098,
+        "questionId": 25,
+        "isCorrect": true
+    },
+    {
+        "id": 1099,
+        "questionId": 25,
+        "isCorrect": false
+    },
+    {
+        "id": 1100,
+        "questionId": 25,
+        "isCorrect": false
+    },
+    {
+        "id": 1101,
+        "questionId": 26,
+        "isCorrect": false
+    },
+    {
+        "id": 1102,
+        "questionId": 26,
+        "isCorrect": true
+    },
+    {
+        "id": 1103,
+        "questionId": 26,
+        "isCorrect": false
+    },
+    {
+        "id": 1104,
+        "questionId": 26,
+        "isCorrect": false
+    },
+    {
+        "id": 1105,
+        "questionId": 27,
+        "isCorrect": false
+    },
+    {
+        "id": 1106,
+        "questionId": 27,
+        "isCorrect": false
+    },
+    {
+        "id": 1107,
+        "questionId": 27,
+        "isCorrect": true
+    },
+    {
+        "id": 1108,
+        "questionId": 27,
+        "isCorrect": false
+    },
+    {
+        "id": 1109,
+        "questionId": 28,
+        "isCorrect": false
+    },
+    {
+        "id": 1110,
+        "questionId": 28,
+        "isCorrect": true
+    },
+    {
+        "id": 1111,
+        "questionId": 28,
+        "isCorrect": false
+    },
+    {
+        "id": 1112,
+        "questionId": 28,
+        "isCorrect": false
+    },
+    {
+        "id": 1113,
+        "questionId": 29,
+        "isCorrect": true
+    },
+    {
+        "id": 1114,
+        "questionId": 29,
+        "isCorrect": false
+    },
+    {
+        "id": 1115,
+        "questionId": 29,
+        "isCorrect": false
+    },
+    {
+        "id": 1116,
+        "questionId": 29,
+        "isCorrect": false
+    },
+    {
+        "id": 1117,
+        "questionId": 30,
+        "isCorrect": true
+    },
+    {
+        "id": 1118,
+        "questionId": 30,
+        "isCorrect": false
+    },
+    {
+        "id": 1119,
+        "questionId": 30,
+        "isCorrect": false
+    },
+    {
+        "id": 1120,
+        "questionId": 30,
+        "isCorrect": false
+    },
+    {
+        "id": 1121,
+        "questionId": 31,
+        "isCorrect": false
+    },
+    {
+        "id": 1122,
+        "questionId": 31,
+        "isCorrect": true
+    },
+    {
+        "id": 1123,
+        "questionId": 31,
+        "isCorrect": false
+    },
+    {
+        "id": 1124,
+        "questionId": 31,
+        "isCorrect": false
+    },
+    {
+        "id": 1125,
+        "questionId": 32,
+        "isCorrect": true
+    },
+    {
+        "id": 1126,
+        "questionId": 32,
+        "isCorrect": false
+    },
+    {
+        "id": 1127,
+        "questionId": 32,
+        "isCorrect": false
+    },
+    {
+        "id": 1128,
+        "questionId": 32,
+        "isCorrect": false
+    },
+    {
+        "id": 1129,
+        "questionId": 33,
+        "isCorrect": false
+    },
+    {
+        "id": 1130,
+        "questionId": 33,
+        "isCorrect": true
+    },
+    {
+        "id": 1131,
+        "questionId": 33,
+        "isCorrect": false
+    },
+    {
+        "id": 1132,
+        "questionId": 33,
+        "isCorrect": false
+    },
+    {
+        "id": 1133,
+        "questionId": 34,
+        "isCorrect": true
+    },
+    {
+        "id": 1134,
+        "questionId": 34,
+        "isCorrect": false
+    },
+    {
+        "id": 1135,
+        "questionId": 34,
+        "isCorrect": false
+    },
+    {
+        "id": 1136,
+        "questionId": 34,
+        "isCorrect": false
+    },
+    {
+        "id": 1137,
+        "questionId": 35,
+        "isCorrect": false
+    },
+    {
+        "id": 1138,
+        "questionId": 35,
+        "isCorrect": false
+    },
+    {
+        "id": 1139,
+        "questionId": 35,
+        "isCorrect": true
+    },
+    {
+        "id": 1140,
+        "questionId": 35,
+        "isCorrect": false
+    },
+    {
+        "id": 1141,
+        "questionId": 36,
+        "isCorrect": false
+    },
+    {
+        "id": 1142,
+        "questionId": 36,
+        "isCorrect": true
+    },
+    {
+        "id": 1143,
+        "questionId": 36,
+        "isCorrect": false
+    },
+    {
+        "id": 1144,
+        "questionId": 36,
+        "isCorrect": false
+    },
+    {
+        "id": 1145,
+        "questionId": 37,
+        "isCorrect": true
+    },
+    {
+        "id": 1146,
+        "questionId": 37,
+        "isCorrect": false
+    },
+    {
+        "id": 1147,
+        "questionId": 37,
+        "isCorrect": false
+    },
+    {
+        "id": 1148,
+        "questionId": 37,
+        "isCorrect": false
+    },
+    {
+        "id": 1149,
+        "questionId": 38,
+        "isCorrect": false
+    },
+    {
+        "id": 1150,
+        "questionId": 38,
+        "isCorrect": true
+    },
+    {
+        "id": 1151,
+        "questionId": 38,
+        "isCorrect": false
+    },
+    {
+        "id": 1152,
+        "questionId": 38,
+        "isCorrect": false
+    },
+    {
+        "id": 1153,
+        "questionId": 39,
+        "isCorrect": true
+    },
+    {
+        "id": 1154,
+        "questionId": 39,
+        "isCorrect": false
+    },
+    {
+        "id": 1155,
+        "questionId": 39,
+        "isCorrect": false
+    },
+    {
+        "id": 1156,
+        "questionId": 39,
+        "isCorrect": false
+    },
+    {
+        "id": 1157,
+        "questionId": 40,
+        "isCorrect": false
+    },
+    {
+        "id": 1158,
+        "questionId": 40,
+        "isCorrect": false
+    },
+    {
+        "id": 1159,
+        "questionId": 40,
+        "isCorrect": true
+    },
+    {
+        "id": 1160,
+        "questionId": 40,
+        "isCorrect": false
+    },
+    {
+        "id": 1161,
+        "questionId": 41,
+        "isCorrect": false
+    },
+    {
+        "id": 1162,
+        "questionId": 41,
+        "isCorrect": false
+    },
+    {
+        "id": 1163,
+        "questionId": 41,
+        "isCorrect": true
+    },
+    {
+        "id": 1164,
+        "questionId": 41,
+        "isCorrect": false
+    },
+    {
+        "id": 1165,
+        "questionId": 42,
+        "isCorrect": true
+    },
+    {
+        "id": 1166,
+        "questionId": 42,
+        "isCorrect": false
+    },
+    {
+        "id": 1167,
+        "questionId": 42,
+        "isCorrect": false
+    },
+    {
+        "id": 1168,
+        "questionId": 42,
+        "isCorrect": false
+    },
+    {
+        "id": 1169,
+        "questionId": 43,
+        "isCorrect": true
+    },
+    {
+        "id": 1170,
+        "questionId": 43,
+        "isCorrect": false
+    },
+    {
+        "id": 1171,
+        "questionId": 43,
+        "isCorrect": false
+    },
+    {
+        "id": 1172,
+        "questionId": 43,
+        "isCorrect": false
+    },
+    {
+        "id": 1173,
+        "questionId": 44,
+        "isCorrect": true
+    },
+    {
+        "id": 1174,
+        "questionId": 44,
+        "isCorrect": false
+    },
+    {
+        "id": 1175,
+        "questionId": 44,
+        "isCorrect": false
+    },
+    {
+        "id": 1176,
+        "questionId": 44,
+        "isCorrect": false
+    },
+    {
+        "id": 1177,
+        "questionId": 45,
+        "isCorrect": false
+    },
+    {
+        "id": 1178,
+        "questionId": 45,
+        "isCorrect": false
+    },
+    {
+        "id": 1179,
+        "questionId": 45,
+        "isCorrect": true
+    },
+    {
+        "id": 1180,
+        "questionId": 45,
+        "isCorrect": false
+    }
+]
