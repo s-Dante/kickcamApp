@@ -12,6 +12,9 @@ use Database\Seeders\CountrySeeder;
 use Database\Seeders\MultimediaSeeder;
 use Database\Seeders\UserSeeder; 
 use Database\Seeders\BadgeSeeder; 
+use Database\Seeders\UserCustomizationSeeder;
+use Database\Seeders\QuestionSeeder;
+use Database\Seeders\AnswerSeeder;
 
 use App\Providers\AssetPathProvider;
 
@@ -37,6 +40,13 @@ class DatabaseSeeder extends Seeder
 
             UserSeeder::class,
             BadgeSeeder::class,
+            UserCustomizationSeeder::class,
+            UserBadgeSeeder::class,
+
+            QuestionSeeder::class,
+            /*
+            AnswerSeeder::class,
+            */
         ]);
     }
 }

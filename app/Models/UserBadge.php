@@ -19,7 +19,7 @@ class UserBadge extends Model
     ];
 
     protected $casts = [
-        'earned_at' => 'dateTime',
+        'earned_at' => 'datetime',
         'badge_id' => 'integer',
         'user_id' => 'integer'
     ];
