@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 use App\Models\Multimedia;
 use App\Models\Question;
@@ -39,5 +40,15 @@ class Country extends Model
     public function question(): HasMany
     {
         return $this->hasMany(Question::class, 'id');
+    }
+
+    protected function flagUrl(): Attribute
+    {
+        return Attribute::make(
+            get: function ($value) {
+                $path = parse_url($value, PHP_URL_PATH);
+                return asset($path);
+            }
+        );
     }
 }

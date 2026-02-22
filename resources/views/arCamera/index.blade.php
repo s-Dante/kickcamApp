@@ -29,9 +29,27 @@
 
 </html> -->
 
-<x-general-layout>
-    <x-slot:title>ArCamera</x-slot:title>
+<x-general-layout title="Cámara AR">
+    <div class="text-center mb-4">
+        <h1 class="text-xl font-bold">Escáner AR</h1>
+        <p class="text-sm text-gray-500">Apunta a un escudo o balón para ver la magia</p>
+    </div>
 
-    <h1>ArCamera</h1>
+    <x-camera-frame>
+        {{-- Aquí se inicializará MindAR --}}
+        <canvas id="ar-canvas" class="w-full h-full"></canvas>
 
+        <x-slot:topControls>
+            <button class="bg-white/20 blur-md p-2 rounded-full text-white">
+                <i class="fas fa-info-circle"></i>
+            </button>
+        </x-slot:topControls>
+
+        <x-slot:bottomControls>
+            {{-- Botones específicos de AR --}}
+            <button class="w-16 h-16 bg-white rounded-full border-4 border-gray-300 shadow-lg flex items-center justify-center">
+                 <div class="w-12 h-12 bg-blue-600 rounded-full"></div>
+            </button>
+        </x-slot:bottomControls>
+    </x-camera-frame>
 </x-general-layout>

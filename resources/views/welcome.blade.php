@@ -7,8 +7,10 @@
             <p>La experiencia definitiva de realidad aumentada para fanáticos del fútbol.</p>
         </article>
 
-        <button>
-            <a href="{{ route('auth.login') }}" role="button">Comenzar Ahora</a>
-        </button>
+        @auth
+        <a href="{{ route('profile.me') }}" class="btn-primary">Ir a mi Perfil</a>
+        @else
+        <a href="{{ route('auth.login') }}" class="btn-primary">Iniciar Sesión</a>
+        @endauth
     </section>
 </x-app>

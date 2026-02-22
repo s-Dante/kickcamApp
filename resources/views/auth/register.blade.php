@@ -2,12 +2,14 @@
     title="Sign In"
     description="Crea una cuenta para continuar"
     :action="route('auth.register')">
-    
+
     <x-auth.input name="name" label="Nombre(s)" type="text" required />
     <x-auth.input name="father_lastname" label="Apellido Paterno" type="text" required />
     <x-auth.input name="mother_lastname" label="Apellido Materno" type="text" required />
+    <x-auth.input name="username" label="Nombre de Usuario" type="text" required />
     <x-auth.input name="email" label="Correo Electrónico" type="email" required />
     <x-auth.input name="password" label="Contraseña" type="password" required />
+    <x-auth.input name="password_confirmation" label="Confirmar Contraseña" type="password" required />
 
     <button type="submit" class="hover:cursor-pointer">Registrarse</button>
 
@@ -23,4 +25,14 @@
         ¿Ya tienes una cuenta?
         <a href="{{ route('auth.login') }}">Inicia sesión aquí</a>
     </span>
+
+    @if ($errors->any())
+    <div class="bg-red-500 text-white p-4 mb-4 rounded">
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
 </x-auth.layout>
