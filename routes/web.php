@@ -39,7 +39,7 @@ Route::prefix('auth')->name('auth.')->group(function () {
 /**
  * Rutas del perfil
  */
-Route::prefix('proofile')->name('profile.')->group(function () {
+Route::prefix('profile')->name('profile.')->group(function () {
     Route::get('me', function () {
         return view('profile.index');
     })->name('me');
@@ -67,7 +67,7 @@ Route::get('/camera', function () {
  * Rutas para la trivia
  */
 Route::prefix('trivia')->name('trivia.')->group(function () {
-    Route::get('/', function () {
+    Route::get('select', function () {
         return view('trivia.index');
     })->name('index');
 

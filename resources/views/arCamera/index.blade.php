@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -27,4 +27,11 @@
     </a-scene>
 </body>
 
-</html>
+</html> -->
+
+<x-general-layout>
+    <x-slot:title>ArCamera</x-slot:title>
+
+    <h1>ArCamera</h1>
+
+</x-general-layout>
