@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -11,18 +13,19 @@ class Answer extends Model
 {
     /** @use HasFactory<\Database\Factories\AnswerFactory> */
     use HasFactory;
+
     use SoftDeletes;
 
     protected $fillable = [
         'answer_text',
         'is_correct',
-        'question_id'
+        'question_id',
     ];
 
     protected $casts = [
         'answer_text' => 'string',
         'is_correct' => 'boolean',
-        'question_id' => 'integer'
+        'question_id' => 'integer',
     ];
 
     public function question(): BelongsTo

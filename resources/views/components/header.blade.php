@@ -1,14 +1,22 @@
-@props(['name', 'label', 'type' => 'text', 'required' => false])
+<nav class="">
+    <img src="/KickCam_Logo.svg" alt="Logotipo de KickCamApp" class="w-[50px] h-[50px]">
 
-<div class="field-group">
-    <label for="{{ $name }}">{{ $label }}</label>
-    <input
-        type="{{ $type }}"
-        name="{{ $name }}"
-        id="{{ $name }}"
-        {{ $required ? 'required' : '' }}
-        {{ $attributes->merge(['class' => 'border rounded p-2']) }}>
-    @error($name)
-    <span class="text-red-500 text-sm">{{ $message }}</span>
-    @enderror
-</div>
+    @auth
+        {{-- Solo se muestra si el usuario inició sesión --}}
+        <a href="{{ route('dashboard') }}">Perfil</a>
+        <a href="{{ route('arCamera') }}">Realidad Aumentada</a>
+        <a href="{{ route('camera') }}">Cámara</a>
+        <a href="{{ route('multimedia.index') }}">Multimedia</a>
+        <a href="{{ route('trivia.index') }}">Trivia</a>
+        <a href="{{ route('scoreboard.index') }}">Marcadores</a>
+
+        <form action="{{ route('logout') }}" method="POST" class="inline">
+            @csrf
+            <button type="submit" class="hover:cursor-pointer">Cerrar sesión</button>
+        </form>
+    @else
+        {{-- Solo se muestra si es invitado --}}
+        <a href="{{ route('login') }}">Iniciar Sesión</a>
+        <a href="{{ route('register') }}">Registrarse</a>
+    @endauth
+</nav>

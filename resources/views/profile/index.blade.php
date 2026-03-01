@@ -1,7 +1,7 @@
 <x-general-layout>
     <div class="">
         <h1 class="">{{ $user->full_name }}</h1>
-        <p class="">@ {{ $user->username }}</p>
+        <p class="">{{ "@" . $user->username }}</p>
         <div class="">
             <span class="">Puntos: {{ $user->points }}</span>
         </div>

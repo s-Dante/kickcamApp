@@ -8,9 +8,9 @@
         </article>
 
         @auth
-        <a href="{{ route('profile.me') }}" class="btn-primary">Ir a mi Perfil</a>
+            <a href="{{ route('dashboard') }}" class="btn-primary">Ir a mi Perfil</a>
         @else
-        <a href="{{ route('auth.login') }}" class="btn-primary">Iniciar Sesión</a>
+            <a href="{{ route('login') }}" class="btn-primary">Iniciar Sesión</a>
         @endauth
     </section>
 </x-app>

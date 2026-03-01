@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -10,6 +12,7 @@ class UserBadge extends Model
 {
     /** @use HasFactory<\Database\Factories\UserBadgeFactory> */
     use HasFactory;
+
     use SoftDeletes;
 
     protected $fillable = [
@@ -21,6 +24,6 @@ class UserBadge extends Model
     protected $casts = [
         'earned_at' => 'datetime',
         'badge_id' => 'integer',
-        'user_id' => 'integer'
+        'user_id' => 'integer',
     ];
 }

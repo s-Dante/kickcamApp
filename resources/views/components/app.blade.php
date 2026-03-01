@@ -11,6 +11,8 @@
 
     @stack('css') {{-- Para CSS específico de cada página --}}
 
+    @stack('head-scripts') {{-- Para JS específico de cada página --}}
+
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @endif
@@ -34,7 +36,7 @@
     </footer>
     @endif
 
-    @stack('js')
+    @stack('scripts')
 </body>
 
 </html>

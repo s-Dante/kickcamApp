@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -11,18 +13,19 @@ class Badge extends Model
 {
     /** @use HasFactory<\Database\Factories\BadgeFactory> */
     use HasFactory;
+
     use SoftDeletes;
 
     protected $fillable = [
         'title',
         'image_url',
-        'description'
+        'description',
     ];
 
     protected $casts = [
         'title' => 'string',
         'image_url' => 'string',
-        'description' => 'string'
+        'description' => 'string',
     ];
 
     protected function imageUrl(): Attribute
@@ -30,6 +33,7 @@ class Badge extends Model
         return Attribute::make(
             get: function ($value) {
                 $path = parse_url($value, PHP_URL_PATH);
+
                 return asset($path);
             }
         );

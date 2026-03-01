@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Enums;
 
 enum MultimediaCategoryEnum: string
@@ -8,14 +10,12 @@ enum MultimediaCategoryEnum: string
     case VIDEO = 'video';
     case AR = '3d_model';
 
-    public function label(): string 
+    public function label(): string
     {
-        return match($this)
-        {
+        return match ($this) {
             self::IMAGE => 'imagen',
             self::VIDEO => 'video',
             self::AR => 'modelo 3D',
         };
     }
 }
-

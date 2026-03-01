@@ -1,10 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use App\Http\Repositories\CountryRepository;
+use App\Repositories\CountryRepository;
 
 class AppContentController extends Controller
 {
@@ -18,6 +18,7 @@ class AppContentController extends Controller
     public function multimediaIndex()
     {
         $countries = $this->countryRepository->getAllCountries();
+
         return view('multimedia.index', compact('countries'));
     }
 
@@ -25,7 +26,9 @@ class AppContentController extends Controller
     {
         $country = $this->countryRepository->getCountryWithMultimedia($slug);
 
-        if (!$country) abort(404);
+        if (! $country) {
+            abort(404);
+        }
 
         return view('multimedia.watch', compact('country'));
     }
@@ -33,13 +36,16 @@ class AppContentController extends Controller
     public function triviaIndex()
     {
         $countries = $this->countryRepository->getAllCountries();
+
         return view('trivia.index', compact('countries'));
     }
 
     public function playTrivia(string $slug)
     {
         $country = $this->countryRepository->getCountryBySlug($slug);
-        if (!$country) abort(404);
+        if (! $country) {
+            abort(404);
+        }
 
         $questions = $this->countryRepository->getQuestionsByCountry($country->id);
 

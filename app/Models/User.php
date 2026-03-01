@@ -1,16 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Casts\Attribute;
-
-use App\Models\UserCustomization;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class User extends Authenticatable
 {
@@ -58,7 +58,7 @@ class User extends Authenticatable
             'name' => 'string',
             'father_lastname' => 'string',
             'mother_lastname' => 'string',
-            'points' => 'integer'
+            'points' => 'integer',
 
         ];
     }
@@ -66,21 +66,21 @@ class User extends Authenticatable
     protected function getFullName(): Attribute
     {
         return Attribute::make(
-            get: fn() => "{$this->name} {$this->father->lastname} {$this->mother_lastname}"
+            get: fn () => "{$this->name} {$this->father->lastname} {$this->mother_lastname}"
         );
     }
 
     protected function getUserName(): Attribute
     {
         return Attribute::make(
-            get: fn() => "{$this->username}"
+            get: fn () => "{$this->username}"
         );
     }
 
     protected function getUserPoints(): Attribute
     {
         return Attribute::make(
-            get: fn() => "{$this->points}"
+            get: fn () => "{$this->points}"
         );
     }
 

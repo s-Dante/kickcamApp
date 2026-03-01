@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Enums;
 
 enum QuestionDifficultyEnum: string
@@ -8,10 +10,9 @@ enum QuestionDifficultyEnum: string
     case MEDIUM = 'medium';
     case HARD = 'hard';
 
-    public function label(): string 
+    public function label(): string
     {
-        return match($this)
-        {
+        return match ($this) {
             self::EASY => 'facil',
             self::MEDIUM => 'moderado',
             self::HARD => 'dificil',
