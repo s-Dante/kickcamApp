@@ -1,18 +1,41 @@
 @props(['soccerCategories', 'userUnlockedIds'])
 
-<div id="badgeModalOverlay"
-    class="{{ $ui['modal-backdrop'] }} opacity-0 pointer-events-none transition-opacity duration-300">
-    <div class="{{ $ui['modal-content'] }} max-w-4xl max-h-[85vh] flex flex-col transform scale-95 transition-transform duration-300"
-        id="badgeModalContent">
+@php
+    // Estructura de clases para limpiar el HTML
+    $classes = [
+        'overlay' => "{$ui['modal-backdrop']} opacity-0 pointer-events-none transition-opacity duration-300",
+        'content' => "{$ui['modal-content']} max-w-4xl max-h-[85vh] flex flex-col transform scale-95 transition-transform duration-300",
+
+        'header' => [
+            'container' => 'flex items-center justify-between p-5 border-b border-tertiary',
+            'title' => "{$ui['h2']} flex items-center capitalize",
+            'closeBtn' => "{$ui['text-muted']} transition-colors hover:text-secondary bg-tertiary-desat hover:bg-tertiary rounded-full p-2",
+            'icon' => 'w-5 h-5',
+        ],
+
+        'body' => [
+            'container' => 'p-6 overflow-y-auto',
+            'grid' => 'grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-4',
+        ],
+
+        'footer' => [
+            'container' => 'p-4 border-t border-tertiary bg-tertiary-desat/50 flex justify-between items-center rounded-b-2xl',
+            'text' => "text-sm font-semibold {$ui['text-muted']}",
+            'closeBtn' => $ui['btn-primary'],
+        ]
+    ];
+@endphp
+
+<div id="badgeModalOverlay" class="{{ $classes['overlay'] }}">
+    <div class="{{ $classes['content'] }}" id="badgeModalContent">
 
         <!-- Modal Header -->
-        <div class="flex items-center justify-between p-5 border-b border-tertiary">
-            <h3 class="{{ $ui['h2'] }} flex items-center capitalize" id="modalTitle">
+        <div class="{{ $classes['header']['container'] }}">
+            <h3 class="{{ $classes['header']['title'] }}" id="modalTitle">
                 <span class="mr-2" id="modalIcon">🌍</span> <span id="modalCategoryText">Colección</span>
             </h3>
-            <button onclick="closeBadgeModal()"
-                class="{{ $ui['text-muted'] }} transition-colors hover:text-secondary bg-tertiary-desat hover:bg-tertiary rounded-full p-2">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <button onclick="closeBadgeModal()" class="{{ $classes['header']['closeBtn'] }}">
+                <svg class="{{ $classes['header']['icon'] }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
                     </path>
                 </svg>
@@ -20,19 +43,16 @@
         </div>
 
         <!-- Modal Body (Grid Scrollable) -->
-        <div class="p-6 overflow-y-auto">
-            <div id="modalGrid"
-                class="grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-4">
+        <div class="{{ $classes['body']['container'] }}">
+            <div id="modalGrid" class="{{ $classes['body']['grid'] }}">
                 <!-- Badges injected dynamically by JS -->
             </div>
         </div>
 
         <!-- Modal Footer -->
-        <div class="p-4 border-t border-tertiary bg-tertiary-desat/50 flex justify-between items-center rounded-b-2xl">
-            <span class="text-sm font-semibold {{ $ui['text-muted'] }}" id="modalProgressText">0 / 0
-                Desbloqueadas</span>
-            <button onclick="closeBadgeModal()" class="{{ $ui['btn-primary'] }}">Cerrar
-                Álbum</button>
+        <div class="{{ $classes['footer']['container'] }}">
+            <span class="{{ $classes['footer']['text'] }}" id="modalProgressText">0 / 0 Desbloqueadas</span>
+            <button onclick="closeBadgeModal()" class="{{ $classes['footer']['closeBtn'] }}">Cerrar Álbum</button>
         </div>
     </div>
 </div>
@@ -56,6 +76,23 @@
         'poster': '🖼️'
     };
 
+    // Objeto JS para mantener las clases de los badges dinámicos limpias
+    const badgeUI = {
+        unlocked: {
+            wrapper: "flex flex-col items-center p-3 rounded-xl bg-accent-desat/30 border border-accent shadow-sm transition-transform hover:scale-105",
+            imgContainer: "w-16 h-16 rounded-full bg-primary flex items-center justify-center p-1 mb-2 shadow-inner border-2 border-accent-sat overflow-hidden relative",
+            radialBg: "absolute inset-0 bg-radial-1 opacity-20",
+            img: "w-full h-full object-contain relative z-10 drop-shadow-sm",
+            title: "text-[10px] font-bold text-secondary-sat text-center leading-tight line-clamp-2"
+        },
+        locked: {
+            wrapper: "flex flex-col items-center p-3 rounded-xl bg-tertiary-desat/20 border border-transparent",
+            iconContainer: "w-16 h-16 rounded-full bg-tertiary-desat flex items-center justify-center p-2 mb-2 grayscale opacity-40 shadow-inner overflow-hidden",
+            icon: "w-8 h-8 text-tertiary-sat opacity-30",
+            title: "text-[10px] font-semibold text-tertiary-sat text-center leading-tight"
+        }
+    };
+
     function openBadgeModal(categoryType) {
         modalTitleIcon.innerText = iconsMap[categoryType] || '🌍';
         modalCategoryText.innerText = `Álbum de ${categoryType}`;
@@ -71,19 +108,19 @@
             if (isUnlocked) unlockedCount++;
 
             const template = isUnlocked ? `
-                <div class="flex flex-col items-center p-3 rounded-xl bg-accent-desat/30 border border-accent shadow-sm transition-transform hover:scale-105" title="${badge.description}">
-                    <div class="w-16 h-16 rounded-full bg-primary flex items-center justify-center p-1 mb-2 shadow-inner border-2 border-accent-sat overflow-hidden relative">
-                        <div class="absolute inset-0 bg-radial-1 opacity-20"></div>
-                        <img src="${badge.image_url}" alt="${badge.title}" class="w-full h-full object-contain relative z-10 drop-shadow-sm">
+                <div class="${badgeUI.unlocked.wrapper}" title="${badge.description}">
+                    <div class="${badgeUI.unlocked.imgContainer}">
+                        <div class="${badgeUI.unlocked.radialBg}"></div>
+                        <img src="${badge.image_url}" alt="${badge.title}" class="${badgeUI.unlocked.img}">
                     </div>
-                    <span class="text-[10px] font-bold text-secondary-sat text-center leading-tight line-clamp-2">${badge.title}</span>
+                    <span class="${badgeUI.unlocked.title}">${badge.title}</span>
                 </div>
             ` : `
-                <div class="flex flex-col items-center p-3 rounded-xl bg-tertiary-desat/20 border border-transparent" title="Sigue jugando Trivia para desbloquearla">
-                    <div class="w-16 h-16 rounded-full bg-tertiary-desat flex items-center justify-center p-2 mb-2 grayscale opacity-40 shadow-inner overflow-hidden">
-                        <svg class="w-8 h-8 text-tertiary-sat opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                <div class="${badgeUI.locked.wrapper}" title="Sigue jugando Trivia para desbloquearla">
+                    <div class="${badgeUI.locked.iconContainer}">
+                        <svg class="${badgeUI.locked.icon}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
                     </div>
-                    <span class="text-[10px] font-semibold text-tertiary-sat text-center leading-tight">Misterio</span>
+                    <span class="${badgeUI.locked.title}">Misterio</span>
                 </div>
             `;
 

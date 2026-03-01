@@ -36,22 +36,37 @@
     </script>
 </head>
 
-<body class="{{ $ui['body'] }}">
-    <div class="min-h-screen">
+@php
+    $classes = [
+        'body' => $ui['body'],
+        'wrapper' => 'min-h-screen',
+        'header' => [
+            'container' => $ui['page-header'],
+            'inner' => "{$ui['container']} py-6"
+        ],
+        'main' => [
+            'container' => $ui['main-wrapper'],
+            'inner' => "{$ui['container']} py-12"
+        ]
+    ];
+@endphp
+
+<body class="{{ $classes['body'] }}">
+    <div class="{{ $classes['wrapper'] }}">
         @include('layouts.navigation')
 
         <!-- Page Heading -->
         @isset($header)
-            <header class="{{ $ui['page-header'] }}">
-                <div class="{{ $ui['container'] }} py-6">
+            <header class="{{ $classes['header']['container'] }}">
+                <div class="{{ $classes['header']['inner'] }}">
                     {{ $header }}
                 </div>
             </header>
         @endisset
 
         <!-- Page Content -->
-        <main class="{{ $ui['main-wrapper'] }}">
-            <div class="{{ $ui['container'] }} py-12">
+        <main class="{{ $classes['main']['container'] }}">
+            <div class="{{ $classes['main']['inner'] }}">
                 {{ $slot }}
             </div>
         </main>

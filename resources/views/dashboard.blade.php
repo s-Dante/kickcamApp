@@ -1,6 +1,13 @@
+@php
+    $classes = [
+        'container' => 'py-6',
+        'wrapper' => $ui['container']
+    ];
+@endphp
+
 <x-app-layout>
-    <div class="py-6">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div class="{{ $classes['container'] }}">
+        <div class="{{ $classes['wrapper'] }}">
             <x-dashboard.profile-header />
 
             <x-dashboard.general-badges :generalBadges="$generalBadges" :userUnlockedIds="$userUnlockedIds" />

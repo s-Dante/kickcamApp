@@ -36,15 +36,25 @@
     </script>
 </head>
 
-<body class="font-sans text-gray-900 antialiased">
-    <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
-        <div>
+@php
+    $classes = [
+        'body' => 'font-sans text-secondary antialiased bg-primary-sat',
+        'wrapper' => 'min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0',
+        'logo_wrapper' => '',
+        'logo' => 'w-20 h-20 fill-current text-secondary-desat hover:text-secondary transition-colors',
+        'content' => 'w-full sm:max-w-md mt-6 px-6 py-4 bg-primary shadow-sm overflow-hidden sm:rounded-xl border border-tertiary'
+    ];
+@endphp
+
+<body class="{{ $classes['body'] }}">
+    <div class="{{ $classes['wrapper'] }}">
+        <div class="{{ $classes['logo_wrapper'] }}">
             <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+                <x-application-logo class="{{ $classes['logo'] }}" />
             </a>
         </div>
 
-        <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+        <div class="{{ $classes['content'] }}">
             {{ $slot }}
         </div>
     </div>
