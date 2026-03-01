@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Badge;
 use App\Models\Country;
 use App\Services\TriviaService;
 use Illuminate\Http\RedirectResponse;
@@ -79,14 +80,39 @@ class TriviaController extends Controller
             }
         }
 
+        $user = auth()->user();
+        $awardedItems = [];
+
         // Apply Points to the User
         if ($totalEarnedPoints > 0) {
-            $user = auth()->user();
             $user->points = ($user->points ?? 0) + $totalEarnedPoints;
             $user->save();
         }
 
+        // Logic 1: General Achievement - "Primera Trivia Jugada"
+        $firstTriviaBadge = Badge::where('code', 'general_trivia_primera')->first();
+        if ($firstTriviaBadge && ! $user->badges()->where('badges.id', $firstTriviaBadge->id)->exists()) {
+            $user->badges()->syncWithoutDetaching([$firstTriviaBadge->id]);
+            $awardedItems[] = 'Logro: Primera Trivia';
+        }
+
+        // Logic 2: Reward AR Badge based on performance (e.g. perfect score = 100% chance, 80% = random chance)
+        // For development we will award one purely randomly if they score > 0
+        if ($score > 0) {
+            $soccerBadge = Badge::where('sport_category', 'soccer')->inRandomOrder()->first();
+            if ($soccerBadge && ! $user->badges()->where('badges.id', $soccerBadge->id)->exists()) {
+                $user->badges()->syncWithoutDetaching([$soccerBadge->id]);
+                $awardedItems[] = "Colección: {$soccerBadge->title}";
+            }
+        }
+
+        // Build redirect payload
+        $baseStatus = "¡Completado! Acertaste {$score} de {$totalQuestions}. Ganaste +{$totalEarnedPoints} puntos.";
+        if (count($awardedItems) > 0) {
+            $baseStatus .= ' También has desbloqueado: '.implode(', ', $awardedItems);
+        }
+
         // Redirect back with success message showing the Score vs Total
-        return redirect()->route('trivia.index')->with('status', "¡Completado! Acertaste {$score} de {$totalQuestions}. Acabas de ganar +{$totalEarnedPoints} puntos.");
+        return redirect()->route('trivia.index')->with('status', $baseStatus);
     }
 }

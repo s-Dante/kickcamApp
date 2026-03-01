@@ -6,6 +6,7 @@ namespace App\Enums;
 
 enum BadgeTypeEnum: string
 {
+    case GENERAL = 'general';
     case FLAG = 'flag';
     case SHIELD = 'shield';
     case BALL = 'ball';
