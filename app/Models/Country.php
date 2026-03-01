@@ -33,7 +33,7 @@ class Country extends Model
 
     public function multimedia(): HasMany
     {
-        return $this->hasMany(Multimedia::class, 'id');
+        return $this->hasMany(Multimedia::class);
     }
 
     public function question(): HasMany

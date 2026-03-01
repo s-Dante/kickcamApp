@@ -13,7 +13,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 use App\Http\Controllers\AppContentController;
 use App\Http\Controllers\DashboardController;
@@ -36,8 +36,8 @@ Route::middleware('auth')->group(function () {
      * Multimedia
      */
     Route::prefix('multimedia')->name('multimedia.')->group(function () {
-        Route::get('/index', [AppContentController::class, 'multimediaIndex'])->name('index');
-        Route::get('/{slug}', [AppContentController::class, 'watchMultimedia'])->name('watch');
+        Route::get('/index', [\App\Http\Controllers\MultimediaController::class, 'index'])->name('index');
+        Route::get('/{slug}', [\App\Http\Controllers\MultimediaController::class, 'show'])->name('show');
     });
 });
 
@@ -74,9 +74,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/trivia/play/{country}', [\App\Http\Controllers\TriviaController::class, 'play'])->name('trivia.play');
 
     // Placeholders for the other sections
-    Route::get('/multimedia', function () {
-        return view('dashboard');
-    })->name('multimedia.index');
     Route::get('/marcadores', function () {
         return view('dashboard');
     })->name('scoreboard.index');

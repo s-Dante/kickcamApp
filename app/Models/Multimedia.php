@@ -8,14 +8,11 @@ use App\Enums\MultimediaCategoryEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Multimedia extends Model
 {
     /** @use HasFactory<\Database\Factories\MultimediaFactory> */
     use HasFactory;
-
-    use SoftDeletes;
 
     protected $fillable = [
         'file_url',

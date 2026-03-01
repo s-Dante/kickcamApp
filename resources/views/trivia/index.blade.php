@@ -69,29 +69,14 @@
                 @else
                     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
                         @foreach($countries as $country)
-                            <a href="{{ route('trivia.play', $country->id) }}"
-                                class="group block bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all duration-200">
-                                <div class="aspect-w-16 aspect-h-9 w-full bg-gray-100 flex items-center justify-center relative overflow-hidden">
-                                    @if($country->flag_url)
-                                        <img src="{{ Str::startsWith($country->flag_url, 'http') ? $country->flag_url : asset('storage/' . $country->flag_url) }}" alt="{{ $country->name }} flag" class="w-full h-full object-cover filter brightness-[0.9] group-hover:scale-110 transition-transform duration-300">
-                                    @else
-                                        <span class="text-6xl filter drop-shadow-md group-hover:scale-110 transition-transform duration-300">🏳️</span>
-                                    @endif
-                                </div>
-                                <div class="p-4 border-t border-gray-50">
-                                    <h4
-                                        class="font-bold text-gray-900 text-lg mb-1 group-hover:text-indigo-600 transition-colors">
-                                        {{ $country->name }}</h4>
-                                    <div class="flex items-center text-xs text-gray-500 font-medium">
-                                        <svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
-                                            </path>
-                                        </svg>
-                                        {{ count($country->question) ?? 0 }} Preguntas
-                                    </div>
-                                </div>
-                            </a>
+                            <x-country-card :href="route('trivia.play', $country->id)" :country="$country">
+                                <svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                                    </path>
+                                </svg>
+                                {{ count($country->question) ?? 0 }} Preguntas
+                            </x-country-card>
                         @endforeach
                     </div>
                 @endif
