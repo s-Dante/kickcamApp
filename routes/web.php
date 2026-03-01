@@ -13,36 +13,36 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';
 
 use App\Http\Controllers\DashboardController;
 
 Route::middleware('auth')->group(function () {
     /**
-     * AR & Camera
+     * Cámaras (AR y Filtros)
      */
-    Route::get('/arCamera', function () {
+    Route::get('/camara-ar', function () {
         return view('arCamera.index');
     })->name('arCamera');
 
-    Route::get('/camera', function () {
+    Route::get('/camara-filtros', function () {
         return view('camera.index');
     })->name('camera');
 
     /**
      * Scoreboard (TheSportsDB)
      */
-    Route::prefix('scoreboard')->name('scoreboard.')->group(function () {
-        Route::get('/', [\App\Http\Controllers\ScoreboardController::class, 'index'])->name('index');
-        Route::get('/team/{id}', [\App\Http\Controllers\ScoreboardController::class, 'showTeam'])->name('team');
+    Route::get('/marcadores', [\App\Http\Controllers\ScoreboardController::class, 'index'])->name('scoreboard.index');
+    Route::prefix('marcadores')->name('scoreboard.')->group(function () {
+        Route::get('/equipo/{id}', [\App\Http\Controllers\ScoreboardController::class, 'showTeam'])->name('team');
     });
 
     /**
      * Multimedia
      */
+    Route::get('/multimedia', [\App\Http\Controllers\MultimediaController::class, 'index'])->name('multimedia.index');
     Route::prefix('multimedia')->name('multimedia.')->group(function () {
-        Route::get('/index', [\App\Http\Controllers\MultimediaController::class, 'index'])->name('index');
-        Route::get('/{slug}', [\App\Http\Controllers\MultimediaController::class, 'show'])->name('show');
+        Route::get('/ver/{slug}', [\App\Http\Controllers\MultimediaController::class, 'show'])->name('show');
     });
 });
 
@@ -55,10 +55,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     /**
      * Trivia
      */
+    Route::get('/trivia', [\App\Http\Controllers\TriviaController::class, 'index'])->name('trivia.index');
     Route::prefix('trivia')->name('trivia.')->group(function () {
-        Route::get('/index', [\App\Http\Controllers\TriviaController::class, 'index'])->name('index');
-        Route::get('/results', [\App\Http\Controllers\TriviaController::class, 'results'])->name('results');
-        Route::get('/play/{country}', [\App\Http\Controllers\TriviaController::class, 'play'])->name('play');
-        Route::post('/submit', [\App\Http\Controllers\TriviaController::class, 'submit'])->name('submit');
+        Route::get('/resultados', [\App\Http\Controllers\TriviaController::class, 'results'])->name('results');
+        Route::get('/jugar/{country}', [\App\Http\Controllers\TriviaController::class, 'play'])->name('play');
+        Route::post('/enviar', [\App\Http\Controllers\TriviaController::class, 'submit'])->name('submit');
     });
 });

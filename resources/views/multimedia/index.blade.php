@@ -4,21 +4,22 @@
 
             <!-- Page Header -->
             <div class="mb-8 px-4 sm:px-0">
-                <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">Multimedia</h1>
-                <p class="mt-1 text-sm text-gray-500">Explora videos, momentos y contenido exclusivo por país.</p>
+                <h1 class="{{ $ui['h1'] }}">Multimedia</h1>
+                <p class="mt-1 {{ $ui['text-muted'] }}">Explora videos, momentos y contenido exclusivo por país.</p>
             </div>
 
             <!-- Country Grid Section -->
             <div class="px-4 sm:px-0">
                 @if($countries->isEmpty())
-                    <div class="bg-white border-2 border-dashed border-gray-300 rounded-xl p-8 text-center text-gray-500">
-                        <svg class="mx-auto h-12 w-12 text-gray-400 mb-3" fill="none" viewBox="0 0 24 24"
+                    <div
+                        class="bg-primary border-2 border-dashed border-tertiary rounded-xl p-8 text-center {{ $ui['text-muted'] }}">
+                        <svg class="mx-auto h-12 w-12 text-tertiary-sat mb-3" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                                 d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z">
                             </path>
                         </svg>
-                        <p class="font-medium text-gray-900">No hay países disponibles</p>
+                        <p class="font-medium text-secondary-sat">No hay países disponibles</p>
                         <p class="text-sm">Aún no se han configurado selecciones.</p>
                     </div>
                 @else

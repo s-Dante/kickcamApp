@@ -1,17 +1,17 @@
 @props(['soccerCategories', 'userUnlockedIds'])
 
 <div id="badgeModalOverlay"
-    class="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-75 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300">
-    <div class="bg-white rounded-2xl shadow-xl w-11/12 max-w-4xl max-h-[85vh] flex flex-col transform scale-95 transition-transform duration-300"
+    class="{{ $ui['modal-backdrop'] }} opacity-0 pointer-events-none transition-opacity duration-300">
+    <div class="{{ $ui['modal-content'] }} max-w-4xl max-h-[85vh] flex flex-col transform scale-95 transition-transform duration-300"
         id="badgeModalContent">
 
         <!-- Modal Header -->
-        <div class="flex items-center justify-between p-5 border-b border-gray-100">
-            <h3 class="text-xl font-bold text-gray-800 flex items-center capitalize" id="modalTitle">
+        <div class="flex items-center justify-between p-5 border-b border-tertiary">
+            <h3 class="{{ $ui['h2'] }} flex items-center capitalize" id="modalTitle">
                 <span class="mr-2" id="modalIcon">🌍</span> <span id="modalCategoryText">Colección</span>
             </h3>
             <button onclick="closeBadgeModal()"
-                class="text-gray-400 hover:text-gray-600 transition-colors bg-gray-100 hover:bg-gray-200 rounded-full p-2">
+                class="{{ $ui['text-muted'] }} transition-colors hover:text-secondary bg-tertiary-desat hover:bg-tertiary rounded-full p-2">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
                     </path>
@@ -28,10 +28,10 @@
         </div>
 
         <!-- Modal Footer -->
-        <div class="p-4 border-t border-gray-100 bg-gray-50 flex justify-between items-center rounded-b-2xl">
-            <span class="text-sm font-semibold text-gray-500" id="modalProgressText">0 / 0 Desbloqueadas</span>
-            <button onclick="closeBadgeModal()"
-                class="px-5 py-2 bg-indigo-600 text-white rounded-lg font-bold shadow-sm hover:bg-indigo-700 transition-colors">Cerrar
+        <div class="p-4 border-t border-tertiary bg-tertiary-desat/50 flex justify-between items-center rounded-b-2xl">
+            <span class="text-sm font-semibold {{ $ui['text-muted'] }}" id="modalProgressText">0 / 0
+                Desbloqueadas</span>
+            <button onclick="closeBadgeModal()" class="{{ $ui['btn-primary'] }}">Cerrar
                 Álbum</button>
         </div>
     </div>
@@ -71,19 +71,19 @@
             if (isUnlocked) unlockedCount++;
 
             const template = isUnlocked ? `
-                <div class="flex flex-col items-center p-3 rounded-xl bg-orange-50 border border-orange-200 shadow-sm transition-transform hover:scale-105" title="${badge.description}">
-                    <div class="w-16 h-16 rounded-full bg-white flex items-center justify-center p-1 mb-2 shadow-inner border-2 border-orange-400 overflow-hidden relative">
-                        <div class="absolute inset-0 bg-gradient-to-tr from-yellow-200 to-transparent opacity-20"></div>
+                <div class="flex flex-col items-center p-3 rounded-xl bg-accent-desat/30 border border-accent shadow-sm transition-transform hover:scale-105" title="${badge.description}">
+                    <div class="w-16 h-16 rounded-full bg-primary flex items-center justify-center p-1 mb-2 shadow-inner border-2 border-accent-sat overflow-hidden relative">
+                        <div class="absolute inset-0 bg-radial-1 opacity-20"></div>
                         <img src="${badge.image_url}" alt="${badge.title}" class="w-full h-full object-contain relative z-10 drop-shadow-sm">
                     </div>
-                    <span class="text-[10px] font-bold text-orange-900 text-center leading-tight line-clamp-2">${badge.title}</span>
+                    <span class="text-[10px] font-bold text-secondary-sat text-center leading-tight line-clamp-2">${badge.title}</span>
                 </div>
             ` : `
-                <div class="flex flex-col items-center p-3 rounded-xl bg-gray-50/70 border border-transparent" title="Sigue jugando Trivia para desbloquearla">
-                    <div class="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center p-2 mb-2 grayscale opacity-40 shadow-inner overflow-hidden">
-                        <svg class="w-8 h-8 text-gray-500 opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                <div class="flex flex-col items-center p-3 rounded-xl bg-tertiary-desat/20 border border-transparent" title="Sigue jugando Trivia para desbloquearla">
+                    <div class="w-16 h-16 rounded-full bg-tertiary-desat flex items-center justify-center p-2 mb-2 grayscale opacity-40 shadow-inner overflow-hidden">
+                        <svg class="w-8 h-8 text-tertiary-sat opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
                     </div>
-                    <span class="text-[10px] font-semibold text-gray-400 text-center leading-tight">Misterio</span>
+                    <span class="text-[10px] font-semibold text-tertiary-sat text-center leading-tight">Misterio</span>
                 </div>
             `;
 

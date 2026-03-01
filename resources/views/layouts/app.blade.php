@@ -14,24 +14,46 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <!-- Theme Initialization -->
+    <script>
+        (function () {
+            // Get user preference from Blade or localStorage
+            let theme = '{!! auth()->check() ? auth()->user()->theme : "system" !!}';
+
+            if (theme === 'system') {
+                if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    document.documentElement.classList.add('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                }
+            } else if (theme === 'dark') {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        })();
+    </script>
 </head>
 
-<body class="font-sans antialiased">
-    <div class="min-h-screen bg-gray-100">
+<body class="{{ $ui['body'] }}">
+    <div class="min-h-screen">
         @include('layouts.navigation')
 
         <!-- Page Heading -->
         @isset($header)
-            <header class="bg-white shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            <header class="{{ $ui['page-header'] }}">
+                <div class="{{ $ui['container'] }} py-6">
                     {{ $header }}
                 </div>
             </header>
         @endisset
 
         <!-- Page Content -->
-        <main class="pb-20 sm:pb-0">
-            {{ $slot }}
+        <main class="{{ $ui['main-wrapper'] }}">
+            <div class="{{ $ui['container'] }} py-12">
+                {{ $slot }}
+            </div>
         </main>
     </div>
 </body>
