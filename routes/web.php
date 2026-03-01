@@ -53,18 +53,11 @@ Route::middleware('auth')->group(function () {
     })->name('camera');
 
     /**
-     * Scoreboard (Estadísticas BeSoccer)
+     * Scoreboard (TheSportsDB)
      */
     Route::prefix('scoreboard')->name('scoreboard.')->group(function () {
-        Route::get('/', function () {
-            return view('scoreboard.index');
-        })->name('index');
-        Route::get('matches', function () {
-            return view('scoreboard.matches');
-        })->name('matches');
-        Route::get('match-status', function () {
-            return view('scoreboard.match-status');
-        })->name('match-status');
+        Route::get('/', [\App\Http\Controllers\ScoreboardController::class, 'index'])->name('index');
+        Route::get('/team/{id}', [\App\Http\Controllers\ScoreboardController::class, 'showTeam'])->name('team');
     });
 });
 
@@ -74,9 +67,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/trivia/play/{country}', [\App\Http\Controllers\TriviaController::class, 'play'])->name('trivia.play');
 
     // Placeholders for the other sections
-    Route::get('/marcadores', function () {
-        return view('dashboard');
-    })->name('scoreboard.index');
     Route::get('/ar-camera', function () {
         return view('dashboard');
     })->name('arCamera');

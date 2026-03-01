@@ -47,4 +47,8 @@ return [
         'redirect' => env('GOOGLE_REDIRECT'),
     ],
 
+    'sportsdb' => [
+        'key' => env('SPORTSDB_API_KEY', '3'),
+    ],
+
 ];
