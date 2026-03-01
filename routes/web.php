@@ -70,6 +70,7 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/trivia', [\App\Http\Controllers\TriviaController::class, 'index'])->name('trivia.index');
+    Route::get('/trivia/results', [\App\Http\Controllers\TriviaController::class, 'results'])->name('trivia.results');
     Route::get('/trivia/play/{country}', [\App\Http\Controllers\TriviaController::class, 'play'])->name('trivia.play');
 
     // Placeholders for the other sections

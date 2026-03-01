@@ -51,18 +51,19 @@ class QuestionSeeder extends Seeder
 
                 $question = Question::create([
                     'question_text' => $qData['question'],
-                    'difficulty'    => $qData['difficulty'],
-                    'country_id'    => $country->id,
+                    'difficulty' => $qData['difficulty'],
+                    'country_id' => $country->id,
                 ]);
 
                 foreach ($qData['options'] as $option) {
                     $optionId = $option['id'];
 
-                    $isCorrect = $validityMap[$optionId] ?? false;
+                    // Supports both flat map references or direct object booleans
+                    $isCorrect = $option['isCorrect'] ?? $option['is_correct'] ?? $validityMap[$optionId] ?? false;
 
                     Answer::create([
                         'answer_text' => $option['text'],
-                        'is_correct'  => $isCorrect,
+                        'is_correct' => $isCorrect,
                         'question_id' => $question->id,
                     ]);
                 }

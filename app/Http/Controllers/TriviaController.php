@@ -16,15 +16,10 @@ class TriviaController extends Controller
      */
     public function index(): View
     {
-        // For Phase 1.5, we will load countries that have questions configured
-        // Currently bypassing the 'has questions' filter since DB might be empty,
-        // just loading all available countries or an empty collection.
-
-        $countries = collect(); // Placeholder for actual App\Models\Country::all() or similar
+        $countries = collect();
 
         if (class_exists(Country::class)) {
-            // In a real scenario, you'd want: Country::has('questions')->withCount('questions')->get();
-            // $countries = Country::all();
+            $countries = Country::has('question')->withCount('question')->get();
         }
 
         return view('trivia.index', compact('countries'));
@@ -44,11 +39,45 @@ class TriviaController extends Controller
             $type = 'world';
         } else {
             // Handle Country Specific Database Questions
-            // $country = Country::with('questions')->findOrFail($slug);
-            // $questions = $country->questions()->inRandomOrder()->take(5)->get();
+            // Eager load everything needed for the DB match format
+            $country = Country::with('question.answer')->findOrFail($slug);
 
-            // To prevent failures while DB is technically empty for now during dev
-            return redirect()->route('trivia.index')->with('error', 'El país seleccionado no tiene preguntas cargadas aún.');
+            // To preserve eager loaded relationships, we access the collection property directly
+            // and use collection methods rather than query builder methods.
+            $dbQuestions = $country->question;
+
+            if ($dbQuestions->isEmpty()) {
+                return redirect()->route('trivia.index')->with('error', 'El país seleccionado no tiene preguntas cargadas aún.');
+            }
+
+            // Randomize and take up to 5
+            $dbQuestions = $dbQuestions->shuffle()->take(5);
+
+            foreach ($dbQuestions as $q) {
+                // Ensure there is at least a correct answer
+                $correct = $q->answer->where('is_correct', true)->first();
+                if (! $correct) {
+                    continue;
+                }
+
+                $options = $q->answer->pluck('answer_text')->shuffle()->toArray();
+
+                $points = match ($q->difficulty) {
+                    \App\Enums\QuestionDifficultyEnum::EASY => 5,
+                    \App\Enums\QuestionDifficultyEnum::MEDIUM => 10,
+                    \App\Enums\QuestionDifficultyEnum::HARD => 15,
+                    default => 10,
+                };
+
+                $questions[] = [
+                    'id' => 'q_db_'.$q->id,
+                    'question' => $q->question_text,
+                    'options' => $options,
+                    'correct_answer' => $correct->answer_text,
+                    'points' => $points,
+                    'type' => 'db_country',
+                ];
+            }
         }
 
         return view('trivia.play', compact('questions', 'type', 'slug'));
@@ -62,22 +91,36 @@ class TriviaController extends Controller
         $validated = $request->validate([
             'answers' => 'required|array',
             'answers.*.question_id' => 'required|string',
+            'answers.*.question_text' => 'required|string',
             'answers.*.user_answer' => 'required|string',
             'answers.*.correct_answer' => 'required|string',
+            'answers.*.points' => 'required|string',
             'trivia_type' => 'required|string',
         ]);
 
         $score = 0;
         $totalEarnedPoints = 0;
         $totalQuestions = count($validated['answers']);
+        $detailedResults = [];
 
         foreach ($validated['answers'] as $ans) {
             $decryptedCorrect = decrypt($ans['correct_answer']);
+            $decryptedQuestion = decrypt($ans['question_text']);
 
-            if (trim(strtolower($ans['user_answer'])) === trim(strtolower($decryptedCorrect))) {
+            $isCorrect = trim(strtolower($ans['user_answer'])) === trim(strtolower($decryptedCorrect));
+
+            if ($isCorrect) {
                 $score++;
-                $totalEarnedPoints += 10; // For now all questions yield 10pts
+                $pts = (int) decrypt($ans['points']);
+                $totalEarnedPoints += $pts;
             }
+
+            $detailedResults[] = [
+                'question' => $decryptedQuestion,
+                'user_answer' => $ans['user_answer'],
+                'correct_answer' => $decryptedCorrect,
+                'is_correct' => $isCorrect,
+            ];
         }
 
         $user = auth()->user();
@@ -92,7 +135,7 @@ class TriviaController extends Controller
         // Logic 1: General Achievement - "Primera Trivia Jugada"
         $firstTriviaBadge = Badge::where('code', 'general_trivia_primera')->first();
         if ($firstTriviaBadge && ! $user->badges()->where('badges.id', $firstTriviaBadge->id)->exists()) {
-            $user->badges()->syncWithoutDetaching([$firstTriviaBadge->id]);
+            $user->badges()->syncWithoutDetaching([$firstTriviaBadge->id => ['earned_at' => now()]]);
             $awardedItems[] = 'Logro: Primera Trivia';
         }
 
@@ -101,18 +144,32 @@ class TriviaController extends Controller
         if ($score > 0) {
             $soccerBadge = Badge::where('sport_category', 'soccer')->inRandomOrder()->first();
             if ($soccerBadge && ! $user->badges()->where('badges.id', $soccerBadge->id)->exists()) {
-                $user->badges()->syncWithoutDetaching([$soccerBadge->id]);
+                $user->badges()->syncWithoutDetaching([$soccerBadge->id => ['earned_at' => now()]]);
                 $awardedItems[] = "Colección: {$soccerBadge->title}";
             }
         }
 
-        // Build redirect payload
-        $baseStatus = "¡Completado! Acertaste {$score} de {$totalQuestions}. Ganaste +{$totalEarnedPoints} puntos.";
-        if (count($awardedItems) > 0) {
-            $baseStatus .= ' También has desbloqueado: '.implode(', ', $awardedItems);
+        // Redirect back to detailed Results Page with flashed data
+        return redirect()->route('trivia.results')->with([
+            'status' => '¡Trivia Completada!',
+            'score' => $score,
+            'totalQuestions' => $totalQuestions,
+            'totalEarnedPoints' => $totalEarnedPoints,
+            'awardedItems' => $awardedItems,
+            'detailedResults' => $detailedResults,
+        ]);
+    }
+
+    /**
+     * Show detailed results after a Trivia session.
+     */
+    public function results(): View|RedirectResponse
+    {
+        // Guard if accessed directly without session data
+        if (! session()->has('detailedResults')) {
+            return redirect()->route('trivia.index');
         }
 
-        // Redirect back with success message showing the Score vs Total
-        return redirect()->route('trivia.index')->with('status', $baseStatus);
+        return view('trivia.results');
     }
 }

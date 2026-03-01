@@ -38,7 +38,7 @@ class Country extends Model
 
     public function question(): HasMany
     {
-        return $this->hasMany(Question::class, 'id');
+        return $this->hasMany(Question::class);
     }
 
     protected function flagUrl(): Attribute

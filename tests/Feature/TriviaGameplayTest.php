@@ -50,21 +50,26 @@ test('trivia submit endpoint calculates score and awards points correctly', func
         'answers' => [
             [
                 'question_id' => 'q_world_123',
+                'question_text' => encrypt('¿Cuál es la capital de España?'),
                 'user_answer' => 'Madrid', // Right
                 'correct_answer' => $encryptedCorrect,
+                'points' => encrypt(10),
             ],
             [
                 'question_id' => 'q_world_456',
+                'question_text' => encrypt('¿Cuál es la capital de Francia?'),
                 'user_answer' => 'Paris', // Wrong
                 'correct_answer' => encrypt('London'),
+                'points' => encrypt(10),
             ],
         ],
     ];
 
     $response = $this->actingAs($this->testUser)->post(route('trivia.submit'), $payload);
 
-    $response->assertRedirect(route('trivia.index'));
+    $response->assertRedirect(route('trivia.results'));
     $response->assertSessionHas('status');
+    $response->assertSessionHas('detailedResults');
 
     // User should have 10 points (1 right answer out of 2)
     $this->testUser->refresh();

@@ -37,7 +37,7 @@ class Question extends Model
 
     public function answer(): HasMany
     {
-        return $this->hasMany(Answer::class, 'id', 'id');
+        return $this->hasMany(Answer::class);
     }
 
     public function scopeDifficulty($query, QuestionDifficultyEnum $difficulty)

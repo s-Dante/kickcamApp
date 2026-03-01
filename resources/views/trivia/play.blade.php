@@ -43,7 +43,10 @@
                                     
                                     <!-- ID Backend Oculto para validación posterior -->
                                     <input type="hidden" name="answers[{{ $index }}][question_id]" value="{{ $q['id'] }}">
-                                    <input type="hidden" name="answers[{{ $index }}][correct_answer]" value="{{ encrypt($q['correct_answer']) }}"> <!-- Basic anti-cheat text -->
+                                    <!-- Encrypted Payload Context -->
+                                    <input type="hidden" name="answers[{{ $index }}][question_text]" value="{{ encrypt($q['question']) }}">
+                                    <input type="hidden" name="answers[{{ $index }}][correct_answer]" value="{{ encrypt($q['correct_answer']) }}"> 
+                                    <input type="hidden" name="answers[{{ $index }}][points]" value="{{ encrypt($q['points']) }}"> 
 
                                     <h3 class="text-2xl sm:text-3xl font-extrabold text-gray-900 mb-8 leading-tight text-center">
                                         {{ $q['question'] }}
