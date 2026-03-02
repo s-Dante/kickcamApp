@@ -14,6 +14,13 @@ use Illuminate\View\View;
 class OtpPasswordResetController extends Controller
 {
     /**
+     * Display the password reset link request view.
+     */
+    public function create(): View
+    {
+        return view('auth.forgot-password');
+    }
+    /**
      * Handle an incoming password reset link request and send OTP.
      */
     public function sendOtp(Request $request, PasswordResetService $service): RedirectResponse
@@ -33,7 +40,7 @@ class OtpPasswordResetController extends Controller
      */
     public function showVerifyForm(Request $request): View|RedirectResponse
     {
-        if (! $request->session()->has('reset_email')) {
+        if (!$request->session()->has('reset_email')) {
             return redirect()->route('password.request');
         }
 
@@ -66,7 +73,7 @@ class OtpPasswordResetController extends Controller
      */
     public function showResetForm(Request $request): View|RedirectResponse
     {
-        if (! $request->session()->has('verified_reset_email')) {
+        if (!$request->session()->has('verified_reset_email')) {
             return redirect()->route('password.request');
         }
 
