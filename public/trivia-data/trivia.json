@@ -1080,6 +1080,126 @@
         ]
     },
     {
+        "id": 46,
+        "country": "mx",
+        "difficulty": "easy",
+        "question": "¿En qué año México ganó la medalla de oro olímpica en fútbol?",
+        "options": [
+            {
+                "id": 1181,
+                "text": "2012"
+            },
+            {
+                "id": 1182,
+                "text": "2008"
+            },
+            {
+                "id": 1183,
+                "text": "2016"
+            },
+            {
+                "id": 1184,
+                "text": "2004"
+            }
+        ]
+    },
+    {
+        "id": 47,
+        "country": "mx",
+        "difficulty": "easy",
+        "question": "¿Quién anotó el gol contra Alemania en el Mundial 2018?",
+        "options": [
+            {
+                "id": 1185,
+                "text": "Hirving Lozano"
+            },
+            {
+                "id": 1186,
+                "text": "Carlos Vela"
+            },
+            {
+                "id": 1187,
+                "text": "Raúl Jiménez"
+            },
+            {
+                "id": 1188,
+                "text": "Andrés Guardado"
+            }
+        ]
+    },
+    {
+        "id": 48,
+        "country": "mx",
+        "difficulty": "medium",
+        "question": "¿Cuántos Mundiales ha organizado México?",
+        "options": [
+            {
+                "id": 1189,
+                "text": "2"
+            },
+            {
+                "id": 1190,
+                "text": "1"
+            },
+            {
+                "id": 1191,
+                "text": "3"
+            },
+            {
+                "id": 1192,
+                "text": "0"
+            }
+        ]
+    },
+    {
+        "id": 49,
+        "country": "mx",
+        "difficulty": "medium",
+        "question": "¿Qué estadio fue sede de dos finales del mundo?",
+        "options": [
+            {
+                "id": 1193,
+                "text": "Estadio Azteca"
+            },
+            {
+                "id": 1194,
+                "text": "Estadio Jalisco"
+            },
+            {
+                "id": 1195,
+                "text": "Estadio BBVA"
+            },
+            {
+                "id": 1196,
+                "text": "Estadio CU"
+            }
+        ]
+    },
+    {
+        "id": 50,
+        "country": "mx",
+        "difficulty": "hard",
+        "question": "¿Quién fue el director técnico de México en el Mundial 1998?",
+        "options": [
+            {
+                "id": 1197,
+                "text": "Manuel Lapuente"
+            },
+            {
+                "id": 1198,
+                "text": "Ricardo La Volpe"
+            },
+            {
+                "id": 1199,
+                "text": "Miguel Herrera"
+            },
+            {
+                "id": 1200,
+                "text": "Javier Aguirre"
+            }
+        ]
+    },
+    {
         "id": 1041,
         "questionId": 11,
         "isCorrect": true
@@ -1977,6 +2097,106 @@
     {
         "id": 1040,
         "questionId": 10,
+        "isCorrect": false
+    },
+    {
+        "id": 1181,
+        "questionId": 46,
+        "isCorrect": true
+    },
+    {
+        "id": 1182,
+        "questionId": 46,
+        "isCorrect": false
+    },
+    {
+        "id": 1183,
+        "questionId": 46,
+        "isCorrect": false
+    },
+    {
+        "id": 1184,
+        "questionId": 46,
+        "isCorrect": false
+    },
+    {
+        "id": 1185,
+        "questionId": 47,
+        "isCorrect": true
+    },
+    {
+        "id": 1186,
+        "questionId": 47,
+        "isCorrect": false
+    },
+    {
+        "id": 1187,
+        "questionId": 47,
+        "isCorrect": false
+    },
+    {
+        "id": 1188,
+        "questionId": 47,
+        "isCorrect": false
+    },
+    {
+        "id": 1189,
+        "questionId": 48,
+        "isCorrect": true
+    },
+    {
+        "id": 1190,
+        "questionId": 48,
+        "isCorrect": false
+    },
+    {
+        "id": 1191,
+        "questionId": 48,
+        "isCorrect": false
+    },
+    {
+        "id": 1192,
+        "questionId": 48,
+        "isCorrect": false
+    },
+    {
+        "id": 1193,
+        "questionId": 49,
+        "isCorrect": true
+    },
+    {
+        "id": 1194,
+        "questionId": 49,
+        "isCorrect": false
+    },
+    {
+        "id": 1195,
+        "questionId": 49,
+        "isCorrect": false
+    },
+    {
+        "id": 1196,
+        "questionId": 49,
+        "isCorrect": false
+    },
+    {
+        "id": 1197,
+        "questionId": 50,
+        "isCorrect": true
+    },
+    {
+        "id": 1198,
+        "questionId": 50,
+        "isCorrect": false
+    },
+    {
+        "id": 1199,
+        "questionId": 50,
+        "isCorrect": false
+    },
+    {
+        "id": 1200,
+        "questionId": 50,
         "isCorrect": false
     }
 ]
