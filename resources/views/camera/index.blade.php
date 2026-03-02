@@ -16,20 +16,20 @@
     ];
 @endphp
 
-<x-general-layout title="KickCam Pro">
+<x-app-layout title="KickCam Pro">
 
     {{-- =========================
     IMPORTMAP (SOLO ESTO EN HEAD)
     ========================== --}}
     @push('head-scripts')
         <script type="importmap">
-                {
-                "imports": {
-                    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
-                    "mindar-face-three": "https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-face-three.prod.js"
+                    {
+                    "imports": {
+                        "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                        "mindar-face-three": "https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-face-three.prod.js"
+                    }
                 }
-            }
-            </script>
+                </script>
     @endpush
 
 
@@ -138,4 +138,4 @@
         </script>
     @endpush
 
-</x-general-layout>
+</x-app-layout>

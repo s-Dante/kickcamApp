@@ -1,4 +1,4 @@
-<x-general-layout title="Escáner AR">
+<x-app-layout title="Escáner AR">
 
     @push('head-scripts')
         <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
@@ -168,4 +168,4 @@
                 });
             </script>
         @endpush
-</x-general-layout>
+</x-app-layout>

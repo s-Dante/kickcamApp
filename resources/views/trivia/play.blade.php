@@ -178,9 +178,8 @@
                         const theNextBtn = currentSlide.querySelector('.next-btn');
                         const theSubmitBtn = currentSlide.querySelector('.submit-btn');
 
-                        if (theNextBtn) textBtn.disabled = false;
-                        if (theSubmitBtn) theSubmitBtn.disabled = false;
                         if (theNextBtn) theNextBtn.disabled = false;
+                        if (theSubmitBtn) theSubmitBtn.disabled = false;
                     });
                 });
 

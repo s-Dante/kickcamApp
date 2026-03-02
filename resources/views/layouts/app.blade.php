@@ -14,6 +14,7 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @stack('head-scripts')
 
     <!-- Theme Initialization -->
     <script>
@@ -71,6 +72,7 @@
             </div>
         </main>
     </div>
+    @stack('scripts')
 </body>
 
 </html>
