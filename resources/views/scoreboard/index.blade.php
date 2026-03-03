@@ -82,6 +82,57 @@
             <!-- Dashboard Content -->
             <div class="{{ $classes['content']['grid'] }}">
 
+                <!-- Live Events Column (Full Width if exists) -->
+                @if(!empty($liveEvents))
+                    <div class="col-span-1 lg:col-span-2 mb-6">
+                        <h2 class="{{ $classes['events']['title'] }} text-red-500 animate-pulse">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                            EN VIVO
+                        </h2>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+                            @foreach($liveEvents as $event)
+                                <div
+                                    class="bg-primary border-2 border-red-500/50 rounded-xl p-4 shadow-[0_0_15px_rgba(239,68,68,0.2)]">
+                                    <div class="flex justify-between items-center mb-3">
+                                        <span
+                                            class="text-xs font-bold text-red-500 bg-red-500/10 px-2 py-1 rounded-full animate-pulse">
+                                            LIVE
+                                        </span>
+                                        <span class="text-xs text-secondary-desat font-mono">
+                                            {{ $event['strTime'] ?? 'En juego' }}
+                                        </span>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex-1 text-center">
+                                            <a href="{{ route('scoreboard.team', $event['idHomeTeam']) }}"
+                                                class="{{ $classes['events']['team_link'] }} text-lg">
+                                                {{ $event['strHomeTeam'] }}
+                                            </a>
+                                        </div>
+                                        <div class="px-4 font-mono text-2xl font-bold text-secondary flex items-center gap-2">
+                                            <span
+                                                class="{{ isset($event['intHomeScore']) && $event['intHomeScore'] > $event['intAwayScore'] ? 'text-accent' : '' }}">{{ $event['intHomeScore'] ?? '-' }}</span>
+                                            <span class="text-tertiary-sat text-sm">-</span>
+                                            <span
+                                                class="{{ isset($event['intAwayScore']) && $event['intAwayScore'] > $event['intHomeScore'] ? 'text-accent' : '' }}">{{ $event['intAwayScore'] ?? '-' }}</span>
+                                        </div>
+                                        <div class="flex-1 text-center">
+                                            <a href="{{ route('scoreboard.team', $event['idAwayTeam']) }}"
+                                                class="{{ $classes['events']['team_link'] }} text-lg">
+                                                {{ $event['strAwayTeam'] }}
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                @endif
+
                 <!-- Past Events Column -->
                 <div>
                     <h2 class="{{ $classes['events']['title'] }}">

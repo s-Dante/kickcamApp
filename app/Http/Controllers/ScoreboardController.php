@@ -50,13 +50,14 @@ class ScoreboardController extends Controller
             $leagueId = TheSportsDbService::LEAGUE_MX;
         }
 
+        $liveEvents = $this->sportsService->getLiveEvents($leagueId);
         $pastEvents = $this->sportsService->getPastEvents($leagueId);
         $nextEvents = $this->sportsService->getNextEvents($leagueId);
 
         $activeLeague = $this->supportedLeagues[$leagueId];
         $leagues = $this->supportedLeagues;
 
-        return view('scoreboard.index', compact('pastEvents', 'nextEvents', 'activeLeague', 'leagues'));
+        return view('scoreboard.index', compact('liveEvents', 'pastEvents', 'nextEvents', 'activeLeague', 'leagues'));
     }
 
     /**

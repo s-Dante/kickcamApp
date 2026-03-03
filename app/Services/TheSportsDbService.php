@@ -60,6 +60,46 @@ class TheSportsDbService
     }
 
     /**
+     * Get live/today's events for a specific league.
+     * Caches the result very briefly (2 minutes) since it's live data.
+     * Uses the eventsday endpoint which covers today's matches.
+     *
+     * @param string $leagueId
+     * @return array
+     */
+    public function getLiveEvents(string $leagueId): array
+    {
+        $cacheKey = "sportsdb_live_events_{$leagueId}_" . now()->format('Y-m-d');
+
+        // Short cache of 2 minutes to keep it fresh
+        return Cache::remember($cacheKey, now()->addMinutes(2), function () use ($leagueId) {
+            try {
+                // Determine today's date for params
+                $today = now()->format('Y-m-d');
+
+                // Try eventsday.php explicitly for today's matches
+                $response = Http::timeout(10)->get($this->baseUrl . '/eventsday.php', [
+                    'id' => $leagueId,
+                    'd' => $today,
+                ]);
+
+                if ($response->successful()) {
+                    return $response->json('events') ?? [];
+                }
+
+                Log::warning("TheSportsDB API request failed for live/today events", [
+                    'league_id' => $leagueId,
+                    'status' => $response->status(),
+                ]);
+            } catch (\Exception $e) {
+                Log::error("Exception in TheSportsDbService@getLiveEvents: " . $e->getMessage());
+            }
+
+            return [];
+        });
+    }
+
+    /**
      * Get the next 15 upcoming events for a specific league.
      * Caches the result for 2 hours.
      *

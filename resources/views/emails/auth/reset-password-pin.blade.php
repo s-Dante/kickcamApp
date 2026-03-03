@@ -1,14 +1,20 @@
 <x-mail::message>
     # Recuperación de Contraseña
 
-    Has solicitado restablecer tu contraseña. Ingresa el siguiente código de seguridad en la aplicación para proceder.
+    Hola,
+
+    Recibimos una solicitud para restablecer la contraseña de tu cuenta en **{{ config('app.name') }}**.
+    Por favor, ingresa el siguiente código de seguridad en la aplicación para crear una nueva contraseña:
 
     <x-mail::panel>
-        # {{ $pin }}
+        <div style="text-align: center; font-size: 24px; font-weight: bold; letter-spacing: 5px; color: #18181b;">
+            {{ $pin }}
+        </div>
     </x-mail::panel>
 
-    Si tú no solicitaste este cambio, por favor ignora este correo.
+    Este código es válido por 60 minutos. Si tú no solicitaste este cambio, por favor ignora este correo; tu cuenta
+    sigue estando segura.
 
     Gracias,<br>
-    {{ config('app.name') }}
+    El equipo de **{{ config('app.name') }}**
 </x-mail::message>

@@ -65,5 +65,7 @@
                 </x-primary-button>
             </div>
         </div>
+
+        <x-social-login-buttons />
     </form>
 </x-guest-layout>
