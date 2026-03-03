@@ -75,4 +75,48 @@ class ScoreboardController extends Controller
 
         return view('scoreboard.team', compact('team', 'lastEvents'));
     }
+
+    /**
+     * API request for the AR Camera (Returns Team JSON by ISO Code)
+     */
+    public function getTeamByIso(string $iso)
+    {
+        // ISO-alpha-2 to TheSportsDB ID Mapping for World Cup Teams + Historical Cups
+        $isoDict = [
+            'ar' => ['id' => '133602', 'trophies' => 3], // Argentina
+            'mx' => ['id' => '137682', 'trophies' => 0], // Mexico
+            'br' => ['id' => '133604', 'trophies' => 5], // Brazil
+            'es' => ['id' => '133614', 'trophies' => 1], // Spain
+            'fr' => ['id' => '133610', 'trophies' => 2], // France
+            'de' => ['id' => '133606', 'trophies' => 4], // Germany
+            'gb-eng' => ['id' => '133608', 'trophies' => 1], // England
+            'us' => ['id' => '137684', 'trophies' => 0], // USA
+            'ca' => ['id' => '137691', 'trophies' => 0], // Canada
+            'jp' => ['id' => '135905', 'trophies' => 0], // Japan
+        ];
+
+        $teamData = $isoDict[strtolower($iso)] ?? null;
+
+        if (!$teamData) {
+            return response()->json(['error' => 'Equipo no mapeado aún'], 404);
+        }
+
+        $team = $this->sportsService->getTeamDetails($teamData['id']);
+
+        if (!$team) {
+            return response()->json(['error' => 'Error al contactar con TheSportsDB'], 500);
+        }
+
+        return response()->json([
+            'id' => $team['idTeam'],
+            'name' => $team['strTeam'],
+            'alternate' => $team['strTeamAlternate'] ?? '',
+            'stadium' => $team['strStadium'],
+            'formed' => $team['intFormedYear'],
+            'website' => $team['strWebsite'],
+            'description' => $team['strDescriptionES'] ?? $team['strDescriptionEN'] ?? '',
+            'badge' => $team['strBadge'],
+            'trophies' => $teamData['trophies']
+        ]);
+    }
 }

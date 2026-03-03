@@ -1,0 +1,62 @@
+{
+    "ar": {
+        "name": "Argentina",
+        "stadium": "Monumental",
+        "formed": "1893",
+        "trophies": 3
+    },
+    "mx": {
+        "name": "México",
+        "stadium": "Azteca",
+        "formed": "1927",
+        "trophies": 0
+    },
+    "br": {
+        "name": "Brasil",
+        "stadium": "Maracanã",
+        "formed": "1914",
+        "trophies": 5
+    },
+    "es": {
+        "name": "España",
+        "stadium": "Santiago Bernabéu",
+        "formed": "1909",
+        "trophies": 1
+    },
+    "fr": {
+        "name": "Francia",
+        "stadium": "Stade de France",
+        "formed": "1919",
+        "trophies": 2
+    },
+    "de": {
+        "name": "Alemania",
+        "stadium": "Olympiastadion",
+        "formed": "1900",
+        "trophies": 4
+    },
+    "gb-eng": {
+        "name": "Inglaterra",
+        "stadium": "Wembley Stadium",
+        "formed": "1863",
+        "trophies": 1
+    },
+    "us": {
+        "name": "Estados Unidos",
+        "stadium": "Mercedes-Benz Stadium",
+        "formed": "1913",
+        "trophies": 0
+    },
+    "ca": {
+        "name": "Canadá",
+        "stadium": "BMO Field",
+        "formed": "1912",
+        "trophies": 0
+    },
+    "jp": {
+        "name": "Japón",
+        "stadium": "Saitama Stadium",
+        "formed": "1921",
+        "trophies": 0
+    }
+}

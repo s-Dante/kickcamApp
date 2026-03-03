@@ -13,7 +13,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 use App\Http\Controllers\DashboardController;
 
@@ -22,8 +22,16 @@ Route::middleware('auth')->group(function () {
      * Cámaras (AR y Filtros)
      */
     Route::get('/camara-ar', function () {
-        return view('arCamera.index');
+        $files = scandir(public_path('assets/ar-compiler-targets'));
+        $images = array_values(array_filter($files, fn($f) => pathinfo($f, PATHINFO_EXTENSION) === 'jpg'));
+        return view('arCamera.index', compact('images'));
     })->name('arCamera');
+
+    Route::get('/ar-compiler', function () {
+        $files = scandir(public_path('assets/ar-compiler-targets'));
+        $images = array_values(array_filter($files, fn($f) => pathinfo($f, PATHINFO_EXTENSION) === 'jpg'));
+        return view('arCamera.compiler', compact('images'));
+    })->name('arCamera.compiler');
 
     Route::get('/camara-filtros', function () {
         return view('camera.index');
@@ -35,6 +43,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/marcadores', [\App\Http\Controllers\ScoreboardController::class, 'index'])->name('scoreboard.index');
     Route::prefix('marcadores')->name('scoreboard.')->group(function () {
         Route::get('/equipo/{id}', [\App\Http\Controllers\ScoreboardController::class, 'showTeam'])->name('team');
+        Route::get('/api/equipo/{iso}', [\App\Http\Controllers\ScoreboardController::class, 'getTeamByIso'])->name('api.team');
     });
 
     /**
