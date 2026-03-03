@@ -31,7 +31,7 @@ class MultimediaSeeder extends Seeder
         foreach ($countries as $country) {
             $countryPath = "{$basePath}/{$country->slug}";
 
-            if (File::isDirectory($countryPath)){
+            if (File::isDirectory($countryPath)) {
                 $files = File::files($countryPath);
 
                 foreach ($files as $file) {
@@ -53,7 +53,7 @@ class MultimediaSeeder extends Seeder
     private function determineCategory(string $extension): MultimediaCategoryEnum
     {
         return match ($extension) {
-            'jpg', 'jpeg', 'png', 'webp' => MultimediaCategoryEnum::IMAGE,
+            'jpg', 'jpeg', 'png', 'webp', 'avif' => MultimediaCategoryEnum::IMAGE,
             'mp4', 'mov', 'avi' => MultimediaCategoryEnum::VIDEO,
             'glb', 'obj', 'glt' => MultimediaCategoryEnum::AR,
             default => null,

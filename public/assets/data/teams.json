@@ -3,60 +3,121 @@
         "name": "Argentina",
         "stadium": "Monumental",
         "formed": "1893",
-        "trophies": 3
+        "trophies": 3,
+        "color": "#43A1D5"
     },
     "mx": {
         "name": "México",
         "stadium": "Azteca",
         "formed": "1927",
-        "trophies": 0
+        "data": "La Selección de fútbol de México ha participado en 17 Copas del Mundo y es una de las selecciones más constantes del torneo. Fue anfitriona en 1970 y 1986, y en 2026 hará historia al convertirse en el primer país en organizar tres ediciones masculinas. Sus mejores actuaciones fueron los cuartos de final en 1970 y 1986. Entre sus figuras mundialistas más representativas destacan Rafael Márquez, Guillermo Ochoa y Manuel Negrete.",
+        "trophies": 0,
+        "color": "#006847"
     },
     "br": {
         "name": "Brasil",
         "stadium": "Maracanã",
         "formed": "1914",
-        "trophies": 5
+        "trophies": 5,
+        "color": "#FFDC02"
     },
     "es": {
         "name": "España",
         "stadium": "Santiago Bernabéu",
         "formed": "1909",
-        "trophies": 1
+        "data": "La Selección de fútbol de España ha participado en dieciséis Copas del Mundo y forma parte de la élite histórica del torneo. Su mayor logro fue conquistar el título en Sudáfrica 2010, obteniendo su primer campeonato mundial. También alcanzó semifinales en 1950. Participará en el Mundial 2026, buscando volver a competir por el título. Entre sus figuras mundialistas más representativas destacan Iker Casillas, Andrés Iniesta y Xavi Hernández.",
+        "trophies": 1,
+        "color": "#C60B1E"
     },
     "fr": {
         "name": "Francia",
         "stadium": "Stade de France",
         "formed": "1919",
-        "trophies": 2
+        "trophies": 2,
+        "color": "#002654"
     },
     "de": {
         "name": "Alemania",
         "stadium": "Olympiastadion",
         "formed": "1900",
-        "trophies": 4
+        "trophies": 4,
+        "color": "#FFFFFF"
     },
     "gb-eng": {
         "name": "Inglaterra",
         "stadium": "Wembley Stadium",
         "formed": "1863",
-        "trophies": 1
+        "trophies": 1,
+        "color": "#FFFFFF"
     },
     "us": {
         "name": "Estados Unidos",
         "stadium": "Mercedes-Benz Stadium",
         "formed": "1913",
-        "trophies": 0
+        "trophies": 0,
+        "color": "#B31942"
     },
     "ca": {
         "name": "Canadá",
         "stadium": "BMO Field",
         "formed": "1912",
-        "trophies": 0
+        "trophies": 0,
+        "color": "#D80621"
     },
     "jp": {
         "name": "Japón",
         "stadium": "Saitama Stadium",
         "formed": "1921",
-        "trophies": 0
+        "data": "La Selección de fútbol de Japón ha participado en siete Copas del Mundo y es una de las potencias asiáticas del torneo. Fue coanfitriona en 2002 y ha alcanzado los octavos de final en varias ediciones, consolidándose como una selección competitiva y disciplinada. Participará también en el Mundial 2026, continuando su presencia constante en la competencia. Entre sus figuras mundialistas más representativas destacan Keisuke Honda, Hidetoshi Nakata y Shinji Kagawa.",
+        "trophies": 0,
+        "color": "#000555"
+    },
+    "uz": {
+        "name": "Uzbekistán",
+        "stadium": "Stade de France",
+        "formed": "1919",
+        "data": "La Selección de fútbol de Uzbekistán logró clasificarse por primera vez a una Copa del Mundo para la edición de 2026, marcando un hecho histórico para el país y para el fútbol de Asia Central. Antes de ello, había estado cerca en distintas eliminatorias asiáticas, consolidándose como una selección competitiva en su región. Su participación en 2026 será la primera en su historia. Entre sus figuras más representativas destacan Server Djeparov, Odil Ahmedov y Maksim Shatskikh.",
+        "trophies": 0,
+        "color": "#0099B5"
+    },
+    "za": {
+        "name": " Sudáfrica",
+        "stadium": "Stade de France",
+        "formed": "1919",
+        "data": "La Selección de fútbol de Sudáfrica ha participado en tres Copas del Mundo (1998, 2002 y 2010). Fue anfitriona en 2010, convirtiéndose en el primer país africano en organizar el torneo. Su mejor actuación fue la fase de grupos, destacando por su impacto histórico dentro del fútbol africano. Participará en el Mundial 2026, marcando su regreso al máximo torneo internacional. Entre sus figuras mundialistas más representativas destacan Lucas Radebe, Benny McCarthy y Siphiwe Tshabalala.",
+        "trophies": 2,
+        "color": "#007749"
+    },
+    "co": {
+        "name": "Colombia",
+        "stadium": "Stade de France",
+        "formed": "1919",
+        "data": "La Selección de fútbol de Colombia ha participado en seis Copas del Mundo y ha sido una de las selecciones sudamericanas más competitivas en las últimas décadas. Su mejor actuación fue en Brasil 2014, donde alcanzó los cuartos de final, logrando su mejor desempeño histórico. Participará en el Mundial 2026, sumando una nueva presencia en el torneo. Entre sus figuras mundialistas más representativas destacan Carlos Valderrama, James Rodríguez y Radamel Falcao.",
+        "trophies": 0,
+        "color": "#FCD116"
+    },
+    "kr": {
+        "name": "Corea del Sur",
+        "stadium": "Stade de France",
+        "formed": "1919",
+        "data": "La Selección de fútbol de Corea del Sur ha participado en once Copas del Mundo y es una de las selecciones asiáticas más constantes del torneo. Fue coanfitriona en 2002, donde logró su mejor actuación histórica al alcanzar las semifinales, el mejor resultado de una selección asiática en la historia moderna. Participará también en el Mundial 2026, manteniendo su presencia continua en el torneo. Entre sus figuras mundialistas más representativas destacan Park Ji-sung, Son Heung-min y Hong Myung-bo.",
+        "trophies": 0,
+        "color": "#C60C30"
+    },
+    "uy": {
+        "name": "Uruguay",
+        "stadium": "Stade de France",
+        "formed": "1919",
+        "data": "La Selección de fútbol de Uruguay ha participado en catorce Copas del Mundo y fue campeona en 1930 y 1950, siendo una de las selecciones históricas del torneo. En 2010 alcanzó nuevamente las semifinales, consolidando su tradición competitiva. Participará en el Mundial 2026, sumando otra edición a su legado. Entre sus figuras mundialistas más representativas destacan Diego Forlán, Luis Suárez y Óscar Tabárez.",
+        "trophies": 2,
+        "color": "#7B1FA2"
+    },
+    "tn": {
+        "name": "Túnez",
+        "stadium": "Stade de France",
+        "formed": "1919",
+        "data": "La Selección de fútbol de Túnez ha participado en seis Copas del Mundo y fue el primer país africano en ganar un partido en un Mundial, logro conseguido en Argentina 1978. Aunque su mejor resultado ha sido la fase de grupos, ha demostrado competitividad frente a selecciones de mayor tradición. Participará en el Mundial 2026, continuando su presencia en el escenario internacional. Entre sus figuras mundialistas más representativas destacan Tarak Dhiab, Radhi Jaïdi y Wahbi Khazri.",
+        "trophies": 0,
+        "color": "#E70013"
     }
 }
