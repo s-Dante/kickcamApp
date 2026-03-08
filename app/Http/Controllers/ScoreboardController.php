@@ -14,29 +14,28 @@ class ScoreboardController extends Controller
         TheSportsDbService::LEAGUE_MX => [
             'id' => TheSportsDbService::LEAGUE_MX,
             'name' => 'Liga MX',
-            'icon' => '🇲🇽'
+            'icon' => '🇲🇽',
         ],
-        TheSportsDbService::LEAGUE_LALIGA => [
-            'id' => TheSportsDbService::LEAGUE_LALIGA,
-            'name' => 'La Liga',
-            'icon' => '🇪🇸'
+        TheSportsDbService::LEAGUE_MLS => [
+            'id' => TheSportsDbService::LEAGUE_MLS,
+            'name' => 'MLS',
+            'icon' => '🇺🇸',
         ],
-        TheSportsDbService::LEAGUE_PREMIER => [
-            'id' => TheSportsDbService::LEAGUE_PREMIER,
-            'name' => 'Premier League',
-            'icon' => '🏴󠁧󠁢󠁥󠁮󠁧󠁿'
+        TheSportsDbService::LEAGUE_CPL => [
+            'id' => TheSportsDbService::LEAGUE_CPL,
+            'name' => 'Can. Premier League',
+            'icon' => '🇨🇦',
         ],
         TheSportsDbService::LEAGUE_WORLD_CUP => [
             'id' => TheSportsDbService::LEAGUE_WORLD_CUP,
             'name' => 'Mundial 2026',
-            'icon' => '🏆'
+            'icon' => '🏆',
         ],
     ];
 
     public function __construct(
         private readonly TheSportsDbService $sportsService
-    ) {
-    }
+    ) {}
 
     /**
      * Display the scoreboard feed for a given league (or default).
@@ -46,18 +45,18 @@ class ScoreboardController extends Controller
         // Default to Liga MX if no league parameter is passed or if invalid
         $leagueId = $request->query('league', TheSportsDbService::LEAGUE_MX);
 
-        if (!array_key_exists($leagueId, $this->supportedLeagues)) {
+        if (! array_key_exists($leagueId, $this->supportedLeagues)) {
             $leagueId = TheSportsDbService::LEAGUE_MX;
         }
 
-        $liveEvents = $this->sportsService->getLiveEvents($leagueId);
         $pastEvents = $this->sportsService->getPastEvents($leagueId);
         $nextEvents = $this->sportsService->getNextEvents($leagueId);
+        $standings = $this->sportsService->getStandings($leagueId);
 
         $activeLeague = $this->supportedLeagues[$leagueId];
         $leagues = $this->supportedLeagues;
 
-        return view('scoreboard.index', compact('liveEvents', 'pastEvents', 'nextEvents', 'activeLeague', 'leagues'));
+        return view('scoreboard.index', compact('pastEvents', 'nextEvents', 'standings', 'activeLeague', 'leagues'));
     }
 
     /**
@@ -67,7 +66,7 @@ class ScoreboardController extends Controller
     {
         $team = $this->sportsService->getTeamDetails($id);
 
-        if (!$team) {
+        if (! $team) {
             abort(404, 'No se encontró la información del equipo.');
         }
 
@@ -97,13 +96,13 @@ class ScoreboardController extends Controller
 
         $teamData = $isoDict[strtolower($iso)] ?? null;
 
-        if (!$teamData) {
+        if (! $teamData) {
             return response()->json(['error' => 'Equipo no mapeado aún'], 404);
         }
 
         $team = $this->sportsService->getTeamDetails($teamData['id']);
 
-        if (!$team) {
+        if (! $team) {
             return response()->json(['error' => 'Error al contactar con TheSportsDB'], 500);
         }
 
@@ -116,7 +115,7 @@ class ScoreboardController extends Controller
             'website' => $team['strWebsite'],
             'description' => $team['strDescriptionES'] ?? $team['strDescriptionEN'] ?? '',
             'badge' => $team['strBadge'],
-            'trophies' => $teamData['trophies']
+            'trophies' => $teamData['trophies'],
         ]);
     }
 }

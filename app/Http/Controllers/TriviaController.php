@@ -22,21 +22,50 @@ class TriviaController extends Controller
             $countries = Country::has('question')->withCount('question')->get();
         }
 
-        return view('trivia.index', compact('countries'));
+        $cached = \Illuminate\Support\Facades\Cache::get('world_data_json_light_v2') ?? [];
+        $translations = collect($cached)->mapWithKeys(function ($item) {
+            $iso2 = isset($item['iso2']) ? strtolower($item['iso2']) : null;
+            if (! $iso2) {
+                return [];
+            }
+            $translationsArr = $item['translations'] ?? [];
+            $translationsArr['en'] = $item['name'] ?? null;
+
+            return [$iso2 => $translationsArr];
+        })->toArray();
+
+        return view('trivia.index', compact('countries', 'translations'));
     }
 
     /**
      * Load the Trivia Quiz for a specific context.
      */
-    public function play(string $slug, TriviaService $triviaService): View|RedirectResponse
+    public function play(Request $request, TriviaService $triviaService, string $slug): View|RedirectResponse
     {
         $questions = [];
         $type = 'country'; // default
 
+        $lang = $request->query('lang', 'es');
+
         // Handle World Global Challenge
         if ($slug === 'world') {
-            $questions = $triviaService->generateWorldTrivia(5);
+            $questions = $triviaService->generateWorldTrivia(5, $lang);
             $type = 'world';
+            $triviaType = 'world';
+            $title = 'Desafío Mundial';
+        } elseif ($slug === 'flags') {
+            $questions = $triviaService->generateFlagsTrivia(5, $lang);
+            $type = 'flags';
+            $triviaType = 'flags';
+            $title = 'Desafío Banderas';
+        } elseif ($slug === 'shields') {
+            $questions = $triviaService->generateShieldsTrivia(5, $lang);
+            $triviaType = 'shields';
+            $title = 'Desafío Escudos';
+        } elseif ($slug === 'languages') {
+            $questions = $triviaService->generateLanguageTrivia(5, $lang);
+            $triviaType = 'languages';
+            $title = 'Desafío Idiomas';
         } else {
             // Handle Country Specific Database Questions
             // Eager load everything needed for the DB match format
@@ -95,6 +124,7 @@ class TriviaController extends Controller
             'answers.*.user_answer' => 'required|string',
             'answers.*.correct_answer' => 'required|string',
             'answers.*.points' => 'required|string',
+            'answers.*.image' => 'nullable|string',
             'trivia_type' => 'required|string',
         ]);
 
@@ -120,6 +150,7 @@ class TriviaController extends Controller
                 'user_answer' => $ans['user_answer'],
                 'correct_answer' => $decryptedCorrect,
                 'is_correct' => $isCorrect,
+                'image' => isset($ans['image']) ? decrypt($ans['image']) : null,
             ];
         }
 

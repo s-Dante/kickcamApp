@@ -23,6 +23,8 @@
                 'btn' => "mt-6 {$ui['btn-primary']}"
             ],
             'form_wrapper' => 'p-6',
+            'flag_container' => 'w-full max-w-sm mx-auto mb-6 flex justify-center items-center rounded-xl p-4 bg-primary/20 border-2 border-tertiary-desat shadow-inner',
+            'flag_image' => 'h-32 object-contain drop-shadow-md rounded',
             'question_title' => 'text-xl sm:text-2xl font-extrabold text-secondary-sat mb-8 leading-tight text-center',
             'options_wrapper' => 'space-y-4',
             'option_label' => "relative block {$ui['card']} border-2 border-tertiary hover:border-accent hover:bg-accent-desat/10 transition-all group cursor-pointer",
@@ -96,6 +98,17 @@
                                         value="{{ encrypt($q['correct_answer']) }}">
                                     <input type="hidden" name="answers[{{ $index }}][points]"
                                         value="{{ encrypt($q['points']) }}">
+                                    @if(isset($q['image']))
+                                        <input type="hidden" name="answers[{{ $index }}][image]"
+                                            value="{{ encrypt($q['image']) }}">
+                                    @endif
+
+                                    @if(isset($q['image']))
+                                        <div class="{{ $classes['quiz']['flag_container'] }}">
+                                            <img src="{{ $q['image'] }}" alt="Bandera Desconocida"
+                                                class="{{ $classes['quiz']['flag_image'] }}">
+                                        </div>
+                                    @endif
 
                                     <h3 class="{{ $classes['quiz']['question_title'] }}">
                                         {{ $q['question'] }}

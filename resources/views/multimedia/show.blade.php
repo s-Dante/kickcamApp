@@ -2,7 +2,7 @@
     $classes = [
         'page' => [
             'container' => 'py-6',
-            'wrapper' => 'max-w-4xl mx-auto sm:px-6 lg:px-8',
+            'wrapper' => 'max-w-7xl mx-auto sm:px-6 lg:px-8',
             'header' => 'mb-6 px-4 sm:px-0',
             'back_link' => 'inline-flex items-center text-sm font-medium text-accent hover:text-accent-sat transition-colors mb-4',
             'back_icon' => 'h-4 w-4 mr-1',

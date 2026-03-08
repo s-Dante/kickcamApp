@@ -1,4 +1,4 @@
-@props(['href', 'country'])
+@props(['country'])
 
 @php
     $clases = [
@@ -12,7 +12,7 @@
     ];
 @endphp
 
-<a href="{{ $href }}" class="{{ $clases['link'] }}">
+<a {{ $attributes->merge(['class' => $clases['link']]) }}>
     <div class="{{ $clases['imageWrapper'] }}">
         @if($country->flag_url)
             <img src="{{ Str::startsWith($country->flag_url, 'http') ? $country->flag_url : asset('storage/' . $country->flag_url) }}"
@@ -23,7 +23,8 @@
     </div>
 
     <div class="{{ $clases['content'] }}">
-        <h4 class="{{ $clases['title'] }}">
+        <h4 class="{{ $clases['title'] }}"
+            x-text="translations['{{ $country->slug }}']?.[lang] || '{{ addslashes($country->name) }}'">
             {{ $country->name }}
         </h4>
 

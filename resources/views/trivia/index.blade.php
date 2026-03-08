@@ -8,10 +8,11 @@
             'subtitle' => "mt-1 {$ui['text-muted']}"
         ],
         'challenge' => [
-            'card' => "{$ui['card-accent']} mb-8 mx-4 sm:mx-0 transform transition-transform hover:scale-[1.01] cursor-pointer",
-            'link' => 'block p-6 sm:p-10 relative',
+            'grid' => 'grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 mx-4 sm:mx-0',
+            'card' => "{$ui['card-accent']} transform transition-transform hover:scale-[1.01] cursor-pointer",
+            'link' => 'block p-6 sm:p-10 relative h-full',
             'pattern' => 'absolute inset-0 opacity-10 bg-[url(\'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjIiIGZpbGw9IiNmZmYiLz48L3N2Zz4=\')]',
-            'content' => 'relative z-10 flex flex-col sm:flex-row items-center justify-between gap-6',
+            'content' => 'relative z-10 flex flex-col sm:flex-row items-center justify-between gap-6 h-full',
             'text_wrapper' => 'text-center sm:text-left',
             'badge' => 'inline-flex items-center gap-1.5 py-1.5 px-3 rounded-full text-xs font-semibold bg-accent-desat text-accent-sat dark:bg-accent-sat dark:text-accent-desat mb-3 shadow-sm border border-accent/30',
             'badge_icon' => 'w-4 h-4 text-accent',
@@ -37,49 +38,180 @@
 @endphp
 
 <x-app-layout>
-    <div class="{{ $classes['page']['container'] }}">
+    <div x-data="{ lang: localStorage.getItem('trivia_lang') || 'es', translations: @js($translations ?? []) }"
+        x-init="$watch('lang', val => localStorage.setItem('trivia_lang', val))"
+        class="{{ $classes['page']['container'] }}">
         <div class="{{ $classes['page']['wrapper'] }}">
 
             <!-- Page Header -->
-            <div class="{{ $classes['page']['header'] }}">
-                <h1 class="{{ $classes['page']['title'] }}">Centro de Trivia</h1>
-                <p class="{{ $classes['page']['subtitle'] }}">Demuestra cuánto sabes sobre el mundo y sus selecciones.
-                </p>
+            <div
+                class="{{ $classes['page']['header'] }} flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div>
+                    <h1 class="{{ $classes['page']['title'] }}">Centro de Trivia</h1>
+                    <p class="{{ $classes['page']['subtitle'] }}">Demuestra cuánto sabes sobre el mundo y sus
+                        selecciones.
+                    </p>
+                </div>
+
+                <!-- Global Language Selector -->
+                <div class="flex flex-col sm:items-end z-20">
+                    <label for="globalLang"
+                        class="block text-xs font-semibold text-secondary-sat dark:text-secondary-desat mb-1 uppercase tracking-wider">Idioma
+                        del Juego:</label>
+                    <select id="globalLang" x-model="lang"
+                        class="bg-primary border border-tertiary text-secondary text-sm rounded-lg focus:ring-accent focus:border-accent block w-full sm:w-48 p-2 dark:bg-primary-900 dark:border-tertiary-700 dark:text-secondary-100 font-medium shadow-sm transition-colors cursor-pointer hover:bg-tertiary-desat dark:hover:bg-primary-800">
+                        <option value="es">🇪🇸 Español</option>
+                        <option value="en">🇬🇧 Inglés</option>
+                        <option value="fr">🇫🇷 Francés</option>
+                        <option value="de">🇩🇪 Alemán</option>
+                        <option value="it">🇮🇹 Italiano</option>
+                        <option value="pt">🇵🇹 Portugués</option>
+                        <option value="ko">🇰🇷 Coreano</option>
+                        <option value="ja">🇯🇵 Japonés</option>
+                        <option value="fa">🇮🇷 Persa</option>
+                        <option value="ru">🇷🇺 Ruso</option>
+                        <option value="zh-CN">🇨🇳 Chino (Simp)</option>
+                    </select>
+                </div>
             </div>
 
-            <!-- Global Challenge (Main Card) -->
-            <div class="{{ $classes['challenge']['card'] }}">
-                <a href="{{ route('trivia.play', 'world') }}" class="{{ $classes['challenge']['link'] }}">
-                    <!-- Background Pattern / Decoration -->
-                    <div class="{{ $classes['challenge']['pattern'] }}">
-                    </div>
+            <!-- Global Challenges Grid -->
+            <div class="{{ $classes['challenge']['grid'] }}">
+                <!-- Global Challenge 1 -->
+                <div class="{{ $classes['challenge']['card'] }}">
+                    <a x-bind:href="`{{ route('trivia.play', 'world') }}?lang=${lang}`"
+                        class="{{ $classes['challenge']['link'] }}">
+                        <div class="{{ $classes['challenge']['pattern'] }}"></div>
 
-                    <div class="{{ $classes['challenge']['content'] }}">
-                        <div class="{{ $classes['challenge']['text_wrapper'] }}">
-                            <span class="{{ $classes['challenge']['badge'] }}">
-                                <svg class="{{ $classes['challenge']['badge_icon'] }}" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                                </svg>
-                                Jugabilidad Infinita
-                            </span>
-                            <h2 class="{{ $classes['challenge']['title'] }}">
-                                Desafío
-                                Mundial</h2>
-                            <p class="{{ $classes['challenge']['desc'] }}">
-                                Enfréntate a preguntas aleatorias sobre capitales, continentes, idiomas y monedas de
-                                cualquier rincón del planeta. ¿Podrás ganar la insignia dorada?
-                            </p>
-                        </div>
+                        <div class="{{ $classes['challenge']['content'] }}">
+                            <div class="{{ $classes['challenge']['text_wrapper'] }}">
+                                <span class="{{ $classes['challenge']['badge'] }}">
+                                    <svg class="{{ $classes['challenge']['badge_icon'] }}" fill="none"
+                                        stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                    </svg>
+                                    Jugabilidad Infinita
+                                </span>
+                                <h2 class="{{ $classes['challenge']['title'] }}">Desafío Mundial</h2>
+                                <p class="{{ $classes['challenge']['desc'] }}">
+                                    Preguntas aleatorias sobre capitales, continentes, idiomas y monedas del planeta.
+                                </p>
+                            </div>
 
-                        <div class="{{ $classes['challenge']['icon_wrapper'] }}">
-                            <div class="{{ $classes['challenge']['icon_bg'] }}">
-                                <span class="{{ $classes['challenge']['icon'] }}">🌍</span>
+                            <div class="{{ $classes['challenge']['icon_wrapper'] }}">
+                                <div class="{{ $classes['challenge']['icon_bg'] }}">
+                                    <span class="{{ $classes['challenge']['icon'] }}">🌍</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
+                </div>
+
+                <!-- Global Challenge 2 (Flags) -->
+                <div class="{{ $classes['challenge']['card'] }}">
+                    <a x-bind:href="`{{ route('trivia.play', 'flags') }}?lang=${lang}`"
+                        class="{{ $classes['challenge']['link'] }}">
+                        <div class="{{ $classes['challenge']['pattern'] }}"></div>
+
+                        <div class="{{ $classes['challenge']['content'] }}">
+                            <div class="{{ $classes['challenge']['text_wrapper'] }}">
+                                <span class="{{ $classes['challenge']['badge'] }}">
+                                    <svg class="{{ $classes['challenge']['badge_icon'] }}" fill="none"
+                                        stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9">
+                                        </path>
+                                    </svg>
+                                    Jugabilidad Infinita
+                                </span>
+                                <h2 class="{{ $classes['challenge']['title'] }}">
+                                    Desafío
+                                    Banderas</h2>
+                                <p class="{{ $classes['challenge']['desc'] }}">
+                                    Demuestra que eres un experto reconociendo visualmente las banderas de todos los
+                                    países del mundo.
+                                </p>
+                            </div>
+
+                            <div class="{{ $classes['challenge']['icon_wrapper'] }}">
+                                <div class="{{ $classes['challenge']['icon_bg'] }}">
+                                    <span class="{{ $classes['challenge']['icon'] }}">🏳️</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Global Challenge 3 (Shields) -->
+                <div class="{{ $classes['challenge']['card'] }}">
+                    <a x-bind:href="`{{ route('trivia.play', 'shields') }}?lang=${lang}`"
+                        class="{{ $classes['challenge']['link'] }}">
+                        <div class="{{ $classes['challenge']['pattern'] }}"></div>
+
+                        <div class="{{ $classes['challenge']['content'] }}">
+                            <div class="{{ $classes['challenge']['text_wrapper'] }}">
+                                <span class="{{ $classes['challenge']['badge'] }}">
+                                    <svg class="{{ $classes['challenge']['badge_icon'] }}" fill="none"
+                                        stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9">
+                                        </path>
+                                    </svg>
+                                    Jugabilidad Infinita
+                                </span>
+                                <h2 class="{{ $classes['challenge']['title'] }}">
+                                    Desafío
+                                    Escudos</h2>
+                                <p class="{{ $classes['challenge']['desc'] }}">
+                                    El reto definitivo. Adivina a qué selección nacional de fútbol pertenece el escudo
+                                    mostrado en pantalla.
+                                </p>
+                            </div>
+
+                            <div class="{{ $classes['challenge']['icon_wrapper'] }}">
+                                <div class="{{ $classes['challenge']['icon_bg'] }}">
+                                    <span class="{{ $classes['challenge']['icon'] }}">🛡️</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Global Challenge 4 (Languages) -->
+                <div class="{{ $classes['challenge']['card'] }}">
+                    <a x-bind:href="`{{ route('trivia.play', 'languages') }}?lang=${lang}`"
+                        class="{{ $classes['challenge']['link'] }}">
+                        <div class="{{ $classes['challenge']['pattern'] }}"></div>
+
+                        <div class="{{ $classes['challenge']['content'] }}">
+                            <div class="{{ $classes['challenge']['text_wrapper'] }}">
+                                <span class="{{ $classes['challenge']['badge'] }}">
+                                    <svg class="{{ $classes['challenge']['badge_icon'] }}" fill="none"
+                                        stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9">
+                                        </path>
+                                    </svg>
+                                    Jugabilidad Infinita
+                                </span>
+                                <h2 class="{{ $classes['challenge']['title'] }}">
+                                    Desafío
+                                    Idiomas</h2>
+                                <p class="{{ $classes['challenge']['desc'] }}">
+                                    ¿Sabes cómo se dice "Japón" en Francés? Pon a prueba tus habilidades políglotas con
+                                    este desafío traductor.
+                                </p>
+                            </div>
+
+                            <div class="{{ $classes['challenge']['icon_wrapper'] }}">
+                                <div class="{{ $classes['challenge']['icon_bg'] }}">
+                                    <span class="{{ $classes['challenge']['icon'] }}">🗣️</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
             </div>
 
             <!-- Country Grid Section -->
@@ -105,7 +237,8 @@
                 @else
                     <div class="{{ $classes['grid']['items'] }}">
                         @foreach($countries as $country)
-                            <x-country-card :href="route('trivia.play', $country->id)" :country="$country">
+                            <x-country-card x-bind:href="`{{ route('trivia.play', $country->id) }}?lang=${lang}`"
+                                :country="$country">
                                 <svg class="{{ $classes['grid']['item_icon'] }}" fill="none" stroke="currentColor"
                                     viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

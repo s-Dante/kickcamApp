@@ -27,7 +27,10 @@
             'list' => 'space-y-6',
             'item_correct' => 'bg-primary-desat rounded-xl p-5 border border-tertiary border-l-4 border-l-green-500',
             'item_wrong' => 'bg-primary-desat rounded-xl p-5 border border-tertiary border-l-4 border-l-red-500',
-            'question' => 'font-bold text-secondary-sat text-lg mb-3',
+            'item_content' => 'flex flex-col sm:flex-row gap-6 items-center sm:items-start',
+            'item_image' => 'h-16 sm:h-24 w-auto object-contain drop-shadow-md rounded',
+            'item_text' => 'flex-1 w-full',
+            'question' => 'font-bold text-secondary-sat text-lg mb-4 leading-tight',
             'q_num' => "text-secondary-desat text-sm font-normal mr-2",
             'answer_row' => 'flex items-center text-sm font-medium',
             'answer_label' => 'w-24 text-secondary-desat',
@@ -92,33 +95,42 @@
                     @if(session('detailedResults'))
                         @foreach(session('detailedResults') as $index => $res)
                             <div class="{{ $res['is_correct'] ? $classes['details']['item_correct'] : $classes['details']['item_wrong'] }}">
-                                <h4 class="{{ $classes['details']['question'] }}">
-                                    <span class="{{ $classes['details']['q_num'] }}">Q{{ $index + 1 }}.</span>
-                                    {{ $res['question'] }}
-                                </h4>
-                                
-                                <div class="space-y-2">
-                                    <div class="{{ $classes['details']['answer_row'] }}">
-                                        <span class="{{ $classes['details']['answer_label'] }}">Tu respuesta:</span>
-                                        <span class="{{ $res['is_correct'] ? $classes['details']['user_ans_correct'] : $classes['details']['user_ans_wrong'] }}">
-                                            @if($res['is_correct'])
-                                                <svg class="{{ $classes['details']['icon'] }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                            @else
-                                                <svg class="{{ $classes['details']['icon'] }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                                            @endif
-                                            {{ $res['user_answer'] }}
-                                        </span>
-                                    </div>
-                                    
-                                    @if(!$res['is_correct'])
-                                        <div class="{{ $classes['details']['answer_row'] }}">
-                                            <span class="{{ $classes['details']['answer_label'] }}">Correcta:</span>
-                                            <span class="{{ $classes['details']['correct_ans_badge'] }}">
-                                                <svg class="{{ $classes['details']['icon'] }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                                {{ $res['correct_answer'] }}
-                                            </span>
-                                        </div>
+                                <div class="{{ $classes['details']['item_content'] }}">
+                                    <!-- Optional Flag Image for the 'Flags' game mode -->
+                                    @if(isset($res['image']))
+                                        <img src="{{ $res['image'] }}" alt="Bandera del país" class="{{ $classes['details']['item_image'] }}">
                                     @endif
+
+                                    <div class="{{ $classes['details']['item_text'] }}">
+                                        <h4 class="{{ $classes['details']['question'] }}">
+                                            <span class="{{ $classes['details']['q_num'] }}">Q{{ $index + 1 }}.</span>
+                                            {{ $res['question'] }}
+                                        </h4>
+                                        
+                                        <div class="space-y-3">
+                                            <div class="{{ $classes['details']['answer_row'] }}">
+                                                <span class="{{ $classes['details']['answer_label'] }}">Tu respuesta:</span>
+                                                <span class="{{ $res['is_correct'] ? $classes['details']['user_ans_correct'] : $classes['details']['user_ans_wrong'] }}">
+                                                    @if($res['is_correct'])
+                                                        <svg class="{{ $classes['details']['icon'] }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                                    @else
+                                                        <svg class="{{ $classes['details']['icon'] }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                                    @endif
+                                                    {{ $res['user_answer'] }}
+                                                </span>
+                                            </div>
+                                            
+                                            @if(!$res['is_correct'])
+                                                <div class="{{ $classes['details']['answer_row'] }}">
+                                                    <span class="{{ $classes['details']['answer_label'] }}">Correcta:</span>
+                                                    <span class="{{ $classes['details']['correct_ans_badge'] }}">
+                                                        <svg class="{{ $classes['details']['icon'] }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                                        {{ $res['correct_answer'] }}
+                                                    </span>
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         @endforeach

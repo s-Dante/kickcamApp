@@ -22,14 +22,40 @@
 @endphp
 
 <x-app-layout>
-    <div class="{{ $classes['page']['container'] }}">
+    <div x-data="{ lang: localStorage.getItem('trivia_lang') || 'es', translations: @js($translations ?? []) }"
+        x-init="$watch('lang', val => localStorage.setItem('trivia_lang', val))"
+        class="{{ $classes['page']['container'] }}">
         <div class="{{ $classes['page']['wrapper'] }}">
 
             <!-- Page Header -->
-            <div class="{{ $classes['page']['header'] }}">
-                <h1 class="{{ $classes['page']['title'] }}">Multimedia</h1>
-                <p class="{{ $classes['page']['subtitle'] }}">Explora videos, momentos y contenido exclusivo por país.
-                </p>
+            <div
+                class="{{ $classes['page']['header'] }} flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div>
+                    <h1 class="{{ $classes['page']['title'] }}">Multimedia</h1>
+                    <p class="{{ $classes['page']['subtitle'] }}">Explora videos, momentos y contenido exclusivo por
+                        país.</p>
+                </div>
+
+                <!-- Global Language Selector -->
+                <div class="flex flex-col sm:items-end z-20">
+                    <label for="globalLang"
+                        class="block text-xs font-semibold text-secondary-sat dark:text-secondary-desat mb-1 uppercase tracking-wider">Idioma
+                        Global:</label>
+                    <select id="globalLang" x-model="lang"
+                        class="bg-primary border border-tertiary text-secondary text-sm rounded-lg focus:ring-accent focus:border-accent block w-full sm:w-48 p-2 dark:bg-primary-900 dark:border-tertiary-700 dark:text-secondary-100 font-medium shadow-sm transition-colors cursor-pointer hover:bg-tertiary-desat dark:hover:bg-primary-800">
+                        <option value="es">🇪🇸 Español</option>
+                        <option value="en">🇬🇧 Inglés</option>
+                        <option value="fr">🇫🇷 Francés</option>
+                        <option value="de">🇩🇪 Alemán</option>
+                        <option value="it">🇮🇹 Italiano</option>
+                        <option value="pt">🇵🇹 Portugués</option>
+                        <option value="ko">🇰🇷 Coreano</option>
+                        <option value="ja">🇯🇵 Japonés</option>
+                        <option value="fa">🇮🇷 Persa</option>
+                        <option value="ru">🇷🇺 Ruso</option>
+                        <option value="zh-CN">🇨🇳 Chino (Simp)</option>
+                    </select>
+                </div>
             </div>
 
             <!-- Country Grid Section -->

@@ -4,7 +4,7 @@
     // Estructura de clases para limpiar el HTML
     $classes = [
         'overlay' => "{$ui['modal-backdrop']} opacity-0 pointer-events-none transition-opacity duration-300",
-        'content' => "{$ui['modal-content']} max-w-4xl max-h-[85vh] flex flex-col transform scale-95 transition-transform duration-300",
+        'content' => "{$ui['modal-content']} w-[95vw] sm:w-[90vw] lg:max-w-7xl max-h-[85vh] flex flex-col transform scale-95 transition-transform duration-300",
 
         'header' => [
             'container' => 'flex items-center justify-between p-5 border-b border-tertiary',
@@ -15,7 +15,7 @@
 
         'body' => [
             'container' => 'p-6 overflow-y-auto',
-            'grid' => 'grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-4',
+            'grid' => 'grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 gap-4',
         ],
 
         'footer' => [
@@ -80,18 +80,36 @@
     const badgeUI = {
         unlocked: {
             wrapper: "flex flex-col items-center p-3 rounded-xl bg-accent-desat/30 border border-accent shadow-sm transition-transform hover:scale-105",
-            imgContainer: "w-16 h-16 rounded-full bg-primary flex items-center justify-center p-1 mb-2 shadow-inner border-2 border-accent-sat overflow-hidden relative",
-            radialBg: "absolute inset-0 bg-radial-1 opacity-20",
+            imgContainer: "w-20 h-20 rounded-2xl bg-primary flex items-center justify-center p-2 mb-3 shadow-inner border border-accent/40 relative",
+            radialBg: "absolute inset-0 bg-radial-1 opacity-20 rounded-2xl",
             img: "w-full h-full object-contain relative z-10 drop-shadow-sm",
-            title: "text-[10px] font-bold text-secondary-sat text-center leading-tight line-clamp-2"
+            title: "text-xs font-bold text-secondary-sat text-center leading-tight line-clamp-2"
         },
         locked: {
             wrapper: "flex flex-col items-center p-3 rounded-xl bg-tertiary-desat/20 border border-transparent",
-            iconContainer: "w-16 h-16 rounded-full bg-tertiary-desat flex items-center justify-center p-2 mb-2 grayscale opacity-40 shadow-inner overflow-hidden",
+            iconContainer: "w-20 h-20 rounded-2xl bg-tertiary-desat flex items-center justify-center p-2 mb-3 grayscale opacity-30 shadow-inner",
             icon: "w-8 h-8 text-tertiary-sat opacity-30",
-            title: "text-[10px] font-semibold text-tertiary-sat text-center leading-tight"
+            title: "text-xs font-semibold text-tertiary-sat text-center leading-tight"
         }
     };
+
+    let iso2ToNameMap = {};
+    fetch('/assets/country_state_city-data/countries.json')
+        .then(res => res.json())
+        .then(data => {
+            if (Array.isArray(data)) {
+                data.forEach(c => {
+                    iso2ToNameMap[c.iso2] = c.translations?.es || c.name;
+                });
+            }
+        }).catch(err => console.warn('Could not load country mappings for badge modal:', err));
+
+    function formatBadgeTitle(title) {
+        if (title && title.length === 2 && iso2ToNameMap[title.toUpperCase()]) {
+            return iso2ToNameMap[title.toUpperCase()];
+        }
+        return title;
+    }
 
     function openBadgeModal(categoryType) {
         modalTitleIcon.innerText = iconsMap[categoryType] || '🌍';
@@ -111,9 +129,9 @@
                 <div class="${badgeUI.unlocked.wrapper}" title="${badge.description}">
                     <div class="${badgeUI.unlocked.imgContainer}">
                         <div class="${badgeUI.unlocked.radialBg}"></div>
-                        <img src="${badge.image_url}" alt="${badge.title}" class="${badgeUI.unlocked.img}">
+                        <img src="${badge.image_url}" alt="${formatBadgeTitle(badge.title)}" class="${badgeUI.unlocked.img}">
                     </div>
-                    <span class="${badgeUI.unlocked.title}">${badge.title}</span>
+                    <span class="${badgeUI.unlocked.title}">${formatBadgeTitle(badge.title)}</span>
                 </div>
             ` : `
                 <div class="${badgeUI.locked.wrapper}" title="Sigue jugando Trivia para desbloquearla">

@@ -40,14 +40,14 @@
 @php
     $classes = [
         'body' => $ui['body'],
-        'wrapper' => 'min-h-screen',
+        'wrapper' => 'min-h-screen flex flex-col',
         'header' => [
             'container' => $ui['page-header'],
-            'inner' => "{$ui['container']} py-6"
+            'inner' => "{$ui['container']}"
         ],
         'main' => [
-            'container' => $ui['main-wrapper'],
-            'inner' => "{$ui['container']} py-12"
+            'container' => $ui['main-wrapper'] . ' flex-1 flex flex-col relative',
+            'inner' => "{$ui['container']} flex-1 flex flex-col w-full"
         ]
     ];
 @endphp

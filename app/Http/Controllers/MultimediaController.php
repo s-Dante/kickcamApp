@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Country;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class MultimediaController extends Controller
@@ -16,11 +15,23 @@ class MultimediaController extends Controller
         $countries = collect();
 
         if (class_exists(Country::class)) {
-            // Include count of multimedia items if relationship exists
-            $countries = Country::withCount('multimedia')->get();
+            // Include only countries with multimedia and their counts
+            $countries = Country::has('multimedia')->withCount('multimedia')->get();
         }
 
-        return view('multimedia.index', compact('countries'));
+        $cached = \Illuminate\Support\Facades\Cache::get('world_data_json_light_v2') ?? [];
+        $translations = collect($cached)->mapWithKeys(function ($item) {
+            $iso2 = isset($item['iso2']) ? strtolower($item['iso2']) : null;
+            if (! $iso2) {
+                return [];
+            }
+            $translationsArr = $item['translations'] ?? [];
+            $translationsArr['en'] = $item['name'] ?? null;
+
+            return [$iso2 => $translationsArr];
+        })->toArray();
+
+        return view('multimedia.index', compact('countries', 'translations'));
     }
 
     /**
@@ -28,7 +39,7 @@ class MultimediaController extends Controller
      */
     public function show(string $slug): View
     {
-        $country = Country::with('multimedia')->findOrFail($slug);
+        $country = Country::with('multimedia')->where('slug', $slug)->firstOrFail();
 
         return view('multimedia.show', compact('country'));
     }
