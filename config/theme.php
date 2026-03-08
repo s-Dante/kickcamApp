@@ -14,6 +14,9 @@ return [
     */
 
     // App Structure & Wrappers
+    'bg-primary' => 'bg-[hsl(var(--bg-solid-1))] transition-colors duration-300',
+    'bg-secondary' => 'bg-primary-sat transition-colors duration-300',
+    'border' => 'border-tertiary-desat',
     'body' => 'antialiased transition-colors duration-300 min-h-screen bg-[hsl(var(--bg-solid-1))] text-secondary',
     'main-wrapper' => 'pb-20 sm:pb-0',
     'container' => 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8',
@@ -28,6 +31,8 @@ return [
     'h1' => 'text-3xl font-bold tracking-tight text-secondary-sat',
     'h2' => 'text-xl font-semibold leading-tight text-secondary',
     'h3' => 'text-lg font-medium text-secondary',
+    'text-primary' => 'text-secondary-sat',
+    'text-secondary' => 'text-secondary',
     'text-muted' => 'text-sm text-tertiary-sat',
     'text-highlight' => 'text-accent font-semibold',
 

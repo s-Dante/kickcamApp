@@ -24,43 +24,37 @@
 
     $classes = [
         'page' => [
-            'container' => 'h-[calc(100vh-4rem)] sm:h-[calc(100vh-5rem)] w-full flex flex-col lg:flex-row bg-[#0a0a0a] overflow-hidden relative',
+            'container' => 'h-[calc(100vh-4rem)] sm:h-[calc(100vh-5rem)] w-full flex flex-col lg:flex-row overflow-hidden relative',
         ],
         'camera' => [
-            // El wrapper contenedor ahora es más parecido a un celular con padding en móvil
-            'outer_wrapper' => 'relative w-full h-full lg:w-3/4 flex flex-col overflow-hidden shrink-0 transition-all duration-300 pt-4 px-4 lg:p-0',
-            // El recuadro gris redondeado
-            'wrapper' => 'relative w-full flex-1 bg-[#1a1a1a] rounded-[2.5rem] lg:rounded-none flex flex-col justify-center items-center overflow-hidden shrink-0 transition-all duration-300 shadow-2xl border border-white/10 lg:border-none',
+            'outer_wrapper' => 'relative w-full h-full lg:w-3/4 flex flex-col overflow-hidden shrink-0 transition-all duration-300 pt-4 px-4 lg:p-6 lg:pl-8',
+            'wrapper' => "relative w-full flex-1 {$ui['card']} rounded-[2.5rem] flex flex-col justify-center items-center overflow-hidden shrink-0 transition-all duration-300 shadow-xl",
             'video' => 'hidden',
-            // Visor principal
-            'canvas_compositor' => 'absolute inset-0 w-full h-full object-cover',
+            'canvas_compositor' => 'absolute inset-0 w-full h-full object-cover rounded-[2.2rem]',
             'canvas_face' => 'hidden'
         ],
         'sidebar' => [
-            'container' => 'hidden lg:flex lg:w-1/4 h-full bg-[#111] border-l border-white/5 flex-col p-6 overflow-y-auto space-y-6',
+            'container' => "hidden lg:flex lg:w-1/4 h-full {$ui['bg-primary']} border-l {$ui['border']} flex-col p-6 overflow-y-auto space-y-6",
         ],
         'mobile_ui' => [
-            // Carrusel movido afuera y abajo
             'carousel_container' => 'lg:hidden w-full shrink-0 flex flex-col justify-center mt-4 mb-2 h-28',
             'carousel' => 'w-full overflow-x-auto scrollbar-hide flex gap-6 snap-x snap-mandatory px-4 items-center pointer-events-auto',
-            'carousel_spacer' => 'min-w-[45vw] shrink-0', // Spacer to allow centering
+            'carousel_spacer' => 'min-w-[45vw] shrink-0',
             'filter_item' => 'snap-center shrink-0 flex flex-col items-center gap-2 cursor-pointer transition-transform duration-300',
-            'filter_btn' => 'w-14 h-14 rounded-full border-2 border-white/30 bg-[#222] bg-cover bg-center overflow-hidden transition-all duration-300 shadow-lg',
-            'filter_name' => 'text-white/80 text-xs font-medium drop-shadow-md transition-opacity duration-300',
-            // Controles flotantes dentro del visor móvil
+            'filter_btn' => "w-14 h-14 rounded-full border-2 border-white/30 {$ui['bg-secondary']} bg-cover bg-center overflow-hidden transition-all duration-300 shadow-lg",
+            'filter_name' => "{$ui['text-secondary']} text-xs font-medium drop-shadow-md transition-opacity duration-300",
             'controls_overlay' => 'absolute bottom-6 inset-x-0 w-full px-8 flex justify-between items-center z-10 pointer-events-none lg:hidden',
             'shoot_btn' => 'w-20 h-20 rounded-full border-[5px] border-white/80 flex items-center justify-center p-1.5 cursor-pointer active:scale-95 transition-transform backdrop-blur-sm bg-black/20 mix-blend-screen pointer-events-auto shadow-[0_0_20px_rgba(0,0,0,0.5)]',
             'shoot_btn_inner' => 'w-full h-full rounded-full bg-white transition-all duration-300',
             'flip_btn' => 'w-12 h-12 rounded-full bg-black/40 text-white flex items-center justify-center backdrop-blur-md hover:bg-black/60 transition-colors pointer-events-auto shadow-xl border border-white/10'
         ],
         'desktop_ui' => [
-            'btn' => 'w-full py-4 px-6 rounded-xl font-bold flex items-center justify-center gap-2 transition-all active:scale-95 text-white shadow-lg',
-            'photo_btn' => 'bg-white text-black hover:bg-gray-200',
-            'video_btn' => 'bg-red-500 hover:bg-red-600',
-            'flip_btn' => 'w-full py-3 px-6 rounded-lg font-bold flex items-center justify-center gap-2 bg-[#222] text-white hover:bg-[#333] transition-colors border border-white/10',
+            'photo_btn' => "{$ui['btn-primary']} w-full py-4 px-6 shadow-lg",
+            'video_btn' => "w-full py-4 px-6 rounded-xl font-bold flex items-center justify-center gap-2 transition-all active:scale-95 text-white shadow-lg bg-red-500 hover:bg-red-600",
+            'flip_btn' => "{$ui['btn-secondary']} w-full py-3 px-6 gap-2",
             'select_wrapper' => 'space-y-3 w-full',
-            'label' => 'text-xs font-bold uppercase tracking-wider text-white/50',
-            'select' => 'w-full px-4 py-3 rounded-lg border border-white/10 bg-[#1a1a1a] text-white focus:border-white/50 outline-none appearance-none font-medium'
+            'label' => "text-xs font-bold uppercase tracking-wider {$ui['text-muted']}",
+            'select' => "w-full px-4 py-3 rounded-lg {$ui['border']} {$ui['bg-secondary']} {$ui['text-primary']} focus:ring-2 focus:ring-accent focus:border-transparent outline-none appearance-none font-medium transition-colors"
         ]
     ];
 @endphp
@@ -96,8 +90,9 @@
                 </div>
 
                 <!-- Helper Text Overlay -->
-                <div
-                    class="absolute top-20 text-white/90 text-xs font-medium bg-black/50 px-4 py-1.5 rounded-full backdrop-blur-md shadow-lg pointer-events-none lg:hidden z-20">
+                <div class="absolute top-20 text-white/90 text-xs font-medium bg-black/50 px-4 py-1.5 rounded-full backdrop-blur-md shadow-lg pointer-events-none lg:hidden z-20 transition-all duration-300"
+                    id="helper-text-toast" x-data="{ show: true }" x-show="show"
+                    x-init="setTimeout(() => show = false, 3000)">
                     Apunta con tu rostro
                 </div>
 
@@ -145,7 +140,7 @@
                         <!-- Opciones dinámicas inyectadas por JS -->
                     </select>
                     <div
-                        class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-secondary-desat">
+                        class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 {{ $ui['text-muted'] }}">
                         <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                             <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
                         </svg>
@@ -166,8 +161,7 @@
                 </button>
 
                 <div class="grid grid-cols-2 gap-3 pt-4 border-t border-tertiary/20">
-                    <button id="desktop-photo"
-                        class="{{ $classes['desktop_ui']['btn'] }} {{ $classes['desktop_ui']['photo_btn'] }}">
+                    <button id="desktop-photo" class="{{ $classes['desktop_ui']['photo_btn'] }}">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z">
@@ -177,9 +171,7 @@
                         </svg>
                         Foto
                     </button>
-                    <!-- El boton de video cambia de estado a "Detener" -->
-                    <button id="desktop-video"
-                        class="{{ $classes['desktop_ui']['btn'] }} {{ $classes['desktop_ui']['video_btn'] }}">
+                    <button id="desktop-video" class="{{ $classes['desktop_ui']['video_btn'] }}">
                         <span id="desktop-video-icon">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -201,12 +193,12 @@
     ========================== --}}
     @push('head-scripts')
         <script type="importmap">
-                                                                                        {
-                                                                                            "imports": {
-                                                                                                "three": "https://unpkg.com/three@0.160.0/build/three.module.js"
-                                                                                            }
-                                                                                        }
-                                                                                    </script>
+                                                                                                {
+                                                                                                    "imports": {
+                                                                                                        "three": "https://unpkg.com/three@0.160.0/build/three.module.js"
+                                                                                                    }
+                                                                                                }
+                                                                                            </script>
         <!-- Google MediaPipe (Carga global en window) -->
         <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js" crossorigin="anonymous"></script>
@@ -296,84 +288,84 @@
                         u_isUserFacing: { value: 1.0 }
                     },
                     vertexShader: `
-                                                                    varying vec2 vUv;
-                                                                    uniform float u_isUserFacing;
-                                                                    void main() {
-                                                                        vUv = uv;
-                                                                        if(u_isUserFacing > 0.5) vUv.x = 1.0 - vUv.x; // Mirror for selfie
-                                                                        gl_Position = vec4(position, 1.0);
-                                                                    }
-                                                                `,
-                    fragmentShader: `
-                                                                            uniform sampler2D tDiffuse;
-                                                                            uniform int u_effectType;
-                                                                            uniform vec2 u_resolution;
-                                                                            uniform vec2 u_videoResolution;
                                                                             varying vec2 vUv;
-
+                                                                            uniform float u_isUserFacing;
                                                                             void main() {
-                                                                                vec2 uv = vUv;
-
-                                                                                // Object-Fit Cover Logic en Shader puro
-                                                                                float rs = u_resolution.x / u_resolution.y;
-                                                                                float vs = u_videoResolution.x / u_videoResolution.y;
-
-                                                                                if (rs > vs) {
-                                                                                    float scale = vs / rs; 
-                                                                                    uv.y = (uv.y - 0.5) * scale + 0.5;
-                                                                                } else {
-                                                                                    float scale = rs / vs;
-                                                                                    uv.x = (uv.x - 0.5) * scale + 0.5;
-                                                                                }
-
-                                                                                if(uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0) {
-                                                                                    gl_FragColor = vec4(0.0, 0.0, 0.0, 1.0);
-                                                                                    return;
-                                                                                }
-
-                                                                                // Pixelate
-                                                                                if(u_effectType == 2) {
-                                                                                    float pixels = 60.0;
-                                                                                    uv = floor(uv * pixels) / pixels;
-                                                                                }
-
-                                                                                vec4 texel = texture2D(tDiffuse, uv);
-
-                                                                                // Thermal
-                                                                                if(u_effectType == 1) {
-                                                                                    float lum = dot(texel.rgb, vec3(0.299, 0.587, 0.114));
-                                                                                    vec3 heat;
-                                                                                    if(lum < 0.33) heat = mix(vec3(0,0,1), vec3(0,1,0), lum/0.33);
-                                                                                    else if(lum < 0.66) heat = mix(vec3(0,1,0), vec3(1,1,0), (lum-0.33)/0.33);
-                                                                                    else heat = mix(vec3(1,1,0), vec3(1,0,0), (lum-0.66)/0.34);
-                                                                                    texel.rgb = heat;
-                                                                                }
-                                                                                // Pastel
-                                                                                else if(u_effectType == 3) {
-                                                                                    vec3 p = texel.rgb;
-                                                                                    texel.r = dot(p, vec3(0.393, 0.769, 0.189)) * 1.3;
-                                                                                    texel.g = dot(p, vec3(0.349, 0.686, 0.168)) * 1.1;
-                                                                                    texel.b = dot(p, vec3(0.272, 0.534, 0.131)) * 1.3;
-                                                                                }
-                                                                                // Blur
-                                                                                else if(u_effectType == 4) {
-                                                                                    vec2 offset = 4.0 / u_resolution;
-                                                                                    vec4 sum = vec4(0.0);
-                                                                                    sum += texture2D(tDiffuse, uv + vec2(-offset.x, -offset.y)) * 0.11;
-                                                                                    sum += texture2D(tDiffuse, uv + vec2(0.0, -offset.y)) * 0.11;
-                                                                                    sum += texture2D(tDiffuse, uv + vec2(offset.x, -offset.y)) * 0.11;
-                                                                                    sum += texture2D(tDiffuse, uv + vec2(-offset.x, 0.0)) * 0.11;
-                                                                                    sum += texture2D(tDiffuse, uv) * 0.12;
-                                                                                    sum += texture2D(tDiffuse, uv + vec2(offset.x, 0.0)) * 0.11;
-                                                                                    sum += texture2D(tDiffuse, uv + vec2(-offset.x, offset.y)) * 0.11;
-                                                                                    sum += texture2D(tDiffuse, uv + vec2(0.0, offset.y)) * 0.11;
-                                                                                    sum += texture2D(tDiffuse, uv + vec2(offset.x, offset.y)) * 0.11;
-                                                                                    texel = sum;
-                                                                                }
-
-                                                                                gl_FragColor = texel;
+                                                                                vUv = uv;
+                                                                                if(u_isUserFacing > 0.5) vUv.x = 1.0 - vUv.x; // Mirror for selfie
+                                                                                gl_Position = vec4(position, 1.0);
                                                                             }
-                                                                        `
+                                                                        `,
+                    fragmentShader: `
+                                                                                    uniform sampler2D tDiffuse;
+                                                                                    uniform int u_effectType;
+                                                                                    uniform vec2 u_resolution;
+                                                                                    uniform vec2 u_videoResolution;
+                                                                                    varying vec2 vUv;
+
+                                                                                    void main() {
+                                                                                        vec2 uv = vUv;
+
+                                                                                        // Object-Fit Cover Logic en Shader puro
+                                                                                        float rs = u_resolution.x / u_resolution.y;
+                                                                                        float vs = u_videoResolution.x / u_videoResolution.y;
+
+                                                                                        if (rs > vs) {
+                                                                                            float scale = vs / rs; 
+                                                                                            uv.y = (uv.y - 0.5) * scale + 0.5;
+                                                                                        } else {
+                                                                                            float scale = rs / vs;
+                                                                                            uv.x = (uv.x - 0.5) * scale + 0.5;
+                                                                                        }
+
+                                                                                        if(uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0) {
+                                                                                            gl_FragColor = vec4(0.0, 0.0, 0.0, 1.0);
+                                                                                            return;
+                                                                                        }
+
+                                                                                        // Pixelate
+                                                                                        if(u_effectType == 2) {
+                                                                                            float pixels = 60.0;
+                                                                                            uv = floor(uv * pixels) / pixels;
+                                                                                        }
+
+                                                                                        vec4 texel = texture2D(tDiffuse, uv);
+
+                                                                                        // Thermal
+                                                                                        if(u_effectType == 1) {
+                                                                                            float lum = dot(texel.rgb, vec3(0.299, 0.587, 0.114));
+                                                                                            vec3 heat;
+                                                                                            if(lum < 0.33) heat = mix(vec3(0,0,1), vec3(0,1,0), lum/0.33);
+                                                                                            else if(lum < 0.66) heat = mix(vec3(0,1,0), vec3(1,1,0), (lum-0.33)/0.33);
+                                                                                            else heat = mix(vec3(1,1,0), vec3(1,0,0), (lum-0.66)/0.34);
+                                                                                            texel.rgb = heat;
+                                                                                        }
+                                                                                        // Pastel
+                                                                                        else if(u_effectType == 3) {
+                                                                                            vec3 p = texel.rgb;
+                                                                                            texel.r = dot(p, vec3(0.393, 0.769, 0.189)) * 1.3;
+                                                                                            texel.g = dot(p, vec3(0.349, 0.686, 0.168)) * 1.1;
+                                                                                            texel.b = dot(p, vec3(0.272, 0.534, 0.131)) * 1.3;
+                                                                                        }
+                                                                                        // Blur
+                                                                                        else if(u_effectType == 4) {
+                                                                                            vec2 offset = 4.0 / u_resolution;
+                                                                                            vec4 sum = vec4(0.0);
+                                                                                            sum += texture2D(tDiffuse, uv + vec2(-offset.x, -offset.y)) * 0.11;
+                                                                                            sum += texture2D(tDiffuse, uv + vec2(0.0, -offset.y)) * 0.11;
+                                                                                            sum += texture2D(tDiffuse, uv + vec2(offset.x, -offset.y)) * 0.11;
+                                                                                            sum += texture2D(tDiffuse, uv + vec2(-offset.x, 0.0)) * 0.11;
+                                                                                            sum += texture2D(tDiffuse, uv) * 0.12;
+                                                                                            sum += texture2D(tDiffuse, uv + vec2(offset.x, 0.0)) * 0.11;
+                                                                                            sum += texture2D(tDiffuse, uv + vec2(-offset.x, offset.y)) * 0.11;
+                                                                                            sum += texture2D(tDiffuse, uv + vec2(0.0, offset.y)) * 0.11;
+                                                                                            sum += texture2D(tDiffuse, uv + vec2(offset.x, offset.y)) * 0.11;
+                                                                                            texel = sum;
+                                                                                        }
+
+                                                                                        gl_FragColor = texel;
+                                                                                    }
+                                                                                `
                 });
                 const bgPlane = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), bgShaderMaterial);
                 bgScene.add(bgPlane);
@@ -762,6 +754,7 @@
                     mobileShutterInner.classList.add('scale-50', 'bg-red-500', 'rounded-lg');
                     desktopVideoText.textContent = "Detener";
                     desktopVideoBtn.classList.replace('bg-red-500', 'bg-gray-800');
+                    desktopVideoBtn.classList.replace('text-white', 'text-gray-400');
 
                     const stream = canvasCompositor.captureStream(30);
                     try {
@@ -797,6 +790,7 @@
                     mobileShutterInner.classList.remove('scale-50', 'bg-red-500', 'rounded-lg');
                     desktopVideoText.textContent = "Grabar";
                     desktopVideoBtn.classList.replace('bg-gray-800', 'bg-red-500');
+                    desktopVideoBtn.classList.replace('text-gray-400', 'text-white');
 
                     if (mediaRecorder && mediaRecorder.state !== 'inactive') {
                         mediaRecorder.stop();

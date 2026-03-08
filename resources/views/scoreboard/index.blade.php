@@ -42,7 +42,7 @@
 
                 <!-- COLUMN 1: Standings (Left) -->
                 <div class="space-y-8">
-                    <section class="sticky top-6">
+                    <section class="sticky top-20">
                         <div class="flex items-center justify-between mb-4">
                             <h2 class="text-xl font-medium text-secondary">Tabla General</h2>
                             <span

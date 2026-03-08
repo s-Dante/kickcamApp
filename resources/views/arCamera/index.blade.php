@@ -1,25 +1,24 @@
 @php
     $classes = [
         'page' => [
-            'container' => 'h-[calc(100vh-4rem)] sm:h-[calc(100vh-5rem)] w-full flex flex-col lg:flex-row bg-[#0a0a0a] overflow-hidden relative',
+            'container' => 'h-[calc(100vh-4rem)] sm:h-[calc(100vh-5rem)] w-full flex flex-col lg:flex-row overflow-hidden relative',
         ],
         'camera' => [
-            'outer_wrapper' => 'relative w-full h-full lg:w-3/4 flex flex-col overflow-hidden shrink-0 transition-all duration-300 pt-4 px-4 lg:p-0',
-            'wrapper' => 'relative w-full flex-1 bg-transparent rounded-[2.5rem] lg:rounded-none flex flex-col justify-center items-center overflow-hidden shrink-0 transition-all duration-300 shadow-2xl border border-white/10 lg:border-none',
+            'outer_wrapper' => 'relative w-full h-full lg:w-3/4 flex flex-col overflow-hidden shrink-0 transition-all duration-300 pt-4 px-4 lg:p-6 lg:pl-8',
+            'wrapper' => "relative w-full flex-1 {$ui['card']} rounded-[2.5rem] flex flex-col justify-center items-center overflow-hidden shrink-0 transition-all duration-300 shadow-xl",
         ],
         'sidebar' => [
-            'container' => 'hidden lg:flex lg:w-1/4 h-full bg-[#111] border-l border-white/5 flex-col p-6 overflow-y-auto space-y-6',
+            'container' => "hidden lg:flex lg:w-1/4 h-full {$ui['bg-primary']} border-l {$ui['border']} flex-col p-6 overflow-y-auto space-y-6",
         ],
         'mobile_ui' => [
             'controls_overlay' => 'absolute bottom-10 inset-x-0 w-full px-8 flex justify-between items-center z-30 pointer-events-none lg:hidden',
-            'info_btn' => 'w-16 h-16 rounded-full border-[3px] border-[var(--accent)] flex items-center justify-center p-1.5 cursor-pointer active:scale-95 transition-all backdrop-blur-md bg-black/60 pointer-events-auto shadow-[0_0_20px_rgba(255,215,0,0.4)] hidden',
+            'info_btn' => "w-16 h-16 rounded-full border-[3px] border-accent flex items-center justify-center p-1.5 cursor-pointer active:scale-95 transition-all backdrop-blur-md bg-black/60 pointer-events-auto shadow-[0_0_20px_rgba(var(--accent-rgb),0.4)] hidden",
             'flip_btn' => 'w-12 h-12 rounded-full bg-black/40 text-white flex items-center justify-center backdrop-blur-md hover:bg-black/60 transition-colors pointer-events-auto shadow-xl border border-white/10',
             'switch_btn' => 'w-12 h-12 rounded-full bg-black/40 text-white flex items-center justify-center backdrop-blur-md hover:bg-black/60 transition-colors pointer-events-auto shadow-xl border border-white/10'
         ],
         'desktop_ui' => [
-            'btn' => 'w-full py-4 px-6 rounded-xl font-bold flex items-center justify-center gap-2 transition-all active:scale-95 text-white shadow-lg',
-            'outline_btn' => 'w-full py-3 px-6 rounded-lg font-bold flex items-center justify-center gap-2 bg-[#222] text-[var(--accent)] hover:bg-[#333] transition-colors border border-[var(--accent)] hidden',
-            'flip_btn' => 'w-full py-3 px-6 rounded-lg font-bold flex items-center justify-center gap-2 bg-[#222] text-white hover:bg-[#333] transition-colors border border-white/10',
+            'outline_btn' => "w-full py-3 px-6 rounded-lg font-bold flex items-center justify-center gap-2 border-2 border-accent text-accent hover:bg-accent hover:text-black transition-colors hidden",
+            'flip_btn' => "{$ui['btn-secondary']} w-full py-3 px-6 gap-2",
         ]
     ];
 @endphp
@@ -58,7 +57,8 @@
         <!-- Contenedor Principal (Cámara AR) -->
         <div class="{{ $classes['camera']['outer_wrapper'] }}">
 
-            <div id="ar-container" class="{{ $classes['camera']['wrapper'] }} relative w-full h-full min-h-[50vh] z-10">
+            <div id="ar-container"
+                class="{{ $classes['camera']['wrapper'] }} relative w-full h-full min-h-[50vh] z-10 overflow-hidden [&>video]:rounded-[2rem] [&>canvas]:rounded-[2rem]">
 
                 <!-- Mensaje de Carga Inicial -->
                 <div id="ar-loading-screen"
@@ -169,8 +169,8 @@
         <!-- PANEL LATERAL ESCRITORIO (LG+) -->
         <div class="{{ $classes['sidebar']['container'] }}">
             <div>
-                <h2 class="text-2xl font-bold text-white mb-1">KickCam Pro V2</h2>
-                <p class="text-[var(--accent)] text-sm font-black uppercase tracking-widest">Escáner Oficial AR</p>
+                <h2 class="text-2xl font-bold {{ $ui['h2'] }} mb-1">KickCam Pro V2</h2>
+                <p class="{{ $ui['text-muted'] }} text-sm font-black uppercase tracking-widest">Escáner Oficial AR</p>
             </div>
 
             <div class="flex-1"></div> <!-- Spacer -->
