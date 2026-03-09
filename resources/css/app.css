@@ -4,100 +4,100 @@
 
 @layer base {
   :root {
-    /* Primary (Monochromatic base light) */
-    --color-primary: 240 5% 96%;
-    /* #f4f4f5 zinc-100 */
-    --color-primary-sat: 240 6% 90%;
-    /* #e4e4e7 zinc-200 */
-    --color-primary-desat: 0 0% 100%;
-    /* #ffffff white */
+    /* Primary (Monochromatic base light - Surfaces/Cards/Inputs) */
+    --color-primary: 0 0% 100%;
+    /* #ffffff */
+    --color-primary-sat: 210 14% 94%;
+    /* #eef0f2 */
+    --color-primary-desat: 226 21% 88%;
+    /* #dadde7 */
 
-    /* Secondary (Text & Contrast light) */
-    --color-secondary: 240 6% 10%;
-    /* #18181b zinc-900 */
+    /* Secondary (Text & Contrast light - Main Text #3d405b) */
+    --color-secondary: 234 20% 30%;
     --color-secondary-sat: 0 0% 0%;
-    /* #000000 black */
-    --color-secondary-desat: 240 5% 26%;
-    /* #3f3f46 zinc-700 */
+    /* #000000 */
+    --color-secondary-desat: 243 11% 54%;
+    /* #807f96 */
 
-    /* Tertiary (Muted elements / Borders) */
-    --color-tertiary: 240 5% 84%;
-    /* #d4d4d8 zinc-300 */
-    --color-tertiary-sat: 240 5% 65%;
-    /* #a1a1aa zinc-400 */
-    --color-tertiary-desat: 240 6% 90%;
-    /* #e4e4e7 zinc-200 */
+    /* Tertiary (Muted elements / Borders - #d9d9d9) */
+    --color-tertiary: 0 0% 85%;
+    --color-tertiary-sat: 243 11% 54%;
+    /* #807f96 */
+    --color-tertiary-desat: 226 21% 88%;
+    /* #dadde7 */
 
-    /* Accent (Dynamic Pop, e.g. Neon Green base/light) */
-    --color-accent: 142 71% 45%;
-    /* #22c55e green-500 */
-    --color-accent-sat: 142 76% 36%;
-    /* #16a34a green-600 */
-    --color-accent-desat: 141 84% 93%;
-    /* #dcfce7 green-100 */
+    /* Accent (Dynamic Pop - #92aaff) */
+    --color-accent: 227 100% 79%;
+    --color-accent-sat: 227 100% 70%;
+    --color-accent-desat: 227 100% 90%;
+
+    /* Alerts */
+    --color-alert-success: 87 24% 56%;
+    /* #92aa74 */
+    --color-alert-error: 355 78% 56%;
+    /* #e63946 */
+    --color-alert-warning: 37 98% 53%;
+    /* #fca311 */
+    --color-alert-info: 221 51% 16%;
+    /* #14213d */
 
     /* Solid Backgrounds */
-    --bg-solid-1: 0 0% 100%;
-    /* White */
-    --bg-solid-2: 240 5% 96%;
-    /* Zinc-100 */
+    --bg-solid-1: 210 14% 94%;
+    /* #eef0f2 */
+    --bg-solid-2: 226 21% 88%;
+    /* #dadde7 */
 
     /* Linear Gradients (Defined as actual values for utilities) */
-    --bg-linear-1: linear-gradient(135deg, hsl(240 5% 96%), hsl(0 0% 100%));
-    --bg-linear-2: linear-gradient(180deg, hsl(0 0% 100%), rgb(228, 228, 231));
+    --bg-linear-1: linear-gradient(135deg, hsl(210 14% 94%), hsl(226 21% 88%));
+    --bg-linear-2: linear-gradient(180deg, hsl(210 14% 94%), hsl(226 21% 88%));
 
     /* Radial Gradients */
-    --bg-radial-1: radial-gradient(circle at center, hsl(0 0% 100%), hsl(240 5% 96%));
-    --bg-radial-2: radial-gradient(circle at top right, hsl(240 5% 96%), hsl(240 6% 90%));
+    --bg-radial-1: radial-gradient(circle at center, hsl(210 14% 94%), hsl(226 21% 88%));
+    --bg-radial-2: radial-gradient(circle at top right, hsl(210 14% 94%), hsl(226 21% 88%));
   }
 
   .dark {
-    /* Primary (Monochromatic base dark) */
-    --color-primary: 240 6% 10%;
-    /* #18181b zinc-900 */
-    --color-primary-sat: 0 0% 0%;
-    /* #000000 black */
-    --color-primary-desat: 240 5% 16%;
-    /* #27272a zinc-800 */
+    /* Primary (Monochromatic base dark - Slightly Lighter Backgrounds) */
+    --color-primary: 208 24% 16%;
+    --color-primary-sat: 221 30% 22%;
+    --color-primary-desat: 169 25% 32%;
 
-    /* Secondary (Text & Contrast dark) */
-    --color-secondary: 240 5% 96%;
-    /* #f4f4f5 zinc-100 */
+    /* Secondary (Text & Contrast dark - High Contrast Text) */
+    --color-secondary: 210 20% 96%;
     --color-secondary-sat: 0 0% 100%;
-    /* #ffffff white */
-    --color-secondary-desat: 240 5% 84%;
-    /* #d4d4d8 zinc-300 */
+    /* #ffffff */
+    --color-secondary-desat: 226 21% 90%;
 
-    /* Tertiary (Muted elements / Borders) */
-    --color-tertiary: 240 5% 26%;
-    /* #3f3f46 zinc-700 */
-    --color-tertiary-sat: 240 5% 16%;
-    /* #27272a zinc-800 */
-    --color-tertiary-desat: 240 5% 34%;
-    /* #52525b zinc-600 */
+    /* Tertiary (Muted elements / Borders - Brighter for readability) */
+    --color-tertiary: 234 15% 45%;
+    --color-tertiary-sat: 243 20% 65%;
+    /* Text Muted is generated from here */
+    --color-tertiary-desat: 169 20% 40%;
 
-    /* Accent (Dynamic Pop, e.g. Neon Green for dark mode) */
-    --color-accent: 142 71% 45%;
-    /* #22c55e green-500 */
-    --color-accent-sat: 141 73% 42%;
-    /* #15b347 neon */
-    --color-accent-desat: 142 69% 58%;
-    /* #4ade80 green-400 */
+    /* Accent (Dynamic Pop) */
+    --color-accent: 227 100% 79%;
+    --color-accent-sat: 227 100% 70%;
+    --color-accent-desat: 227 100% 60%;
+
+    /* Alerts */
+    --color-alert-success: 87 24% 56%;
+    --color-alert-error: 355 78% 56%;
+    --color-alert-warning: 37 98% 53%;
+    --color-alert-info: 221 51% 16%;
 
     /* Solid Backgrounds */
-    --bg-solid-1: 240 6% 10%;
-    /* Zinc-900 */
-    --bg-solid-2: 0 0% 0%;
-    /* Black */
+    --bg-solid-1: 208 24% 16%;
+    /* Lighter main dark background */
+    --bg-solid-2: 208 28% 12%;
 
     /* Linear Gradients */
-    --bg-linear-1: linear-gradient(135deg, hsl(240 6% 10%), hsl(0 0% 0%));
-    --bg-linear-2: linear-gradient(180deg, hsl(240 5% 16%), hsl(240 6% 10%));
+    --bg-linear-1: linear-gradient(135deg, hsl(208 24% 16%), hsl(208 28% 12%));
+    --bg-linear-2: linear-gradient(180deg, hsl(169 25% 32%), hsl(208 24% 16%));
 
     /* Radial Gradients */
-    --bg-radial-1: radial-gradient(circle at center, hsl(240 5% 16%), hsl(0 0% 0%));
+    --bg-radial-1: radial-gradient(circle at center, hsl(169 25% 32%), hsl(208 28% 12%));
     /* Glow effect radially */
-    --bg-radial-2: radial-gradient(circle at top, hsl(142 71% 45% / 0.15), hsl(240 6% 10%) 60%);
+    --bg-radial-2: radial-gradient(circle at top, hsl(227 100% 79% / 0.15), hsl(208 24% 16%) 60%);
   }
 }
 

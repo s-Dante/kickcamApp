@@ -169,8 +169,8 @@
         <!-- PANEL LATERAL ESCRITORIO (LG+) -->
         <div class="{{ $classes['sidebar']['container'] }}">
             <div>
-                <h2 class="text-2xl font-bold {{ $ui['h2'] }} mb-1">KickCam Pro V2</h2>
-                <p class="{{ $ui['text-muted'] }} text-sm font-black uppercase tracking-widest">Escáner Oficial AR</p>
+                <h2 class="text-2xl font-bold {{ $ui['h2'] }} mb-1">Camara AR</h2>
+                <p class="{{ $ui['text-muted'] }} text-sm font-black uppercase tracking-widest">Escáner de escudos</p>
             </div>
 
             <div class="flex-1"></div> <!-- Spacer -->

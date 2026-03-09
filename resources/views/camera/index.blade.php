@@ -129,8 +129,8 @@
         <!-- PANEL LATERAL ESCRITORIO (LG+) -->
         <div class="{{ $classes['sidebar']['container'] }}">
             <div>
-                <h2 class="text-2xl font-bold {{ $ui['h2'] }} mb-1">KickCam Pro V2</h2>
-                <p class="{{ $ui['text-muted'] }} text-sm">Filtros y Shaders WebGL</p>
+                <h2 class="text-2xl font-bold {{ $ui['h2'] }} mb-1">Camara de filtros</h2>
+                <p class="{{ $ui['text-muted'] }} text-sm">Disfruta de la experiencia de filtros</p>
             </div>
 
             <div class="{{ $classes['desktop_ui']['select_wrapper'] }}">
@@ -193,12 +193,12 @@
     ========================== --}}
     @push('head-scripts')
         <script type="importmap">
-                                                                                                {
-                                                                                                    "imports": {
-                                                                                                        "three": "https://unpkg.com/three@0.160.0/build/three.module.js"
-                                                                                                    }
-                                                                                                }
-                                                                                            </script>
+                                                                                                        {
+                                                                                                            "imports": {
+                                                                                                                "three": "https://unpkg.com/three@0.160.0/build/three.module.js"
+                                                                                                            }
+                                                                                                        }
+                                                                                                    </script>
         <!-- Google MediaPipe (Carga global en window) -->
         <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js" crossorigin="anonymous"></script>
@@ -288,84 +288,84 @@
                         u_isUserFacing: { value: 1.0 }
                     },
                     vertexShader: `
-                                                                            varying vec2 vUv;
-                                                                            uniform float u_isUserFacing;
-                                                                            void main() {
-                                                                                vUv = uv;
-                                                                                if(u_isUserFacing > 0.5) vUv.x = 1.0 - vUv.x; // Mirror for selfie
-                                                                                gl_Position = vec4(position, 1.0);
-                                                                            }
-                                                                        `,
-                    fragmentShader: `
-                                                                                    uniform sampler2D tDiffuse;
-                                                                                    uniform int u_effectType;
-                                                                                    uniform vec2 u_resolution;
-                                                                                    uniform vec2 u_videoResolution;
                                                                                     varying vec2 vUv;
-
+                                                                                    uniform float u_isUserFacing;
                                                                                     void main() {
-                                                                                        vec2 uv = vUv;
-
-                                                                                        // Object-Fit Cover Logic en Shader puro
-                                                                                        float rs = u_resolution.x / u_resolution.y;
-                                                                                        float vs = u_videoResolution.x / u_videoResolution.y;
-
-                                                                                        if (rs > vs) {
-                                                                                            float scale = vs / rs; 
-                                                                                            uv.y = (uv.y - 0.5) * scale + 0.5;
-                                                                                        } else {
-                                                                                            float scale = rs / vs;
-                                                                                            uv.x = (uv.x - 0.5) * scale + 0.5;
-                                                                                        }
-
-                                                                                        if(uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0) {
-                                                                                            gl_FragColor = vec4(0.0, 0.0, 0.0, 1.0);
-                                                                                            return;
-                                                                                        }
-
-                                                                                        // Pixelate
-                                                                                        if(u_effectType == 2) {
-                                                                                            float pixels = 60.0;
-                                                                                            uv = floor(uv * pixels) / pixels;
-                                                                                        }
-
-                                                                                        vec4 texel = texture2D(tDiffuse, uv);
-
-                                                                                        // Thermal
-                                                                                        if(u_effectType == 1) {
-                                                                                            float lum = dot(texel.rgb, vec3(0.299, 0.587, 0.114));
-                                                                                            vec3 heat;
-                                                                                            if(lum < 0.33) heat = mix(vec3(0,0,1), vec3(0,1,0), lum/0.33);
-                                                                                            else if(lum < 0.66) heat = mix(vec3(0,1,0), vec3(1,1,0), (lum-0.33)/0.33);
-                                                                                            else heat = mix(vec3(1,1,0), vec3(1,0,0), (lum-0.66)/0.34);
-                                                                                            texel.rgb = heat;
-                                                                                        }
-                                                                                        // Pastel
-                                                                                        else if(u_effectType == 3) {
-                                                                                            vec3 p = texel.rgb;
-                                                                                            texel.r = dot(p, vec3(0.393, 0.769, 0.189)) * 1.3;
-                                                                                            texel.g = dot(p, vec3(0.349, 0.686, 0.168)) * 1.1;
-                                                                                            texel.b = dot(p, vec3(0.272, 0.534, 0.131)) * 1.3;
-                                                                                        }
-                                                                                        // Blur
-                                                                                        else if(u_effectType == 4) {
-                                                                                            vec2 offset = 4.0 / u_resolution;
-                                                                                            vec4 sum = vec4(0.0);
-                                                                                            sum += texture2D(tDiffuse, uv + vec2(-offset.x, -offset.y)) * 0.11;
-                                                                                            sum += texture2D(tDiffuse, uv + vec2(0.0, -offset.y)) * 0.11;
-                                                                                            sum += texture2D(tDiffuse, uv + vec2(offset.x, -offset.y)) * 0.11;
-                                                                                            sum += texture2D(tDiffuse, uv + vec2(-offset.x, 0.0)) * 0.11;
-                                                                                            sum += texture2D(tDiffuse, uv) * 0.12;
-                                                                                            sum += texture2D(tDiffuse, uv + vec2(offset.x, 0.0)) * 0.11;
-                                                                                            sum += texture2D(tDiffuse, uv + vec2(-offset.x, offset.y)) * 0.11;
-                                                                                            sum += texture2D(tDiffuse, uv + vec2(0.0, offset.y)) * 0.11;
-                                                                                            sum += texture2D(tDiffuse, uv + vec2(offset.x, offset.y)) * 0.11;
-                                                                                            texel = sum;
-                                                                                        }
-
-                                                                                        gl_FragColor = texel;
+                                                                                        vUv = uv;
+                                                                                        if(u_isUserFacing > 0.5) vUv.x = 1.0 - vUv.x; // Mirror for selfie
+                                                                                        gl_Position = vec4(position, 1.0);
                                                                                     }
-                                                                                `
+                                                                                `,
+                    fragmentShader: `
+                                                                                            uniform sampler2D tDiffuse;
+                                                                                            uniform int u_effectType;
+                                                                                            uniform vec2 u_resolution;
+                                                                                            uniform vec2 u_videoResolution;
+                                                                                            varying vec2 vUv;
+
+                                                                                            void main() {
+                                                                                                vec2 uv = vUv;
+
+                                                                                                // Object-Fit Cover Logic en Shader puro
+                                                                                                float rs = u_resolution.x / u_resolution.y;
+                                                                                                float vs = u_videoResolution.x / u_videoResolution.y;
+
+                                                                                                if (rs > vs) {
+                                                                                                    float scale = vs / rs; 
+                                                                                                    uv.y = (uv.y - 0.5) * scale + 0.5;
+                                                                                                } else {
+                                                                                                    float scale = rs / vs;
+                                                                                                    uv.x = (uv.x - 0.5) * scale + 0.5;
+                                                                                                }
+
+                                                                                                if(uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0) {
+                                                                                                    gl_FragColor = vec4(0.0, 0.0, 0.0, 1.0);
+                                                                                                    return;
+                                                                                                }
+
+                                                                                                // Pixelate
+                                                                                                if(u_effectType == 2) {
+                                                                                                    float pixels = 60.0;
+                                                                                                    uv = floor(uv * pixels) / pixels;
+                                                                                                }
+
+                                                                                                vec4 texel = texture2D(tDiffuse, uv);
+
+                                                                                                // Thermal
+                                                                                                if(u_effectType == 1) {
+                                                                                                    float lum = dot(texel.rgb, vec3(0.299, 0.587, 0.114));
+                                                                                                    vec3 heat;
+                                                                                                    if(lum < 0.33) heat = mix(vec3(0,0,1), vec3(0,1,0), lum/0.33);
+                                                                                                    else if(lum < 0.66) heat = mix(vec3(0,1,0), vec3(1,1,0), (lum-0.33)/0.33);
+                                                                                                    else heat = mix(vec3(1,1,0), vec3(1,0,0), (lum-0.66)/0.34);
+                                                                                                    texel.rgb = heat;
+                                                                                                }
+                                                                                                // Pastel
+                                                                                                else if(u_effectType == 3) {
+                                                                                                    vec3 p = texel.rgb;
+                                                                                                    texel.r = dot(p, vec3(0.393, 0.769, 0.189)) * 1.3;
+                                                                                                    texel.g = dot(p, vec3(0.349, 0.686, 0.168)) * 1.1;
+                                                                                                    texel.b = dot(p, vec3(0.272, 0.534, 0.131)) * 1.3;
+                                                                                                }
+                                                                                                // Blur
+                                                                                                else if(u_effectType == 4) {
+                                                                                                    vec2 offset = 4.0 / u_resolution;
+                                                                                                    vec4 sum = vec4(0.0);
+                                                                                                    sum += texture2D(tDiffuse, uv + vec2(-offset.x, -offset.y)) * 0.11;
+                                                                                                    sum += texture2D(tDiffuse, uv + vec2(0.0, -offset.y)) * 0.11;
+                                                                                                    sum += texture2D(tDiffuse, uv + vec2(offset.x, -offset.y)) * 0.11;
+                                                                                                    sum += texture2D(tDiffuse, uv + vec2(-offset.x, 0.0)) * 0.11;
+                                                                                                    sum += texture2D(tDiffuse, uv) * 0.12;
+                                                                                                    sum += texture2D(tDiffuse, uv + vec2(offset.x, 0.0)) * 0.11;
+                                                                                                    sum += texture2D(tDiffuse, uv + vec2(-offset.x, offset.y)) * 0.11;
+                                                                                                    sum += texture2D(tDiffuse, uv + vec2(0.0, offset.y)) * 0.11;
+                                                                                                    sum += texture2D(tDiffuse, uv + vec2(offset.x, offset.y)) * 0.11;
+                                                                                                    texel = sum;
+                                                                                                }
+
+                                                                                                gl_FragColor = texel;
+                                                                                            }
+                                                                                        `
                 });
                 const bgPlane = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), bgShaderMaterial);
                 bgScene.add(bgPlane);

@@ -37,6 +37,12 @@ export default {
                     sat: 'hsl(var(--color-accent-sat) / <alpha-value>)',
                     desat: 'hsl(var(--color-accent-desat) / <alpha-value>)',
                 },
+                alert: {
+                    success: 'hsl(var(--color-alert-success) / <alpha-value>)',
+                    error: 'hsl(var(--color-alert-error) / <alpha-value>)',
+                    warning: 'hsl(var(--color-alert-warning) / <alpha-value>)',
+                    info: 'hsl(var(--color-alert-info) / <alpha-value>)',
+                },
             },
             backgroundImage: {
                 'linear-1': 'var(--bg-linear-1)',
