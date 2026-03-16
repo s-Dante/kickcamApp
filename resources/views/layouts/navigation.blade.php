@@ -46,46 +46,65 @@
 
                 <!-- Navigation Links (Desktop) -->
                 <div class="{{ $classes['desktop']['links'] }}">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')"
-                        class="{{ $classes['desktop']['link_text'] }}">
-                        Perfil
-                    </x-nav-link>
-                    <x-nav-link :href="route('trivia.index')" :active="request()->routeIs('trivia.*')"
-                        class="{{ $classes['desktop']['link_text'] }}">
-                        Trivia
-                    </x-nav-link>
-                    <x-nav-link :href="route('multimedia.index')" :active="request()->routeIs('multimedia.*')"
-                        class="{{ $classes['desktop']['link_text'] }}">
-                        Multimedia
-                    </x-nav-link>
-                    <x-nav-link :href="route('scoreboard.index')" :active="request()->routeIs('scoreboard.*')"
-                        class="{{ $classes['desktop']['link_text'] }}">
-                        Marcadores
-                    </x-nav-link>
-                    <x-nav-link :href="route('arCamera')" :active="request()->routeIs('arCamera')"
-                        class="{{ $classes['desktop']['link_icon'] }}">
-                        <svg class="{{ $classes['desktop']['icon_svg'] }}" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z">
-                            </path>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                        </svg>
-                        AR Camera
-                    </x-nav-link>
-                    <x-nav-link :href="route('camera')" :active="request()->routeIs('camera')"
-                        class="{{ $classes['desktop']['link_icon'] }}">
-                        <svg class="{{ $classes['desktop']['icon_svg'] }}" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z">
-                            </path>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                        </svg>
-                        Camera
-                    </x-nav-link>
+                    <x-tooltip text="Ve tu perfil y recompensas" position="bottom">
+                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')"
+                            class="{{ $classes['desktop']['link_text'] }}">
+                            Perfil
+                        </x-nav-link>
+                    </x-tooltip>
+                    <x-tooltip text="Desafíos de conocimiento" position="bottom">
+                        <x-nav-link :href="route('trivia.index')" :active="request()->routeIs('trivia.*')"
+                            class="{{ $classes['desktop']['link_text'] }}">
+                            Trivia
+                        </x-nav-link>
+                    </x-tooltip>
+                    <x-tooltip text="Noticias y blogs" position="bottom">
+                        <x-nav-link :href="route('multimedia.index')" :active="request()->routeIs('multimedia.*')"
+                            class="{{ $classes['desktop']['link_text'] }}">
+                            Multimedia
+                        </x-nav-link>
+                    </x-tooltip>
+                    <x-tooltip text="Resultados deportivos en vivo" position="bottom">
+                        <x-nav-link :href="route('scoreboard.index')" :active="request()->routeIs('scoreboard.*')"
+                            class="{{ $classes['desktop']['link_text'] }}">
+                            Marcadores
+                        </x-nav-link>
+                    </x-tooltip>
+                    <x-tooltip text="Escanea cartas y desbloquea insignias" position="bottom">
+                        <x-nav-link :href="route('arCamera')" :active="request()->routeIs('arCamera')"
+                            class="{{ $classes['desktop']['link_icon'] }}">
+                            <svg class="{{ $classes['desktop']['icon_svg'] }}" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z">
+                                </path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                            AR Camera
+                        </x-nav-link>
+                    </x-tooltip>
+                    <x-tooltip text="Abre tu cámara regular con filtros" position="bottom">
+                        <x-nav-link :href="route('camera')" :active="request()->routeIs('camera')"
+                            class="{{ $classes['desktop']['link_icon'] }}">
+                            <svg class="{{ $classes['desktop']['icon_svg'] }}" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z">
+                                </path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                            Camera
+                        </x-nav-link>
+                    </x-tooltip>
+
+                    <x-tooltip text="Conoce cómo funciona la app" position="bottom">
+                        <x-nav-link :href="route('help')" :active="request()->routeIs('help')"
+                            class="{{ $classes['desktop']['link_text'] }}">
+                            Ayuda
+                        </x-nav-link>
+                    </x-tooltip>
                 </div>
             </div>
 
@@ -177,6 +196,11 @@
                 <x-responsive-nav-link :href="route('camera')" :active="request()->routeIs('camera')"
                     class="{{ $classes['mobile_menu']['link_text'] }}">
                     {{ __('Cámara') }}
+                </x-responsive-nav-link>
+
+                <x-responsive-nav-link :href="route('help')" :active="request()->routeIs('help')"
+                    class="{{ $classes['mobile_menu']['link_text'] }}">
+                    {{ __('Ayuda') }}
                 </x-responsive-nav-link>
 
                 <form method="POST" action="{{ route('logout') }}">

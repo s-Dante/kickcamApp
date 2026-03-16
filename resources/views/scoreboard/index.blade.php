@@ -28,11 +28,13 @@
                 <!-- League Filters (Elegant Underline Tabs) -->
                 <nav class="flex overflow-x-auto scrollbar-hide space-x-6 sm:space-x-8" aria-label="Tabs">
                     @foreach($leagues as $league)
-                        <a href="{{ route('scoreboard.index', ['league' => $league['id']]) }}"
-                            class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm transition-colors duration-200 {{ $activeLeague['id'] === $league['id'] ? 'border-accent text-secondary' : 'border-transparent text-tertiary-sat hover:text-secondary hover:border-tertiary' }}">
-                            <span class="mr-1.5 opacity-80">{{ $league['icon'] }}</span>
-                            {{ $league['name'] }}
-                        </a>
+                        <x-tooltip text="Ver resultados de {{ $league['name'] }}" position="bottom">
+                            <a href="{{ route('scoreboard.index', ['league' => $league['id']]) }}"
+                                class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm transition-colors duration-200 {{ $activeLeague['id'] === $league['id'] ? 'border-accent text-secondary' : 'border-transparent text-tertiary-sat hover:text-secondary hover:border-tertiary' }}">
+                                <span class="mr-1.5 opacity-80">{{ $league['icon'] }}</span>
+                                {{ $league['name'] }}
+                            </a>
+                        </x-tooltip>
                     @endforeach
                 </nav>
             </div>
@@ -44,7 +46,9 @@
                 <div class="space-y-8">
                     <section class="sticky top-20">
                         <div class="flex items-center justify-between mb-4">
-                            <h2 class="text-xl font-medium text-secondary">Tabla General</h2>
+                            <x-tooltip text="Clasificación general de los equipos en la temporada actual" position="top" multiline="true">
+                                <h2 class="text-xl font-medium text-secondary inline-block">Tabla General</h2>
+                            </x-tooltip>
                             <span
                                 class="text-xs text-tertiary-sat font-bold uppercase tracking-widest bg-tertiary-desat px-2 py-1 rounded">Temp
                                 25/26</span>
@@ -107,10 +111,12 @@
                 <!-- COLUMN 2: Past Events (Middle) -->
                 <div class="space-y-8">
                     <section>
-                        <h2 class="text-xl font-medium text-secondary mb-4 flex items-center gap-2">
-                            <span class="w-2 h-2 rounded-full bg-accent/60"></span>
-                            Resultados Recientes
-                        </h2>
+                        <x-tooltip text="Últimos partidos jugados con sus resultados y acceso a los Video Highlights" position="top" multiline="true">
+                            <h2 class="text-xl font-medium text-secondary mb-4 flex items-center gap-2 w-max cursor-default">
+                                <span class="w-2 h-2 rounded-full bg-accent/60"></span>
+                                Resultados Recientes
+                            </h2>
+                        </x-tooltip>
 
                         @if(empty($pastEvents))
                             <div
@@ -172,10 +178,12 @@
                 <!-- COLUMN 3: Next Events (Right) -->
                 <div class="space-y-8">
                     <section>
-                        <h2 class="text-xl font-medium text-secondary mb-4 flex items-center gap-2">
-                            <span class="w-2 h-2 rounded-full border border-tertiary-sat"></span>
-                            Próximos Encuentros
-                        </h2>
+                        <x-tooltip text="Partidos programados próximamente con fecha y hora" position="top" multiline="true">
+                            <h2 class="text-xl font-medium text-secondary mb-4 flex items-center gap-2 w-max cursor-default">
+                                <span class="w-2 h-2 rounded-full border border-tertiary-sat"></span>
+                                Próximos Encuentros
+                            </h2>
+                        </x-tooltip>
 
                         @if(empty($nextEvents))
                             <div

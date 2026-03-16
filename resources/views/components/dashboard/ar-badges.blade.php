@@ -10,7 +10,7 @@
         ],
         'grid' => 'grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4',
         'item' => [
-            'container' => 'flex flex-col items-center p-3 rounded-xl bg-accent-desat/20 border border-tertiary-sat shadow-sm transition-transform hover:scale-105 cursor-pointer',
+            'container' => 'w-full h-full flex flex-col items-center p-3 rounded-xl bg-accent-desat/20 border border-tertiary-sat shadow-sm cursor-pointer',
             'icon_wrapper' => 'w-16 h-16 rounded-full bg-primary flex items-center justify-center mb-2 shadow-inner border border-tertiary',
             'icon' => 'text-3xl drop-shadow-sm',
             'title' => 'text-xs font-bold text-secondary-sat text-center leading-tight uppercase tracking-wider',
@@ -30,22 +30,26 @@
 <div class="{{ $classes['card'] }}">
     <div class="{{ $classes['card_body'] }}">
         <div class="{{ $classes['header']['container'] }}">
-            <h3 class="{{ $classes['header']['title'] }}">
-                <span class="{{ $classes['header']['icon'] }}">🌍</span>
-                Colección Mundial (AR)
-            </h3>
+            <x-tooltip text="Esta es tu colección virtual interactiva. Escanea los códigos de las cartas reales usando tu cámara AR para desbloquearlos" position="right">
+                <h3 class="{{ $classes['header']['title'] }}">
+                    <span class="{{ $classes['header']['icon'] }}">🌍</span>
+                    Colección Mundial (AR)
+                </h3>
+            </x-tooltip>
             <span class="{{ $classes['header']['badge'] }}">Deportes Oficiales</span>
         </div>
 
         <div class="{{ $classes['grid'] }}">
             @foreach($collections as $collection)
-                <div onclick="openBadgeModal('{{ $collection['type'] }}')" class="{{ $classes['item']['container'] }}">
-                    <div class="{{ $classes['item']['icon_wrapper'] }}">
-                        <span class="{{ $classes['item']['icon'] }}">{{ $collection['icon'] }}</span>
+                <x-tooltip text="Ver colección de {{ $collection['title'] }}" position="top" class="block w-full h-full hover:scale-105 transition-transform">
+                    <div onclick="openBadgeModal('{{ $collection['type'] }}')" class="{{ $classes['item']['container'] }}">
+                        <div class="{{ $classes['item']['icon_wrapper'] }}">
+                            <span class="{{ $classes['item']['icon'] }}">{{ $collection['icon'] }}</span>
+                        </div>
+                        <span class="{{ $classes['item']['title'] }}">{{ $collection['title'] }}</span>
+                        <span class="{{ $classes['item']['link'] }}">Ver Álbum</span>
                     </div>
-                    <span class="{{ $classes['item']['title'] }}">{{ $collection['title'] }}</span>
-                    <span class="{{ $classes['item']['link'] }}">Ver Álbum</span>
-                </div>
+                </x-tooltip>
             @endforeach
         </div>
     </div>

@@ -13,7 +13,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';
 
 use App\Http\Controllers\DashboardController;
 
@@ -23,13 +23,15 @@ Route::middleware('auth')->group(function () {
      */
     Route::get('/camara-ar', function () {
         $files = scandir(public_path('assets/ar-compiler-targets'));
-        $images = array_values(array_filter($files, fn($f) => pathinfo($f, PATHINFO_EXTENSION) === 'jpg'));
+        $images = array_values(array_filter($files, fn ($f) => pathinfo($f, PATHINFO_EXTENSION) === 'jpg'));
+
         return view('arCamera.index', compact('images'));
     })->name('arCamera');
 
     Route::get('/ar-compiler', function () {
         $files = scandir(public_path('assets/ar-compiler-targets'));
-        $images = array_values(array_filter($files, fn($f) => pathinfo($f, PATHINFO_EXTENSION) === 'jpg'));
+        $images = array_values(array_filter($files, fn ($f) => pathinfo($f, PATHINFO_EXTENSION) === 'jpg'));
+
         return view('arCamera.compiler', compact('images'));
     })->name('arCamera.compiler');
 
@@ -56,6 +58,13 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
+    /**
+     * Ayuda
+     */
+    Route::get('/ayuda', function () {
+        return view('help');
+    })->name('help');
+
     /**
      * Dashboard Central
      */

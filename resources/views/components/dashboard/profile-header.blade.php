@@ -67,7 +67,8 @@
 
         <!-- Edición Button Estilizado -->
         <div class="{{ $classes['action']['container'] }}">
-            <a href="{{ route('profile.edit') }}" class="{{ $classes['action']['btn'] }}" title="Editar Perfil">
+        <x-tooltip text="Ajustes de cuenta" position="left">
+            <a href="{{ route('profile.edit') }}" class="{{ $classes['action']['btn'] }}">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z">
@@ -75,6 +76,7 @@
                 </svg>
                 <span class="hidden sm:inline">Editar Perfil</span>
             </a>
+        </x-tooltip>
         </div>
     </div>
 </div>

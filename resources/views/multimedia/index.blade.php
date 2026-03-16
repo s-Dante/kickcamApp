@@ -37,25 +37,27 @@
                 </div>
 
                 <!-- Global Language Selector -->
-                <div class="flex flex-col sm:items-end z-20">
-                    <label for="globalLang"
-                        class="block text-xs font-semibold text-secondary-sat dark:text-secondary-desat mb-1 uppercase tracking-wider">Idioma
-                        Global:</label>
-                    <select id="globalLang" x-model="lang"
-                        class="bg-primary border border-tertiary text-secondary text-sm rounded-lg focus:ring-accent focus:border-accent block w-full sm:w-48 p-2 dark:bg-primary-900 dark:border-tertiary-700 dark:text-secondary-100 font-medium shadow-sm transition-colors cursor-pointer hover:bg-tertiary-desat dark:hover:bg-primary-800">
-                        <option value="es">🇪🇸 Español</option>
-                        <option value="en">🇬🇧 Inglés</option>
-                        <option value="fr">🇫🇷 Francés</option>
-                        <option value="de">🇩🇪 Alemán</option>
-                        <option value="it">🇮🇹 Italiano</option>
-                        <option value="pt">🇵🇹 Portugués</option>
-                        <option value="ko">🇰🇷 Coreano</option>
-                        <option value="ja">🇯🇵 Japonés</option>
-                        <option value="fa">🇮🇷 Persa</option>
-                        <option value="ru">🇷🇺 Ruso</option>
-                        <option value="zh-CN">🇨🇳 Chino (Simp)</option>
-                    </select>
-                </div>
+                <x-tooltip text="Cambia el idioma de los nombres de países" position="bottom">
+                    <div class="flex flex-col sm:items-end z-20">
+                        <label for="globalLang"
+                            class="block text-xs font-semibold text-secondary-sat dark:text-secondary-desat mb-1 uppercase tracking-wider">Idioma
+                            Global:</label>
+                        <select id="globalLang" x-model="lang"
+                            class="bg-primary border border-tertiary text-secondary text-sm rounded-lg focus:ring-accent focus:border-accent block w-full sm:w-48 p-2 dark:bg-primary-900 dark:border-tertiary-700 dark:text-secondary-100 font-medium shadow-sm transition-colors cursor-pointer hover:bg-tertiary-desat dark:hover:bg-primary-800">
+                            <option value="es">🇪🇸 Español</option>
+                            <option value="en">🇬🇧 Inglés</option>
+                            <option value="fr">🇫🇷 Francés</option>
+                            <option value="de">🇩🇪 Alemán</option>
+                            <option value="it">🇮🇹 Italiano</option>
+                            <option value="pt">🇵🇹 Portugués</option>
+                            <option value="ko">🇰🇷 Coreano</option>
+                            <option value="ja">🇯🇵 Japonés</option>
+                            <option value="fa">🇮🇷 Persa</option>
+                            <option value="ru">🇷🇺 Ruso</option>
+                            <option value="zh-CN">🇨🇳 Chino (Simp)</option>
+                        </select>
+                    </div>
+                </x-tooltip>
             </div>
 
             <!-- Country Grid Section -->
@@ -74,17 +76,19 @@
                 @else
                     <div class="{{ $classes['content']['grid'] }}">
                         @foreach($countries as $country)
-                            <x-country-card :href="route('multimedia.show', $country->slug)" :country="$country">
-                                <svg class="{{ $classes['content']['card_icon'] }}" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z">
-                                    </path>
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                </svg>
-                                {{ $country->multimedia_count ?? 0 }} Archivos
-                            </x-country-card>
+                            <x-tooltip text="Ver galería multimedia de {{ $country->translated_name ?? $country->name ?? 'este país' }}" position="top" class="block w-full">
+                                <x-country-card :href="route('multimedia.show', $country->slug)" :country="$country">
+                                    <svg class="{{ $classes['content']['card_icon'] }}" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z">
+                                        </path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                    {{ $country->multimedia_count ?? 0 }} Archivos
+                                </x-country-card>
+                            </x-tooltip>
                         @endforeach
                     </div>
                 @endif
