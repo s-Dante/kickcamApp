@@ -40,7 +40,7 @@ class ResetPasswordPinMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            markdown: 'emails.auth.reset-password-pin',
+            view: 'emails.auth.reset-password-pin',
         );
     }
 

@@ -222,6 +222,42 @@
                         </a>
                     </div>
                 </x-tooltip>
+
+                <!-- Global Challenge 5 (Silhouettes) -->
+                <x-tooltip text="Geografía oculta. ¿Podrás reconocer el país simplemente guiándote por la silueta de su frontera y territorio?" position="top" class="block w-full h-full md:col-span-2" multiline="true">
+                    <div class="{{ $classes['challenge']['card'] }} h-full bg-gradient-to-br from-primary to-tertiary-desat dark:from-primary-900 dark:to-primary-800">
+                        <a x-bind:href="`{{ route('trivia.playSilhouette') }}?lang=${lang}`"
+                            class="{{ $classes['challenge']['link'] }}">
+                            <div class="{{ $classes['challenge']['pattern'] }}"></div>
+
+                            <div class="{{ $classes['challenge']['content'] }}">
+                                <div class="{{ $classes['challenge']['text_wrapper'] }}">
+                                    <span class="{{ $classes['challenge']['badge'] }}">
+                                        <svg class="{{ $classes['challenge']['badge_icon'] }}" fill="none"
+                                            stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9">
+                                            </path>
+                                        </svg>
+                                        Nuevo Modo
+                                    </span>
+                                    <h2 class="{{ $classes['challenge']['title'] }}">
+                                        Desafío Siluetas
+                                    </h2>
+                                    <p class="{{ $classes['challenge']['desc'] }}">
+                                        Identifica el país basándote únicamente en la forma de su territorio geográfico dibujado en un color sólido.
+                                    </p>
+                                </div>
+
+                                <div class="{{ $classes['challenge']['icon_wrapper'] }}">
+                                    <div class="{{ $classes['challenge']['icon_bg'] }}">
+                                        <span class="{{ $classes['challenge']['icon'] }}">🗺️</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </x-tooltip>
             </div>
 
             <!-- Country Grid Section -->

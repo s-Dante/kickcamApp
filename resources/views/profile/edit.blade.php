@@ -36,6 +36,10 @@
                 <!-- Left Column: Core Info & Preferences -->
                 <div class="{{ $classes['col_left'] }}">
                     <div class="{{ $classes['card'] }}">
+                        @include('profile.partials.update-avatar-form')
+                    </div>
+
+                    <div class="{{ $classes['card'] }}">
                         @include('profile.partials.update-profile-information-form')
                     </div>
 

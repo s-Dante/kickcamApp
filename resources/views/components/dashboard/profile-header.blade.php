@@ -37,18 +37,12 @@
             <!-- Placeholder Grid 3D -->
             <div class="{{ $classes['avatar']['bg_pattern'] }}"></div>
 
-            <div class="{{ $classes['avatar']['content_wrapper'] }}">
-                <svg class="{{ $classes['avatar']['icon'] }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z">
-                    </path>
-                </svg>
-            </div>
+            <img src="{{ auth()->user()->avatar_url }}" alt="Avatar" class="relative z-10 w-full h-full object-cover">
         </div>
 
         <!-- Info Usuario -->
         <div class="{{ $classes['info']['container'] }}">
-            <h2 class="{{ $classes['info']['name'] }}">{{ auth()->user()->name }}</h2>
+            <h2 class="{{ $classes['info']['name'] }}">{{ auth()->user()->full_name }}</h2>
             <p class="{{ $classes['info']['username'] }}">{{ '@' . (auth()->user()->username ?? 'usuario_invitado') }}
             </p>
 

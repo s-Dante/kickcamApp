@@ -11,6 +11,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::patch('/profile/avatar', [\App\Http\Controllers\ProfileAvatarController::class, 'update'])->name('profile.avatar.update');
 });
 
 require __DIR__.'/auth.php';
@@ -76,6 +77,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/trivia', [\App\Http\Controllers\TriviaController::class, 'index'])->name('trivia.index');
     Route::prefix('trivia')->name('trivia.')->group(function () {
         Route::get('/resultados', [\App\Http\Controllers\TriviaController::class, 'results'])->name('results');
+        Route::get('/jugar/siluetas', [\App\Http\Controllers\TriviaController::class, 'playSilhouette'])->name('playSilhouette');
+        Route::get('/compilador-siluetas', function () {
+            return view('trivia.silhouette-compiler');
+        })->name('silhouetteCompiler');
         Route::get('/jugar/{country}', [\App\Http\Controllers\TriviaController::class, 'play'])->name('play');
         Route::post('/enviar', [\App\Http\Controllers\TriviaController::class, 'submit'])->name('submit');
     });

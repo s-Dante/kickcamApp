@@ -29,6 +29,7 @@ class User extends Authenticatable
         'username',
         'email',
         'password',
+        'avatar',
         'points',
         'theme',
     ];
@@ -64,10 +65,10 @@ class User extends Authenticatable
         ];
     }
 
-    protected function getFullName(): Attribute
+    protected function fullName(): Attribute
     {
         return Attribute::make(
-            get: fn () => "{$this->name} {$this->father->lastname} {$this->mother_lastname}"
+            get: fn () => trim("{$this->name} {$this->father_lastname} {$this->mother_lastname}")
         );
     }
 
@@ -82,6 +83,32 @@ class User extends Authenticatable
     {
         return Attribute::make(
             get: fn () => "{$this->points}"
+        );
+    }
+
+    protected function avatarUrl(): Attribute
+    {
+        return Attribute::make(
+            get: function () {
+                if ($this->avatar) {
+                    // Predefined avatars are now stored as full URLs or relative assets
+                    if (str_starts_with($this->avatar, 'http') || str_starts_with($this->avatar, '/assets')) {
+                        return str_starts_with($this->avatar, 'http') ? $this->avatar : asset(ltrim($this->avatar, '/'));
+                    }
+                    
+                    if (str_starts_with($this->avatar, 'avatars/')) {
+                        return asset('storage/' . $this->avatar);
+                    }
+                    
+                    return asset('images/avatars/' . $this->avatar);
+                }
+
+                // If no avatar, pick a random default based on their ID to keep it consistent per user
+                // Let's fetch one from the known arrays; for simplicity we will fallback to a generated avatar or one of the known balls
+                $defaults = ['assets/wc-balls/1930.png', 'assets/wc-fifa-logos/1930.jpg', 'assets/country-teams-shields/Mexico.png'];
+                $index = $this->id % max(count($defaults), 1);
+                return asset($defaults[$index]);
+            }
         );
     }
 

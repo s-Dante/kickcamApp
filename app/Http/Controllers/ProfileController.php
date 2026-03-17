@@ -16,8 +16,27 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
+        $predefinedAvatars = [];
+        $dirs = [
+            'assets/wc-balls' => public_path('assets/wc-balls'),
+            'assets/wc-fifa-logos' => public_path('assets/wc-fifa-logos'),
+            'assets/country-teams-shields' => public_path('assets/country-teams-shields'),
+        ];
+        
+        foreach($dirs as $prefix => $path) {
+            if (is_dir($path)) {
+                $files = scandir($path);
+                foreach($files as $file) {
+                    if (in_array(pathinfo($file, PATHINFO_EXTENSION), ['png', 'jpg', 'webp'])) {
+                        $predefinedAvatars[] = url($prefix . '/' . $file);
+                    }
+                }
+            }
+        }
+
         return view('profile.edit', [
             'user' => $request->user(),
+            'predefinedAvatars' => $predefinedAvatars,
         ]);
     }
 
