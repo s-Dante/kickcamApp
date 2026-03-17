@@ -185,16 +185,21 @@
                 // Initialize Bar
                 updateProgress();
 
-                // Listen to Radio Clicks to enable Next/Submit logically
-                radios.forEach(radio => {
-                    radio.addEventListener('change', function () {
-                        const currentSlide = this.closest('.question-slide');
+                // Listen to Radio Clicks to enable Next/Submit logically using delegation
+                document.getElementById('questions-wrapper').addEventListener('change', function (e) {
+                    if (e.target.classList.contains('option-radio')) {
+                        const currentSlide = e.target.closest('.question-slide');
                         const theNextBtn = currentSlide.querySelector('.next-btn');
                         const theSubmitBtn = currentSlide.querySelector('.submit-btn');
 
                         if (theNextBtn) theNextBtn.disabled = false;
                         if (theSubmitBtn) theSubmitBtn.disabled = false;
-                    });
+                        
+                        // Also visual feedback
+                        const labels = currentSlide.querySelectorAll('label');
+                        labels.forEach(l => l.classList.remove('border-accent', 'bg-accent-desat/20'));
+                        e.target.closest('label').classList.add('border-accent', 'bg-accent-desat/20');
+                    }
                 });
 
                         // Next Button workflow
@@ -273,6 +278,10 @@
                         const projection = d3.geoMercator().fitSize([width, height], boundsFeature);
                         const pathGenerator = d3.geoPath().projection(projection);
 
+                        // Calculate area to determine if it's a "tiny" country for visual polish
+                        const geoArea = d3.geoArea(featureData);
+                        const isTiny = geoArea < 0.0005; // Arbitrary threshold for tiny countries/islands
+
                         svgElement
                             .attr("viewBox", `0 0 ${width} ${height}`)
                             .append("path")
@@ -280,9 +289,14 @@
                             .attr("d", pathGenerator)
                             .attr("fill", "currentColor")
                             .attr("stroke", "currentColor")
-                            // Make strokes thicker for extremely small islands/countries
-                            .attr("stroke-width", 0.5)
-                            .attr("stroke-linejoin", "round");
+                            // Make strokes thicker for extremely small countries or if it's generally small
+                            .attr("stroke-width", isTiny ? 2 : 0.5)
+                            .attr("stroke-linejoin", "round")
+                            .attr("class", "transition-all duration-700 ease-in-out")
+                            .style("opacity", 0)
+                            .transition()
+                            .duration(800)
+                            .style("opacity", 1);
                     });
                 } catch (e) {
                     console.error("D3 Mapping Error:", e);

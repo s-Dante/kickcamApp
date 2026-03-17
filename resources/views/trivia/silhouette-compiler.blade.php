@@ -4,7 +4,8 @@
             Convertidor de Shapefile a GeoJSON
         </h1>
         <p class="text-[var(--text-secondary)] mb-8">
-            Sube arrastrando los archivos <b>.shp</b>, <b>.dbf</b> (y opcionalmente <b>.shx</b>) de tus países (Natural Earth Data) para compilar en tu navegador un <code>silhouettes.geojson</code> limpio y optimizado para dibujar siluetas con D3.
+            Para mejores resultados, usa los archivos de <b>10m (High Resolution)</b> de <a href="https://www.naturalearthdata.com/downloads/10m-cultural-vectors/" target="_blank" class="text-[var(--accent)] underline">Natural Earth</a>. 
+            Sube los archivos <b>.shp</b>, <b>.dbf</b> y <b>.shx</b> para compilar un <code>silhouettes.geojson</code> optimizado y su índice <code>silhouettes-names.json</code>.
         </p>
 
         <div id="drop-zone" class="mb-8 border-4 border-dashed border-[var(--accent)]/50 rounded-xl p-10 bg-[var(--bg-secondary)] hover:bg-[var(--accent)]/10 transition-colors cursor-pointer">
@@ -34,6 +35,7 @@
         <script>
             let shpFileObj = null;
             let dbfFileObj = null;
+            let shxFileObj = null;
 
             const dropZone = document.getElementById('drop-zone');
             const fileInput = document.getElementById('file-input');
@@ -60,8 +62,7 @@
                     fileList.innerHTML += `<div>📄 ${f.name}</div>`;
                     if (f.name.toLowerCase().endsWith('.shp')) shpFileObj = f;
                     if (f.name.toLowerCase().endsWith('.dbf')) dbfFileObj = f;
-                    // Note: .shx is a fast seek index used by Desktop GIS tools like QGIS. 
-                    // Our JS sequential parser shapefile.js extracts perfect geometry using just SHP and DBF!
+                    if (f.name.toLowerCase().endsWith('.shx')) shxFileObj = f; // Added support for shx index
                 }
 
                 if (shpFileObj && dbfFileObj) {
@@ -88,11 +89,15 @@
                     statusText.innerText = "Cargando binarios a memoria...";
                     const shpBuffer = await shpFileObj.arrayBuffer();
                     const dbfBuffer = await dbfFileObj.arrayBuffer();
+                    const shxBuffer = shxFileObj ? await shxFileObj.arrayBuffer() : null;
                     
                     statusText.innerText = "Transformando Geometrías (Parseando Shapefile)...";
                     
                     // Decode using specific UTF-8 override
-                    const source = await shapefile.open(shpBuffer, dbfBuffer, {encoding: 'utf-8'});
+                    const source = await shapefile.open(shpBuffer, dbfBuffer, {
+                        encoding: 'utf-8',
+                        shx: shxBuffer
+                    });
                     
                     const geojson = {
                         type: "FeatureCollection",
@@ -107,18 +112,29 @@
                     while (!result.done) {
                         const feature = result.value;
                         
-                        // Clean up: delete all properties except NAME to dramatically reduce file size
+                        // Clean up: extract essential properties for robust matching
                         const name = feature.properties.NAME || feature.properties.ADMIN || null;
-                        
+                        const iso2 = feature.properties.ISO_A2 || feature.properties.ADM0_A3_IS || null; // Match ISO2 if available
+                        const iso3 = feature.properties.ISO_A3 || feature.properties.ADM0_A3 || null;
+
                         feature.properties = {};
                         if (name) {
                             const cleanName = name.replace(/\0/g, '').trim();
+                            const cleanIso2 = iso2 ? iso2.replace(/\0/g, '').replace(/-99/g, '').trim() : null;
+                            const cleanIso3 = iso3 ? iso3.replace(/\0/g, '').replace(/-99/g, '').trim() : null;
+
                             feature.properties.name = cleanName;
-                            
+                            if (cleanIso2) feature.properties.iso2 = cleanIso2;
+                            if (cleanIso3) feature.properties.iso3 = cleanIso3;
+
                             // Only add to our game if it has a valid name and geometry
                             if (feature.geometry) {
                                 geojson.features.push(feature);
-                                featureNames.push(cleanName);
+                                featureNames.push({
+                                    name: cleanName,
+                                    iso2: cleanIso2,
+                                    iso3: cleanIso3
+                                });
                                 count++;
                             }
                         }

@@ -575,4 +575,151 @@ class TriviaService
             default => null,
         };
     }
+
+    /**
+     * Generate trivia questions for Country Silhouettes.
+     */
+    public function generateSilhouetteTrivia(int $amount = 5, string $lang = 'es'): array
+    {
+        ini_set('memory_limit', '512M');
+
+        // Load names index
+        $namesPath = public_path('data/silhouettes-names.json');
+        if (! File::exists($namesPath)) {
+            return [];
+        }
+
+        $availableNames = json_decode(File::get($namesPath), true);
+        if (! is_array($availableNames) || empty($availableNames)) {
+            return [];
+        }
+
+        // Load country translations from the specific file requested by the user
+        $countriesPath = public_path('assets/country_state_city-data/countries.json');
+        if (! File::exists($countriesPath)) {
+            return [];
+        }
+
+        $countriesData = json_decode(File::get($countriesPath), true);
+        if (! is_array($countriesData)) {
+            return [];
+        }
+
+        $countriesCollection = collect($countriesData);
+
+        $questions = [];
+        $templates = [
+            'es' => '¿A qué país pertenece esta silueta?',
+            'en' => 'Which country does this silhouette belong to?',
+            'fr' => 'À quel pays appartient cette silhouette ?',
+            'de' => 'Zu welchem Land gehört diese Silhouette?',
+            'it' => 'A quale paese appartiene questa silhouette?',
+            'pt' => 'A que país pertence esta silhueta?',
+            'ko' => '이 실루엣은 어느 나라의 것입니까?',
+            'ja' => 'このシルエットはどの国のものですか？',
+            'fa' => 'این سیلت متعلق به کدام کشور است؟',
+            'ru' => 'Какой стране принадлежит этот силуэт?',
+            'zh-CN' => '这个剪影属于哪个国家？',
+        ];
+
+        $questionText = $templates[$lang] ?? $templates['es'];
+
+        for ($i = 0; $i < $amount; $i++) {
+            if (count($availableNames) < 4) {
+                break;
+            }
+
+            // Pick 4 random items from the available silhouettes index
+            $optionsDataRaw = collect($availableNames)->random(4);
+            $correctDataRaw = $optionsDataRaw->random();
+
+            $optionsNames = $optionsDataRaw->map(function ($item) use ($countriesCollection, $lang) {
+                $nameRaw = is_array($item) ? $item['name'] : $item;
+                $iso2Raw = is_array($item) ? ($item['iso2'] ?? null) : null;
+                $iso3Raw = is_array($item) ? ($item['iso3'] ?? null) : null;
+
+                // Robust matching: ISO2 -> ISO3 -> Search in ALL name fields
+                $countryMatch = $countriesCollection->first(function ($c) use ($nameRaw, $iso2Raw, $iso3Raw) {
+                    if ($iso2Raw && isset($c['iso2']) && strtolower($c['iso2']) === strtolower($iso2Raw)) {
+                        return true;
+                    }
+                    if ($iso3Raw && isset($c['iso3']) && strtolower($c['iso3']) === strtolower($iso3Raw)) {
+                        return true;
+                    }
+
+                    $cleanNameRaw = strtolower(trim($nameRaw));
+                    if (strtolower($c['name'] ?? '') === $cleanNameRaw) {
+                        return true;
+                    }
+
+                    // Check ALL translations for a match
+                    if (isset($c['translations']) && is_array($c['translations'])) {
+                        foreach ($c['translations'] as $tName) {
+                            if ($tName && strtolower($tName) === $cleanNameRaw) {
+                                return true;
+                            }
+                        }
+                    }
+
+                    return false;
+                });
+
+                if ($countryMatch) {
+                    return $countryMatch['translations'][$lang] ?? $countryMatch['name'];
+                }
+
+                return $nameRaw;
+            })->shuffle()->toArray();
+
+            // Resolve correct answer localized name with same robust matching
+            $correctNameRaw = is_array($correctDataRaw) ? $correctDataRaw['name'] : $correctDataRaw;
+            $cIso2 = is_array($correctDataRaw) ? ($correctDataRaw['iso2'] ?? null) : null;
+            $cIso3 = is_array($correctDataRaw) ? ($correctDataRaw['iso3'] ?? null) : null;
+
+            $correctCountryMatch = $countriesCollection->first(function ($c) use ($correctNameRaw, $cIso2, $cIso3) {
+                if ($cIso2 && isset($c['iso2']) && strtolower($c['iso2']) === strtolower($cIso2)) {
+                    return true;
+                }
+                if ($cIso3 && isset($c['iso3']) && strtolower($c['iso3']) === strtolower($cIso3)) {
+                    return true;
+                }
+
+                $cleanCorrectNameRaw = strtolower(trim($correctNameRaw));
+                if (strtolower($c['name'] ?? '') === $cleanCorrectNameRaw) {
+                    return true;
+                }
+
+                if (isset($c['translations']) && is_array($c['translations'])) {
+                    foreach ($c['translations'] as $tName) {
+                        if ($tName && strtolower($tName) === $cleanCorrectNameRaw) {
+                            return true;
+                        }
+                    }
+                }
+
+                return false;
+            });
+
+            $correctAnswer = $correctCountryMatch ? ($correctCountryMatch['translations'][$lang] ?? $correctCountryMatch['name']) : $correctNameRaw;
+
+            $questions[] = [
+                'id' => 'q_sil_'.uniqid(),
+                'question' => $questionText,
+                'options' => $optionsNames,
+                'correct_answer' => $correctAnswer,
+                'correct_name_raw' => $correctNameRaw, // Reference for D3.js
+                'points' => 15,
+                'type' => 'silhouette',
+            ];
+
+            // Avoid repeats (availableNames is now array of objects, but handle array of strings too)
+            $availableNames = collect($availableNames)->filter(function ($item) use ($correctNameRaw) {
+                $name = is_array($item) ? $item['name'] : $item;
+
+                return $name !== $correctNameRaw;
+            })->values()->toArray();
+        }
+
+        return $questions;
+    }
 }

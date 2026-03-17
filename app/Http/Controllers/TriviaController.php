@@ -115,90 +115,25 @@ class TriviaController extends Controller
     /**
      * Load the Silhouette game mode.
      */
-    public function playSilhouette()
+    public function playSilhouette(Request $request, TriviaService $triviaService): View|RedirectResponse
     {
-        $lang = config('app.locale', 'es');
-        
-        // Cargar el index ligero (Asegurarse de que el usuario compiló los archivos)
-        $namesPath = public_path('data/silhouettes-names.json');
-        
-        if (!file_exists($namesPath)) {
-            return redirect()->route('trivia.index')->with('error', 'El archivo principal de siluetas no existe. Ve a /trivia/compilador-siluetas para generarlo primero.');
-        }
+        $lang = $request->query('lang', config('app.locale', 'es'));
 
-        $availableNames = json_decode(file_get_contents($namesPath), true);
-        if (!$availableNames || !is_array($availableNames)) {
-            return redirect()->route('trivia.index')->with('error', 'El índice de nombres es inválido.');
-        }
+        $questions = $triviaService->generateSilhouetteTrivia(5, $lang);
 
-        // We need at least 4 countries to make a question
-        if (count($availableNames) < 4) {
-             return redirect()->route('trivia.index')->with('error', 'No hay suficientes siluetas para jugar.');
-        }
-
-        // Fetch countries (they might have translated names in the translations JSON or DB)
-        // Since the DB uses 'name' which usually matches English 'name' from the SHP file:
-        $countries = Country::whereIn('name', $availableNames)->get()->keyBy('name');
-        
-        // Also fetch our translations cache to show localized names to the user
-        $cached = \Illuminate\Support\Facades\Cache::get('world_data_json_light_v2') ?? [];
-        // Map native 'name' to translated 'name' (in this case 'es' by default)
-        $translationsByName = collect($cached)->mapWithKeys(function ($item) {
-            $engName = $item['name'] ?? null;
-            if (!$engName) return [];
-            return [$engName => $item['translations'] ?? []];
-        });
-
-        $questions = [];
-        $totalQuestions = min(5, count($availableNames)); // Generate up to 5 questions
-
-        for ($i = 0; $i < $totalQuestions; $i++) {
-            // Pick 4 random names
-            $optionsNamesRaw = collect($availableNames)->random(4);
-            $correctNameRaw = $optionsNamesRaw->random();
-            
-            $questionText = "¿A qué país pertenece esta silueta?";
-
-            $optionsNames = $optionsNamesRaw->map(function($name) use ($countries, $translationsByName, $lang) {
-                // Try to get translated name from cache, fallback to DB name, fallback to raw name
-                if (isset($translationsByName[$name][$lang])) {
-                    return $translationsByName[$name][$lang];
-                }
-                
-                if ($countries->has($name)) {
-                    return $countries[$name]->name;
-                }
-                return $name;
-            })->shuffle()->toArray();
-
-            $correctName = $correctNameRaw;
-            if (isset($translationsByName[$correctNameRaw][$lang])) {
-                $correctName = $translationsByName[$correctNameRaw][$lang];
-            } elseif ($countries->has($correctNameRaw)) {
-                $correctName = $countries[$correctNameRaw]->name;
+        if (empty($questions)) {
+            // Check if the file exists to give a better error message
+            if (! file_exists(public_path('data/silhouettes-names.json'))) {
+                return redirect()->route('trivia.index')->with('error', 'El archivo principal de siluetas no existe. Ve a /trivia/compilador-siluetas para generarlo primero.');
             }
 
-            $questions[] = [
-                'id' => 'q_sil_' . uniqid(),
-                'question' => $questionText,
-                'options' => $optionsNames,
-                'correct_answer' => $correctName,
-                'correct_name_raw' => $correctNameRaw, // Send to frontend to lookup in GeoJSON!
-                'points' => 15, // Hard difficulty points
-                'type' => 'silhouette'
-            ];
-            
-            // Remove the correct name from available to avoid repeating questions
-            $availableNames = array_diff($availableNames, [$correctNameRaw]);
-            if (count($availableNames) < 4) {
-                break;
-            }
+            return redirect()->route('trivia.index')->with('error', 'No hay suficientes siluetas para jugar o hubo un problema al cargar los datos.');
         }
 
         $type = 'silhouette';
         $slug = 'siluetas';
 
-        return view('trivia.silhouette', compact('questions', 'type', 'slug'));
+        return view('trivia.silhouette', compact('questions', 'type', 'slug', 'lang'));
     }
 
     /**
