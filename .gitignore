@@ -23,3 +23,5 @@ Homestead.json
 Homestead.yaml
 Thumbs.db
 /database/model-erp/KickCam_ERP.png
+public/data/*.geojson
+public/data/*.gpkg
