@@ -99,6 +99,12 @@
                         </x-nav-link>
                     </x-tooltip>
 
+                    <x-tooltip text="Directorio mundial de países" position="bottom">
+                        <x-nav-link :href="route('countries.index')" :active="request()->routeIs('countries.*')"
+                            class="{{ $classes['desktop']['link_text'] }}">
+                            Diccionario
+                        </x-nav-link>
+                    </x-tooltip>
                     <x-tooltip text="Conoce cómo funciona la app" position="bottom">
                         <x-nav-link :href="route('help')" :active="request()->routeIs('help')"
                             class="{{ $classes['desktop']['link_text'] }}">
@@ -196,6 +202,11 @@
                 <x-responsive-nav-link :href="route('camera')" :active="request()->routeIs('camera')"
                     class="{{ $classes['mobile_menu']['link_text'] }}">
                     {{ __('Cámara') }}
+                </x-responsive-nav-link>
+
+                <x-responsive-nav-link :href="route('countries.index')" :active="request()->routeIs('countries.*')"
+                    class="{{ $classes['mobile_menu']['link_text'] }}">
+                    {{ __('Diccionario') }}
                 </x-responsive-nav-link>
 
                 <x-responsive-nav-link :href="route('help')" :active="request()->routeIs('help')"

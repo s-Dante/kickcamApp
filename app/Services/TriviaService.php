@@ -594,6 +594,18 @@ class TriviaService
             return [];
         }
 
+        // Filter out silhouettes with few points (simple shapes or tiny islands)
+        // This ensures the trivia only asks for recognizable country shapes.
+        $minPointsThreshold = 30;
+        $availableNames = array_filter($availableNames, function ($item) use ($minPointsThreshold) {
+            if (! is_array($item)) {
+                return true; // Keep old format strings
+            }
+
+            return ($item['points'] ?? 999) >= $minPointsThreshold;
+        });
+        $availableNames = array_values($availableNames);
+
         // Load country translations from the specific file requested by the user
         $countriesPath = public_path('assets/country_state_city-data/countries.json');
         if (! File::exists($countriesPath)) {

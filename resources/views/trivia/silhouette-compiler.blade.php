@@ -127,13 +127,25 @@
                             if (cleanIso2) feature.properties.iso2 = cleanIso2;
                             if (cleanIso3) feature.properties.iso3 = cleanIso3;
 
+                            // Calculate point count for detail filtering
+                            let pointCount = 0;
+                            if (feature.geometry.type === 'Polygon') {
+                                feature.geometry.coordinates.forEach(ring => pointCount += ring.length);
+                            } else if (feature.geometry.type === 'MultiPolygon') {
+                                feature.geometry.coordinates.forEach(polygon => {
+                                    polygon.forEach(ring => pointCount += ring.length);
+                                });
+                            }
+                            feature.properties.points = pointCount;
+
                             // Only add to our game if it has a valid name and geometry
                             if (feature.geometry) {
                                 geojson.features.push(feature);
                                 featureNames.push({
                                     name: cleanName,
                                     iso2: cleanIso2,
-                                    iso3: cleanIso3
+                                    iso3: cleanIso3,
+                                    points: pointCount
                                 });
                                 count++;
                             }

@@ -175,6 +175,7 @@ class TriviaController extends Controller
                 'correct_answer' => $decryptedCorrect,
                 'is_correct' => $isCorrect,
                 'image' => isset($ans['image']) ? decrypt($ans['image']) : null,
+                'is_silhouette' => ($validated['trivia_type'] ?? '') === 'silhouette',
             ];
         }
 

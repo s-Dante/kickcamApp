@@ -98,9 +98,9 @@
                                         value="{{ encrypt($q['correct_answer']) }}">
                                     <input type="hidden" name="answers[{{ $index }}][points]"
                                         value="{{ encrypt($q['points']) }}">
-                                    @if(isset($q['image']))
+                                    @if(isset($q['correct_name_raw']))
                                         <input type="hidden" name="answers[{{ $index }}][image]"
-                                            value="{{ encrypt($q['image']) }}">
+                                            value="{{ encrypt($q['correct_name_raw']) }}">
                                     @endif
 
                                     @if(isset($q['correct_name_raw']))

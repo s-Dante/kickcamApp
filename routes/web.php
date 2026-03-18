@@ -84,4 +84,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/jugar/{country}', [\App\Http\Controllers\TriviaController::class, 'play'])->name('play');
         Route::post('/enviar', [\App\Http\Controllers\TriviaController::class, 'submit'])->name('submit');
     });
+
+    /**
+     * Directorio de Países
+     */
+    Route::get('/paises', [\App\Http\Controllers\CountryController::class, 'index'])->name('countries.index');
+    Route::get('/paises/{iso}', [\App\Http\Controllers\CountryController::class, 'show'])->name('countries.show');
 });

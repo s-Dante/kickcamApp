@@ -97,8 +97,15 @@
                             <div class="{{ $res['is_correct'] ? $classes['details']['item_correct'] : $classes['details']['item_wrong'] }}">
                                 <div class="{{ $classes['details']['item_content'] }}">
                                     <!-- Optional Flag Image for the 'Flags' game mode -->
-                                    @if(isset($res['image']))
+                                    @if(isset($res['image']) && !($res['is_silhouette'] ?? false))
                                         <img src="{{ $res['image'] }}" alt="Bandera del país" class="{{ $classes['details']['item_image'] }}">
+                                    @endif
+
+                                    <!-- Silhouette for the 'Silhouette' game mode -->
+                                    @if($res['is_silhouette'] ?? false)
+                                        <div class="h-24 w-24 flex justify-center items-center text-secondary-sat dark:text-secondary-desat drop-shadow-md d3-result-container" data-country="{{ $res['image'] }}" data-index="{{ $index }}">
+                                            <svg class="w-full h-full" id="d3-result-svg-{{ $index }}"></svg>
+                                        </div>
                                     @endif
 
                                     <div class="{{ $classes['details']['item_text'] }}">
@@ -147,4 +154,44 @@
 
         </div>
     </div>
+
+    @if(collect(session('detailedResults'))->contains('is_silhouette', true))
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const containers = document.querySelectorAll('.d3-result-container');
+            if (containers.length === 0) return;
+
+            fetch('/data/silhouettes.geojson')
+                .then(response => response.json())
+                .then(data => {
+                    containers.forEach(container => {
+                        const countryName = container.dataset.country;
+                        const index = container.dataset.index;
+                        const feature = data.features.find(f => f.properties.name === countryName);
+                        
+                        if (feature) {
+                            renderResultSilhouette(feature, index);
+                        }
+                    });
+                });
+
+            function renderResultSilhouette(feature, index) {
+                const svg = d3.select(`#d3-result-svg-${index}`);
+                const width = 96; // h-24 = 6rem = 96px
+                const height = 96;
+
+                const projection = d3.geoMercator().fitSize([width, height], feature);
+                const pathGenerator = d3.geoPath().projection(projection);
+
+                svg.append("path")
+                    .datum(feature)
+                    .attr("d", pathGenerator)
+                    .attr("fill", "currentColor")
+                    .attr("stroke", "currentColor")
+                    .attr("stroke-width", 0.5);
+            }
+        });
+    </script>
+    @endif
 </x-app-layout>

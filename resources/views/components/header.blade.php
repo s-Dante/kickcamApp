@@ -9,6 +9,7 @@
         <a href="{{ route('multimedia.index') }}">Multimedia</a>
         <a href="{{ route('trivia.index') }}">Trivia</a>
         <a href="{{ route('scoreboard.index') }}">Marcadores</a>
+        <a href="{{ route('countries.index') }}">Diccionario</a>
 
         <form action="{{ route('logout') }}" method="POST" class="inline">
             @csrf
