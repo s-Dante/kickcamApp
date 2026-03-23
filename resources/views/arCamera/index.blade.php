@@ -111,6 +111,17 @@
                         </svg>
                     </button>
 
+                    <!-- Animacion Toggle -->
+                    <button class="{{ $classes['mobile_ui']['switch_btn'] }} ar-btn-anim">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z">
+                            </path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </button>
+
                     <!-- Reabrir Info Button -->
                     <button id="mobile-info-btn" class="{{ $classes['mobile_ui']['info_btn'] }}"
                         onclick="reabrirCard()">
@@ -130,7 +141,7 @@
                 </div>
 
                 <a-scene embedded style="width: 100%; height: 100%; position: absolute; left: 0; top: 0;"
-                    mindar-image="imageTargetSrc: {{ asset('assets/targets-ar/shields-tracker-optimized.mind') }}; uiScanning:no; uiLoading:no; uiError:no; warmupTolerance:1; missTolerance:1;"
+                    mindar-image="imageTargetSrc: {{ asset('assets/targets-ar/shields-tracker-optimized.mind') }}; uiScanning:no; uiLoading:no; uiError:no; warmupTolerance:5; missTolerance:5;"
                     color-space="sRGB" renderer="colorManagement: true; physicallyCorrectLights: true"
                     vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
 
@@ -139,7 +150,7 @@
 
                     <a-assets>
                         <a-asset-item id="avatarModel"
-                            src="{{ asset('assets/3d-models/character-idle.glb') }}"></a-asset-item>
+                            src="{{ asset('assets/3d-models/character.glb') }}"></a-asset-item>
                         <img id="avatarTexture" crossorigin="anonymous"
                             src="{{ asset('assets/3d-models/character-texture.png') }}">
                     </a-assets>
@@ -191,6 +202,16 @@
                     </svg>
                     Frontal / Trasera
                 </button>
+                <button class="{{ $classes['desktop_ui']['flip_btn'] }} ar-btn-anim">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z">
+                        </path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    Cambiar Animación
+                </button>
                 <button id="desktop-info-btn" class="{{ $classes['desktop_ui']['outline_btn'] }}"
                     onclick="reabrirCard()">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -209,6 +230,8 @@
             // --- Variables de Estado ---
             let currentTeamCode = null;
             let currentTeamData = null;
+            let availableAnimations = [];
+            let currentAnimIndex = 0;
 
             // Ocultar Tarjeta de UI
             window.cerrarCard = function () {
@@ -269,24 +292,41 @@
                     document.getElementById('ar-loading-screen').classList.add('hidden');
                 });
 
-                // Manejo de la textura blanca a colores del personaje (GLTF)
-                const texture = new AFRAME.THREE.TextureLoader().load(
-                    "{{ asset('assets/3d-models/character-texture.png') }}"
-                );
-                // GLTF format dictates flipY MUST be false for textures to map correctly over UVs
-                texture.flipY = false;
-                // Previene que los colores se vean pálidos o lavados en WebGL
-                if (AFRAME.THREE.SRGBColorSpace) {
-                    texture.colorSpace = AFRAME.THREE.SRGBColorSpace;
-                }
+                // Manejo de texturas por defecto o modelo Legacy (si no se han subido las nuevas .jpg)
+                const defaultTexture = new AFRAME.THREE.TextureLoader().load("{{ asset('assets/3d-models/character-texture.png') }}");
+                defaultTexture.flipY = false;
+                if (AFRAME.THREE.SRGBColorSpace) defaultTexture.colorSpace = AFRAME.THREE.SRGBColorSpace;
 
                 const models = document.querySelectorAll(".avatar-model");
                 models.forEach((model) => {
                     model.addEventListener("model-loaded", () => {
                         const mesh = model.getObject3D("mesh");
+
+                        // Cargar las animaciones disponibles
+                        if (mesh && mesh.animations && mesh.animations.length > 0) {
+                            availableAnimations = mesh.animations.map(a => a.name);
+                            console.log("Animaciones disponibles:", availableAnimations);
+
+                            // --- CONFIGURACIÓN DE ANIMACIÓN INICIAL ---
+                            // NOTA: Cambia 'T-Pose' por el nombre EXACTO de la animación (ej. 'Idle', 'Armature|Idle', etc.)
+                            // que ves en la consola del navegador como "Animaciones disponibles: [...]"
+                            const defaultAnim = 'T-Pose';
+
+                            // Validar si existe la animación inicial por predeterminado, si no, usa la primera en el índice [0]
+                            if (availableAnimations.includes(defaultAnim)) {
+                                currentAnimIndex = availableAnimations.indexOf(defaultAnim);
+                                model.setAttribute('animation-mixer', `clip: ${defaultAnim}; loop: repeat; crossFadeDuration: 0.2`);
+                            } else {
+                                currentAnimIndex = 0;
+                                model.setAttribute('animation-mixer', `clip: ${availableAnimations[0]}; loop: repeat; crossFadeDuration: 0.2`);
+                            }
+                        }
+
+                        // Aplicar textura legacy a todo por defecto en caso de no tener el modelo separado
                         mesh.traverse((node) => {
                             if (node.isMesh) {
-                                node.material.map = texture;
+                                // Mapeamos global si es el modelo base sin materiales independientes
+                                node.material.map = defaultTexture;
                                 node.material.color.set(0xffffff);
                                 node.material.metalness = 0;
                                 node.material.roughness = 1;
@@ -295,6 +335,27 @@
                         });
                     });
                 });
+
+                // Función auxiliar para cargar texturas .jpg
+                const loadSpecificTexture = (loader, url, fallbackUrl, onSuccess) => {
+                    loader.load(url,
+                        (texture) => {
+                            texture.flipY = false;
+                            if (AFRAME.THREE.SRGBColorSpace) texture.colorSpace = AFRAME.THREE.SRGBColorSpace;
+                            onSuccess(texture);
+                        },
+                        undefined,
+                        (err) => {
+                            if (fallbackUrl) {
+                                loader.load(fallbackUrl, (fallbackTex) => {
+                                    fallbackTex.flipY = false;
+                                    if (AFRAME.THREE.SRGBColorSpace) fallbackTex.colorSpace = AFRAME.THREE.SRGBColorSpace;
+                                    onSuccess(fallbackTex);
+                                });
+                            }
+                        }
+                    );
+                };
 
                 // Lógica Ultra-Eficiente de Memory Management
                 const avatarContainer = document.getElementById('avatar-container');
@@ -327,13 +388,58 @@
                             document.getElementById('mobile-info-btn').classList.remove('hidden');
                             document.getElementById('desktop-info-btn').classList.remove('hidden');
 
-                            mostrarCard(teamCode, data);
+                            // Ya no abrimos la card automáticamente
+                            // mostrarCard(teamCode, data);
 
-                            // 3. Ocultar la UI automáticamente después de 8 segundos (ampliado para leer)
-                            clearTimeout(uiTimeout);
-                            uiTimeout = setTimeout(() => {
-                                cerrarCard();
-                            }, 8000);
+                            // 3. Cargar dinámicamente las texturas .jpg del modelo
+                            const modelEl = avatarContainer.querySelector('.avatar-model');
+                            if (modelEl) {
+                                const mesh = modelEl.getObject3D("mesh");
+                                if (mesh) {
+                                    const texLoader = new AFRAME.THREE.TextureLoader();
+
+                                    // Variantes random reales
+                                    const skinRand = Math.floor(Math.random() * 8); // 0 a 7
+                                    const hairRand = Math.floor(Math.random() * 7); // 0 a 6
+
+                                    const skinUrl = `/assets/3d-models/textures/skin/${skinRand}.jpeg`;
+                                    const hairUrl = `/assets/3d-models/textures/hair/${hairRand}.jpeg`;
+
+                                    const baseUrl = `/assets/3d-models/textures`;
+
+                                    mesh.traverse((node) => {
+                                        if (node.isMesh && node.material) {
+                                            const matName = node.material.name ? node.material.name.toLowerCase() : '';
+                                            let targetUrl = null;
+                                            let fallbackUrl = null;
+
+                                            // Dependiendo del nombre real del material devuelto en GLTF
+                                            if (matName.includes('body') || matName.includes('skin') || matName.includes('piel')) {
+                                                targetUrl = skinUrl;
+                                            } else if (matName.includes('hair') || matName.includes('cabello') || matName.includes('pelo')) {
+                                                targetUrl = hairUrl;
+                                            } else if (matName.includes('shirt') || matName.includes('playera') || matName.includes('camisa')) {
+                                                targetUrl = `${baseUrl}/${teamCode}/shirt.jpeg`;
+                                                fallbackUrl = `${baseUrl}/generics/shirt.jpeg`;
+                                            } else if (matName.includes('short') || matName.includes('pantalon') || matName.includes('pants')) {
+                                                targetUrl = `${baseUrl}/${teamCode}/short.jpeg`;
+                                                fallbackUrl = `${baseUrl}/generics/short.jpeg`;
+                                            } else if (matName.includes('flipflop') || matName.includes('chancla') || matName.includes('zapato') || matName.includes('shoe')) {
+                                                targetUrl = `${baseUrl}/${teamCode}/flipflops.jpeg`;
+                                                fallbackUrl = `${baseUrl}/generics/flipflops.jpeg`;
+                                            }
+
+                                            if (targetUrl) {
+                                                loadSpecificTexture(texLoader, targetUrl, fallbackUrl, (newTexture) => {
+                                                    node.material.map = newTexture;
+                                                    node.material.needsUpdate = true;
+                                                });
+                                            }
+                                        }
+                                    });
+                                }
+                            }
+
 
                         } catch (e) {
                             console.warn("No se pudo cargar la info del JSON para AR", e);
@@ -344,7 +450,6 @@
                     target.addEventListener("targetLost", event => {
                         console.log("Bandera Perdida");
                         avatarContainer.setAttribute('visible', 'false');
-                        clearTimeout(uiTimeout);
                         cerrarCard();
 
                         currentTeamCode = null;
@@ -373,6 +478,24 @@
                         window.arSystem.switchCamera();
                     } else {
                         alert("No se pudo cambiar de cámara. Es posible que el navegador o dispositivo restrinjan el acceso a cámaras alternativas.");
+                    }
+                });
+            });
+
+            // Cycle Animation Button
+            document.querySelectorAll('.ar-btn-anim').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const animModels = document.querySelectorAll('.avatar-model');
+                    if (availableAnimations.length > 0) {
+                        currentAnimIndex = (currentAnimIndex + 1) % availableAnimations.length;
+                        const nextAnim = availableAnimations[currentAnimIndex];
+                        animModels.forEach((m) => {
+                            m.setAttribute('animation-mixer', `clip: ${nextAnim}; loop: repeat; crossFadeDuration: 0.2`);
+                        });
+                        console.log("Cambiando animación a:", nextAnim);
+                    } else {
+                        console.warn("No se encontraron animaciones incrustadas en el objeto.");
+                        // Alternativa si animation-mixer tiene un '*' por defecto, o si quieren toggle simple
                     }
                 });
             });
